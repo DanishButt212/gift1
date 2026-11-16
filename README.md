@@ -2,6 +2,9 @@
 
 Ek chhota sa gift — 3 options: **Ek Gulab**, **Phoolon ka Bagh**, aur **Guldasta aur Khat**.
 
+Ye version **generic** hai — is mein kisi ka naam nahi hai — aur **Dar-e-Nijaat** ki theme
+par hai: menu par drama aur us ke OST "Alvida Alvida" ka zikr hai.
+
 ## Kaise kholein
 
 `Gift.html` ko browser mein kholein. GitHub Pages par yehi file chalti hai:
