@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="ur-Latn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<title>Tumhare liye 🌹</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden;background:#0b040c;
+  -webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none}
+body{font-family:Georgia,"Times New Roman",serif;color:#ffe6ec}
+#menu{position:fixed;inset:0;overflow:hidden auto;-webkit-overflow-scrolling:touch;
+  background:radial-gradient(ellipse at 50% 0%,#5a1638 0%,#2c0c22 38%,#12060f 72%,#08030a 100%);
+  transition:opacity .5s ease}
+#menu.off{opacity:0;pointer-events:none}
+#mbg{position:fixed;inset:0;width:100%;height:100%;display:block;pointer-events:none}
+.wrap{position:relative;min-height:100%;max-width:1040px;margin:0 auto;display:flex;flex-direction:column;justify-content:center;
+  padding:max(26px,env(safe-area-inset-top)) 20px max(22px,env(safe-area-inset-bottom))}
+header{text-align:center;margin-bottom:clamp(18px,3.4vh,34px)}
+.small{font:500 clamp(11px,3vw,13px)/1.4 "Segoe UI",Roboto,Helvetica,Arial,sans-serif;letter-spacing:.42em;
+  text-transform:uppercase;color:#f3a9bb;margin:0 0 10px}
+h1{font-family:"Snell Roundhand","Segoe Script","Brush Script MT","Dancing Script",cursive;font-weight:600;
+  font-size:clamp(34px,9.6vw,64px);line-height:1.12;margin:0;
+  text-shadow:0 0 26px rgba(255,90,130,.55),0 2px 4px rgba(0,0,0,.5)}
+.sub{font-style:italic;font-size:clamp(15px,4.2vw,19px);color:#ffcfda;margin:12px 0 0;opacity:.9}
+.orn{display:flex;align-items:center;justify-content:center;gap:12px;margin:16px auto 0;color:#f08aa5;font-size:13px}
+.orn::before,.orn::after{content:"";height:1px;width:min(22vw,110px);background:linear-gradient(90deg,transparent,rgba(240,138,165,.7))}
+.orn::after{transform:scaleX(-1)}
+.cards{display:flex;flex-direction:column;gap:clamp(12px,2vh,18px)}
+.card{--tint:255,90,130;position:relative;display:flex;align-items:center;gap:16px;width:100%;text-align:left;
+  padding:14px 16px;border-radius:24px;cursor:pointer;color:inherit;font:inherit;overflow:hidden;
+  border:1px solid rgba(255,255,255,.16);
+  background:linear-gradient(135deg,rgba(255,255,255,.12),rgba(255,255,255,.035));
+  box-shadow:0 16px 40px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.16);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;
+  opacity:0}
+#menu.ready .card{animation:rise .9s cubic-bezier(.2,.9,.3,1) both}
+#menu.ready .card:nth-child(1){animation-delay:.35s}#menu.ready .card:nth-child(2){animation-delay:.5s}#menu.ready .card:nth-child(3){animation-delay:.65s}
+header,.foot{opacity:0;transform:translateY(14px);transition:opacity 1.2s ease,transform 1.2s ease}
+#menu.ready header,#menu.ready .foot{opacity:1;transform:none}
+#menu.ready .foot{transition-delay:1s}
+@keyframes rise{from{opacity:0;transform:translateY(28px) scale(.97)}to{opacity:1;transform:none}}
+.card::before{content:"";position:absolute;left:-40px;top:50%;width:230px;height:230px;margin-top:-115px;border-radius:50%;
+  background:radial-gradient(circle,rgba(var(--tint),.38),rgba(var(--tint),0) 68%);pointer-events:none}
+.card::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.14) 48%,transparent 62%);
+  transform:translateX(-120%);animation:shine 5.5s ease-in-out infinite}
+.card:nth-child(2)::after{animation-delay:1.2s}.card:nth-child(3)::after{animation-delay:2.4s}
+@keyframes shine{0%,55%{transform:translateX(-120%)}85%,100%{transform:translateX(120%)}}
+.card:hover{transform:translateY(-3px);border-color:rgba(var(--tint),.7);box-shadow:0 22px 50px rgba(0,0,0,.5),0 0 30px rgba(var(--tint),.25),inset 0 1px 0 rgba(255,255,255,.2)}
+.card:active{transform:scale(.97)}
+.c-bagh{--tint:150,120,255}.c-guldasta{--tint:255,140,190}
+.thumb{position:relative;flex:0 0 auto;width:clamp(92px,26vw,112px);aspect-ratio:1;border-radius:50%;
+  background:radial-gradient(circle at 50% 40%,rgba(var(--tint),.35),rgba(20,6,16,.75) 72%);
+  box-shadow:0 0 0 1px rgba(255,255,255,.18),0 0 26px rgba(var(--tint),.35);display:flex;align-items:center;justify-content:center}
+.thumb i{font-style:normal;font-size:44px}
+.thumb canvas{position:absolute;inset:-9%;width:118%;height:118%;display:block}
+.info{position:relative;flex:1 1 auto;min-width:0;display:block}
+.info b{display:block;font-family:"Snell Roundhand","Segoe Script","Brush Script MT","Dancing Script",cursive;font-weight:600;
+  font-size:clamp(23px,6.6vw,32px);line-height:1.15;color:#fff0f4;text-shadow:0 2px 10px rgba(0,0,0,.45)}
+.info em{display:block;margin-top:6px;font-size:clamp(13px,3.6vw,16px);line-height:1.45;color:#f6cdd8;opacity:.88}
+.go{position:relative;flex:0 0 auto;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);font:400 22px/1 Georgia,serif;padding-bottom:3px;color:#ffe0e8}
+.foot{text-align:center;margin:clamp(16px,3vh,30px) 0 0;font-style:italic;font-size:clamp(13px,3.6vw,16px);color:#f3a9bb;opacity:.85}
+@media (min-width:860px){
+  .cards{flex-direction:row;gap:22px}
+  .card{flex:1 1 0;flex-direction:column;text-align:center;padding:30px 22px 26px;gap:18px}
+  .card::before{left:50%;top:0;margin:-60px 0 0 -150px;width:300px;height:300px}
+  .thumb{width:170px}
+  .go{display:none}
+}
+#stage{position:fixed;inset:0;display:none}
+#stage.on{display:block}
+#stage iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block;background:#07030a}
+#back{position:fixed;left:14px;top:max(14px,env(safe-area-inset-top));z-index:5;height:40px;padding:0 15px 0 11px;border-radius:20px;
+  display:flex;align-items:center;gap:6px;cursor:pointer;color:#ffe0e8;
+  font:500 14px/1 "Segoe UI",Roboto,Helvetica,Arial,sans-serif;letter-spacing:.03em;
+  border:1px solid rgba(255,200,215,.38);background:rgba(30,8,22,.5);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);box-shadow:0 6px 18px rgba(0,0,0,.35);
+  opacity:0;pointer-events:none;transform:translateX(-10px);transition:opacity .5s,transform .5s,background .2s}
+#back.on{opacity:.92;pointer-events:auto;transform:none}
+#back:active{background:rgba(255,120,160,.35)}
+#back span{font:400 24px/1 Georgia,serif;margin-top:-4px}
+#curtain{position:fixed;inset:0;z-index:9;background:#08030a;opacity:0;pointer-events:none;transition:opacity .45s ease}
+#curtain.on{opacity:1;pointer-events:auto}
+#splash{position:fixed;inset:0;z-index:8;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  padding:24px;cursor:pointer;transition:opacity .9s ease,transform .9s ease}
+#splash.on{display:flex}
+#splash.bye{opacity:0;transform:scale(1.08);pointer-events:none}
+.heart{position:relative;width:118px;height:118px;display:flex;align-items:center;justify-content:center;font-size:58px;border-radius:50%;
+  background:radial-gradient(circle at 50% 40%,rgba(255,110,150,.4),rgba(40,8,26,.7) 72%);
+  box-shadow:0 0 0 1px rgba(255,255,255,.2),0 0 50px rgba(255,90,130,.5);animation:beat 1.5s ease-in-out infinite}
+.heart::before,.heart::after{content:"";position:absolute;inset:0;border-radius:50%;border:1px solid rgba(255,150,180,.6);animation:ring 2.4s ease-out infinite}
+.heart::after{animation-delay:1.2s}
+@keyframes beat{0%,100%{transform:scale(1)}14%{transform:scale(1.1)}28%{transform:scale(1)}42%{transform:scale(1.07)}}
+@keyframes ring{from{transform:scale(1);opacity:.8}to{transform:scale(1.9);opacity:0}}
+#splash h2{font-family:"Snell Roundhand","Segoe Script","Brush Script MT","Dancing Script",cursive;font-weight:600;
+  font-size:clamp(30px,8.6vw,52px);line-height:1.15;margin:34px 0 0;text-shadow:0 0 26px rgba(255,90,130,.55),0 2px 4px rgba(0,0,0,.5)}
+#splash p{margin:14px 0 0;font:500 clamp(12px,3.3vw,14px)/1.4 "Segoe UI",Roboto,Helvetica,Arial,sans-serif;letter-spacing:.32em;
+  text-transform:uppercase;color:#f3a9bb;animation:blink 2s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:.55}50%{opacity:1}}
+</style>
+</head>
+<body>
+<div id="menu">
+  <canvas id="mbg"></canvas>
+  <div class="wrap">
+    <header>
+      <p class="small" id="mSmall"></p>
+      <h1 id="mTitle"></h1>
+      <p class="sub" id="mSub"></p>
+      <div class="orn">♥</div>
+    </header>
+    <div class="cards" id="cards"></div>
+    <p class="foot" id="mFoot"></p>
+  </div>
+</div>
+<div id="stage"></div>
+<button id="back" aria-label="Wapas"><span>‹</span><b id="backTxt" style="font-weight:500"></b></button>
+<div id="curtain"></div>
+<div id="splash"><div class="heart">💝</div><h2 id="spTitle"></h2><p id="spTap"></p></div>
+<audio id="song" loop preload="auto"></audio>
+<button id="musicBtn" type="button" aria-label="Gaana chalao / band karo" title="Gaana chalao / band karo" style="position:fixed;right:14px;bottom:14px;z-index:30;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,200,215,.5);background:rgba(30,8,22,.55);color:#ffe0e8;font-size:20px;line-height:1;cursor:pointer;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)">♪</button>
+<script type="text/plain" id="songData"><!--__SONG__--></script>
+
+<script>
+/* =====================================================================
+   SARE MESSAGE YAHAN HAIN — jo badalna ho bas yahin badlo
+   ===================================================================== */
+const MESSAGES={
+  menu:{
+    small:"sirf tumhare liye",
+    title:"Kuch khaas, Simi ke liye",
+    sub:"Ek tohfa chuno aur kholo ✨",
+    foot:"har phool tumhare naam ♥",
+    back:"Wapas",
+    gift:"Simi, tumhare liye ek tohfa hai",
+    giftTap:"kholne ke liye tap karo",
+    cards:[
+      {key:"gulab",icon:"🌹",title:"Ek Gulab",text:"Tumhare naam ka gulab, pankhri pankhri khilta hua"},
+      {key:"bagh",icon:"🌸",title:"Phoolon ka Bagh",text:"Jahan tap karo, wahan ek naya phool khil jaye"},
+      {key:"guldasta",icon:"💐",title:"Guldasta aur Khat",text:"Ek lifafa, jis mein phool bhi hain aur dil ki baat bhi"}
+    ]
+  },
+  gulab:{
+    small:"sirf tumhare liye",
+    title:"Yeh gulab Simi ke naam",
+    line:"Tum meri zindagi ka sab se khoobsurat phool ho 🌹"
+  },
+  bagh:{
+    hint:"Screen pe kahin bhi tap karo 🌸",
+    title:"Tumne poora bagh khila diya",
+    line:"Bilkul waise, jaise tum meri zindagi mein rang bhar deti ho 💖",
+    flowersForMessage:8
+  },
+  guldasta:{
+    tapLine:"Tumhare liye kuch hai…",
+    tapWord:"tap karo",
+    greeting:"Simi, meri jaan,",
+    body:"Yeh phool tumhare liye, kyun ke tum meri zindagi mein wohi ho jo bahaar ek baagh ke liye hoti hai.\n\nTumhari muskurahat mere din ka sab se khoobsurat hissa hai. Hamesha aise hi khilti rehna. 🌷",
+    sign:"— hamesha tumhara, Danish"
+  }
+};
+/* ===================================================================== */
+</script>
+<script>
+const TAU=Math.PI*2;
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const clamp01=v=>clamp(v,0,1);
+const lerp=(a,b,t)=>a+(b-a)*t;
+const easeOut=t=>1-Math.pow(1-t,3);
+const easeInOut=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+const easeBack=t=>{const c1=1.70158,c3=c1+1;return 1+c3*Math.pow(t-1,3)+c1*Math.pow(t-1,2);};
+const rnd=(a,b)=>a+Math.random()*(b-a);
+const mix=(p,q,t)=>[lerp(p[0],q[0],t),lerp(p[1],q[1],t),lerp(p[2],q[2],t)];
+const rgb=(p,a=1)=>`rgba(${p[0]|0},${p[1]|0},${p[2]|0},${a})`;
+
+/* rang: a = halka (pankhri ka kinara), b = gehra (pankhri ki jar), c = beech */
+const PALS={
+  pink:{a:[255,158,190],b:[214,51,108],c:[255,214,102]},
+  red:{a:[255,104,120],b:[176,18,50],c:[255,200,87]},
+  white:{a:[255,255,255],b:[224,218,244],c:[255,196,61]},
+  purple:{a:[210,172,255],b:[124,77,214],c:[255,225,130]},
+  gold:{a:[255,217,112],b:[244,140,40],c:[150,78,24]},
+  peach:{a:[255,196,176],b:[238,112,100],c:[255,230,150]},
+  blue:{a:[160,212,255],b:[72,122,226],c:[255,240,170]}
+};
+
+function petalPath(c,len,wd,notch){
+  c.beginPath();
+  c.moveTo(0,0);
+  if(notch){
+    c.bezierCurveTo(-wd,-len*.3,-wd*.85,-len*1.02,-wd*.2,-len*.98);
+    c.quadraticCurveTo(-wd*.05,-len*.93,0,-len*.84);
+    c.quadraticCurveTo(wd*.05,-len*.93,wd*.2,-len*.98);
+  }else{
+    c.bezierCurveTo(-wd,-len*.3,-wd*.85,-len*1.02,0,-len);
+  }
+  c.bezierCurveTo(wd*.85,-len*1.02,wd,-len*.3,0,0);
+  c.closePath();
+}
+
+function newLook(type,pal,s){
+  return {type,pal,s,rot:rnd(0,TAU),n:12+((Math.random()*5)|0),
+    jit:Array.from({length:40},()=>rnd(-1,1)),sprite:null,half:0};
+}
+
+const ROSE_L=[[5,1,.64],[5,.8,.62],[4,.6,.63],[3,.42,.67],[3,.25,.76]];
+const DAHLIA_L=[[13,1,.19],[11,.76,.21],[9,.54,.24],[6,.32,.28]];
+
+function drawHead(c,f,b){
+  const s=f.s,A=f.pal.a,B=f.pal.b,C=f.pal.c;
+  b=clamp01(b);
+  const e=easeBack(b),sc=.12+.88*e;
+  c.save();
+  if(f.type==='tulip'){
+    c.scale(sc,sc);
+    const a=.08+.2*easeOut(b),L=s*1.45;
+    const g=c.createLinearGradient(0,0,0,-L);
+    g.addColorStop(0,rgb(mix(B,[40,0,30],.3)));g.addColorStop(1,rgb(mix(A,B,.35)));
+    const g2=c.createLinearGradient(0,0,0,-L);
+    g2.addColorStop(0,rgb(B));g2.addColorStop(1,rgb(A));
+    for(const r of [-a*2.1,a*2.1]){c.save();c.rotate(r);petalPath(c,L*.96,s*.4);c.fillStyle=g;c.fill();c.restore();}
+    for(const r of [-a,a]){c.save();c.rotate(r);petalPath(c,L,s*.42);c.fillStyle=g;c.fill();
+      c.strokeStyle=rgb(mix(B,[0,0,0],.4),.3);c.lineWidth=Math.max(.6,s*.03);c.stroke();c.restore();}
+    petalPath(c,L*1.02,s*.44);c.fillStyle=g2;c.fill();
+    c.strokeStyle=rgb(mix(B,[0,0,0],.4),.25);c.lineWidth=Math.max(.6,s*.03);c.stroke();
+    c.restore();return;
+  }
+  c.rotate((1-e)*-.8);
+  c.scale(sc,sc);
+  if(f.type==='daisy'){
+    const n=f.n,g=c.createLinearGradient(0,-s*.2,0,-s);
+    g.addColorStop(0,rgb(B));g.addColorStop(1,rgb(A));
+    for(let i=0;i<n;i++){
+      c.save();c.rotate(i/n*TAU+f.jit[i]*.05);
+      petalPath(c,s*(1+f.jit[i+1]*.06),s*.2);
+      c.fillStyle=g;c.fill();
+      c.strokeStyle=rgb(mix(B,[0,0,0],.35),.28);c.lineWidth=Math.max(.5,s*.02);c.stroke();
+      c.restore();
+    }
+    const cg=c.createRadialGradient(-s*.07,-s*.07,0,0,0,s*.3);
+    cg.addColorStop(0,rgb(mix(C,[255,255,255],.4)));cg.addColorStop(1,rgb(mix(C,[120,60,0],.4)));
+    c.beginPath();c.arc(0,0,s*.28,0,TAU);c.fillStyle=cg;c.fill();
+    c.fillStyle='rgba(110,55,0,.35)';
+    for(let k=1;k<12;k++){const an=k*2.4,rr=s*.21*Math.sqrt(k/12);
+      c.beginPath();c.arc(Math.cos(an)*rr,Math.sin(an)*rr,s*.022,0,TAU);c.fill();}
+  }else if(f.type==='round5'){
+    const g=c.createLinearGradient(0,0,0,-s);
+    g.addColorStop(0,rgb(B));g.addColorStop(.45,rgb(mix(B,A,.6)));g.addColorStop(1,rgb(A));
+    for(let i=0;i<5;i++){
+      c.save();c.rotate(i/5*TAU);
+      petalPath(c,s,s*.6,true);c.fillStyle=g;c.fill();
+      c.strokeStyle=rgb(mix(B,[0,0,0],.3),.22);c.lineWidth=Math.max(.5,s*.02);c.stroke();
+      c.restore();
+    }
+    c.strokeStyle=rgb(mix(C,[255,255,255],.3),.9);c.fillStyle=rgb(C);c.lineWidth=Math.max(.5,s*.022);
+    for(let k=0;k<10;k++){const an=k/10*TAU+.3,rr=s*(.3+.07*f.jit[k]);
+      c.beginPath();c.moveTo(0,0);c.lineTo(Math.cos(an)*rr,Math.sin(an)*rr);c.stroke();
+      c.beginPath();c.arc(Math.cos(an)*rr,Math.sin(an)*rr,s*.035,0,TAU);c.fill();}
+    c.beginPath();c.arc(0,0,s*.09,0,TAU);c.fillStyle=rgb(mix(B,[60,0,20],.4));c.fill();
+  }else if(f.type==='dahlia'){
+    for(let L=0;L<DAHLIA_L.length;L++){
+      const [n,r,wk]=DAHLIA_L[L],len=s*r;
+      const g=c.createLinearGradient(0,0,0,-len);
+      g.addColorStop(0,rgb(mix(B,[40,0,30],.35)));g.addColorStop(.5,rgb(mix(B,A,L*.1)));g.addColorStop(1,rgb(mix(A,B,L*.2)));
+      for(let i=0;i<n;i++){
+        c.save();c.rotate(i/n*TAU+L*.4);
+        petalPath(c,len,len*wk);c.fillStyle=g;c.fill();
+        c.strokeStyle=rgb(mix(B,[0,0,0],.4),.3);c.lineWidth=Math.max(.5,s*.018);c.stroke();
+        c.restore();
+      }
+    }
+    c.beginPath();c.arc(0,0,s*.1,0,TAU);c.fillStyle=rgb(mix(C,B,.3));c.fill();
+  }else{ /* rose */
+    const deep=mix(B,[24,0,12],.6);
+    for(let L=0;L<ROSE_L.length;L++){
+      const [n,r,wk]=ROSE_L[L];
+      const nr=L+1<ROSE_L.length?ROSE_L[L+1][1]:.1;
+      const lp=easeOut(clamp01((b-L*.1)/.6));
+      const len=s*r*(.5+.5*lp),wd=len*wk;
+      const st=clamp(nr/r-.12,0,.8);
+      const g=c.createLinearGradient(0,0,0,-len);
+      g.addColorStop(0,rgb(deep));g.addColorStop(st,rgb(deep));
+      g.addColorStop(Math.min(.97,st+.3),rgb(B));g.addColorStop(1,rgb(mix(B,A,.85)));
+      for(let i=0;i<n;i++){
+        c.save();c.rotate(i/n*TAU+L*.9+(1-lp)*.9+f.jit[L*6+i]*.1);
+        petalPath(c,len*(1+f.jit[L*6+i+1]*.04),wd);c.fillStyle=g;c.fill();
+        c.strokeStyle=rgb(deep,.4);c.lineWidth=Math.max(.5,s*.022);c.stroke();
+        c.restore();
+      }
+    }
+    c.beginPath();
+    for(let t=0;t<TAU*1.5;t+=.25){const rr=s*.015+s*.085*t/(TAU*1.5);
+      const x=Math.cos(t)*rr,y=Math.sin(t)*rr;t===0?c.moveTo(x,y):c.lineTo(x,y);}
+    c.strokeStyle=rgb(deep,.75);c.lineWidth=Math.max(.6,s*.03);c.lineCap='round';c.stroke();
+  }
+  c.restore();
+}
+
+function paintHead(c,f,b,dpr){
+  if(b>=1){
+    if(!f.sprite){
+      const half=Math.ceil(f.s*1.85),cv=document.createElement('canvas');
+      cv.width=cv.height=Math.ceil(half*2*dpr);
+      const k=cv.getContext('2d');k.scale(dpr,dpr);k.translate(half,half);
+      drawHead(k,f,1);f.sprite=cv;f.half=half;
+    }
+    c.drawImage(f.sprite,-f.half,-f.half,f.half*2,f.half*2);
+  }else if(b>0)drawHead(c,f,b);
+}
+
+function drawLeaf(c,len,light){
+  const w=len*.3;
+  c.beginPath();c.moveTo(0,0);c.quadraticCurveTo(len*.45,-w,len,0);c.quadraticCurveTo(len*.45,w,0,0);
+  c.fillStyle=light?'#43a35f':'#2f7f49';c.fill();
+  c.beginPath();c.moveTo(0,0);c.quadraticCurveTo(len*.5,-w*.12,len*.92,0);
+  c.strokeStyle='rgba(12,58,30,.55)';c.lineWidth=Math.max(.7,len*.03);c.stroke();
+}
+
+const qPoint=(p0,p1,p2,t)=>{const u=1-t;return{x:u*u*p0.x+2*u*t*p1.x+t*t*p2.x,y:u*u*p0.y+2*u*t*p1.y+t*t*p2.y};};
+const qAngle=(p0,p1,p2,t)=>Math.atan2(2*(1-t)*(p1.y-p0.y)+2*t*(p2.y-p1.y),2*(1-t)*(p1.x-p0.x)+2*t*(p2.x-p1.x));
+function qPartial(c,p0,p1,p2,g){
+  const e=qPoint(p0,p1,p2,g);
+  c.beginPath();c.moveTo(p0.x,p0.y);c.quadraticCurveTo(lerp(p0.x,p1.x,g),lerp(p0.y,p1.y,g),e.x,e.y);
+  return e;
+}
+
+function heartPath(c,s){
+  c.beginPath();c.moveTo(0,s*.35);
+  c.bezierCurveTo(-s*1.1,-s*.35,-s*.45,-s*1.05,0,-s*.42);
+  c.bezierCurveTo(s*.45,-s*1.05,s*1.1,-s*.35,0,s*.35);
+  c.closePath();
+}
+
+/* ================= 3D phool engine ================= */
+const I3=new Float32Array([1,0,0,0,1,0,0,0,1]);
+function basis(ax,roll){
+  const l=Math.hypot(ax[0],ax[1],ax[2])||1,z=[ax[0]/l,ax[1]/l,ax[2]/l];
+  let x=[-z[1],z[0],0],xl=Math.hypot(x[0],x[1]);
+  if(xl<1e-4){x=[1,0,0];xl=1;}
+  x=[x[0]/xl,x[1]/xl,0];
+  const y=[z[1]*x[2]-z[2]*x[1],z[2]*x[0]-z[0]*x[2],z[0]*x[1]-z[1]*x[0]];
+  const c=Math.cos(roll||0),s=Math.sin(roll||0);
+  return new Float32Array([x[0]*c+y[0]*s,x[1]*c+y[1]*s,x[2]*c+y[2]*s,-x[0]*s+y[0]*c,-x[1]*s+y[1]*c,-x[2]*s+y[2]*c,z[0],z[1],z[2]]);
+}
+const rotZ=a=>new Float32Array([Math.cos(a),Math.sin(a),0,-Math.sin(a),Math.cos(a),0,0,0,1]);
+const mix3=(p,q,t)=>[lerp(p[0],q[0],t),lerp(p[1],q[1],t),lerp(p[2],q[2],t)];
+
+function surfGeo(nu,nv,fn,wrapU){
+  const g=[],p=[],ix=[];
+  for(let i=0;i<=nu;i++)for(let j=0;j<=nv;j++)g.push(fn(i/nu,j/nv));
+  const at=(i,j)=>g[(wrapU?((i%nu)+nu)%nu:clamp(i,0,nu))*(nv+1)+clamp(j,0,nv)];
+  for(let i=0;i<=nu;i++)for(let j=0;j<=nv;j++){
+    const a=at(i+1,j),b=at(i-1,j),c=at(i,j+1),d=at(i,j-1);
+    const ux=a[0]-b[0],uy=a[1]-b[1],uz=a[2]-b[2],vx=c[0]-d[0],vy=c[1]-d[1],vz=c[2]-d[2];
+    let nx=uy*vz-uz*vy,ny=uz*vx-ux*vz,nz=ux*vy-uy*vx;const l=Math.hypot(nx,ny,nz);
+    if(l<1e-9){nx=0;ny=0;nz=1;}else{nx/=l;ny/=l;nz/=l;}
+    const q=g[i*(nv+1)+j];p.push(q[0],q[1],q[2],nx,ny,nz,i/nu,j/nv);
+  }
+  for(let i=0;i<nu;i++)for(let j=0;j<nv;j++){const q=i*(nv+1)+j;ix.push(q,q+nv+1,q+1,q+1,q+nv+1,q+nv+2);}
+  return {p,i:ix};
+}
+function mergeGeo(list){
+  const p=[],ix=[];
+  for(const g of list){const off=p.length/8;for(const v of g.p)p.push(v);for(const k of g.i)ix.push(k+off);}
+  return {p,i:ix};
+}
+const leafGeo=()=>surfGeo(18,8,(u,vv)=>{
+  const v=vv*2-1,hw=.32*Math.pow(Math.sin(Math.PI*Math.pow(u,.8)),.85);
+  return [u,v*hw,(.5*u-.5*u*u)+.38*Math.abs(v)*hw];});
+const domeGeo=()=>surfGeo(20,7,(u,v)=>{const th=v*Math.PI/2,a=u*TAU;
+  return [Math.cos(a)*Math.sin(th),Math.sin(a)*Math.sin(th),Math.cos(th)*.6];},true);
+
+const PAL3={
+  red:{d:[.11,0,.025],m:[.64,.02,.11],l:[.96,.22,.34]},
+  pink:{d:[.3,.03,.14],m:[.92,.33,.55],l:[1,.72,.82]},
+  peach:{d:[.52,.17,.11],m:[.96,.52,.4],l:[1,.82,.72]},
+  white:{d:[.52,.46,.46],m:[.95,.92,.92],l:[1,1,1]},
+  gold:{d:[.42,.2,0],m:[.97,.68,.12],l:[1,.9,.5]},
+  purple:{d:[.16,.04,.32],m:[.56,.32,.88],l:[.84,.7,1]},
+  blue:{d:[.04,.1,.36],m:[.3,.5,.95],l:[.7,.84,1]}
+};
+const SPEC3={
+  daisy:{L:[{n:18,len:1,wid:.15,A0:.14,A1:-.1,cup:.5,r0:.2,sh:[.75,.8]}],c:.27},
+  cosmos:{L:[{n:8,len:1,wid:.36,A0:.32,A1:.04,cup:.3,r0:.1,sh:[.6,.6]}],c:.17},
+  lily:{L:[{n:6,len:1.2,wid:.22,A0:1.05,A1:-.4,cup:.6,r0:.05,sh:[.9,1.1]}],c:.1},
+  tulip:{L:[{n:3,len:1.4,wid:.4,A0:1.02,A1:1.5,cup:.5,r0:.12,sh:[.7,.75]},
+            {n:3,off:1.047,len:1.34,wid:.4,A0:.95,A1:1.42,cup:.5,r0:.17,sh:[.7,.75]}],c:0},
+  dahlia:{L:[{n:13,len:1,wid:.17,A0:.14,A1:0,cup:.9,r0:.1,sh:[.8,.9]},
+             {n:11,off:.24,len:.8,wid:.18,A0:.5,A1:.3,cup:.9,r0:.08,sh:[.8,.9]},
+             {n:9,off:.1,len:.6,wid:.2,A0:.85,A1:.7,cup:.9,r0:.06,sh:[.8,.9]},
+             {n:7,off:.3,len:.4,wid:.24,A0:1.15,A1:1.1,cup:.9,r0:.04,sh:[.8,.9]}],c:.08}
+};
+
+function Flora(canvas,opt){
+  opt=opt||{};
+  const gl=canvas.getContext('webgl',{antialias:true,alpha:true,premultipliedAlpha:true})||canvas.getContext('experimental-webgl');
+  if(!gl)return null;
+  const cam={SE:0,CE:1,D:10,TZ:0,F:1,YOFF:0,spin:0,W:1,H:1};
+  const VC=`precision highp float;
+uniform float uSpin;uniform mediump vec2 uEl;uniform vec4 uProj;uniform float uTz;
+uniform vec3 uPos;uniform mat3 uM;uniform float uS;
+vec3 spinz(vec3 p){float c=cos(uSpin),s=sin(uSpin);return vec3(c*p.x-s*p.y,s*p.x+c*p.y,p.z);}
+vec4 proj(vec3 q){q.z-=uTz;float yv=q.y*uEl.x+q.z*uEl.y;float d=uProj.z+q.y*uEl.y-q.z*uEl.x;
+  return vec4(q.x*uProj.x,yv*uProj.y+uProj.w*d,((d-1.)/99.*2.-1.)*d,d);}
+vec4 place(vec3 p){return proj(spinz(uPos+uM*(p*uS)));}
+vec3 nrm(vec3 n){return spinz(uM*n);}
+`;
+  const FC=`precision mediump float;
+uniform mediump vec2 uEl;
+vec3 shade(vec3 base,vec3 n,float rim,float sp){
+  vec3 V=vec3(0.,-uEl.y,uEl.x);n=normalize(n);if(dot(n,V)<0.)n=-n;
+  vec3 L=normalize(vec3(-.5,-.5,.72));
+  float d=dot(n,L)*.5+.5;d*=d;
+  float fr=pow(1.-abs(dot(n,V)),3.);
+  vec3 Hh=normalize(L+V);
+  return base*(.22+1.05*d)+(base*.5+.5)*fr*rim+vec3(1.,.92,.92)*pow(max(dot(n,Hh),0.),24.)*sp;
+}
+`;
+  const SRC={
+    rose:[VC+`attribute vec2 a;uniform float uOpen;varying vec3 vN;varying vec2 vA;
+vec3 rose(float r,float ay,float lo){
+  float th=mix(-6.2831853,47.1238898,ay);
+  float phi=1.5707963*exp(-th/25.132741);
+  phi=mix(mix(.34,.1,ay),phi,lo);
+  r*=mix(.62,1.,lo);
+  float q=1.-mod(3.6*th,6.2831853)/3.14159265;
+  float t=1.25*q*q-.25;float X=1.-.5*t*t;float k=1.27689*r-1.;
+  float y=1.95653*r*r*k*k*sin(phi);
+  float Rr=X*(r*sin(phi)+y*cos(phi));
+  return vec3(Rr*sin(th),Rr*cos(th),X*(r*cos(phi)-y*sin(phi)));
+}
+void main(){
+  float lo=smoothstep(0.,1.,clamp(uOpen*1.7-a.y*.7,0.,1.));
+  vec3 p=rose(a.x,a.y,lo);float rn=max(a.x,.05);
+  vec3 p0=rose(rn,a.y,lo),pr=rose(rn+.02,a.y,lo),pt=rose(rn,a.y+.0008,lo);
+  vN=nrm(normalize(cross(pr-p0,pt-p0)));vA=a;gl_Position=place(p);
+}`,FC+`varying vec3 vN;varying vec2 vA;uniform vec3 uC0,uC1,uC2;
+void main(){float r=vA.x;
+  vec3 base=mix(uC0,uC1,smoothstep(.04,.72,r));base=mix(base,uC2,smoothstep(.74,1.,r)*.42);base*=mix(1.,.7,vA.y);
+  gl_FragColor=vec4(shade(base,vN,.4*smoothstep(.3,1.,r),.16*smoothstep(.35,1.,r)),1.);
+}`,['a']],
+    pet:[VC+`attribute vec3 a;uniform vec4 uPA,uPB;uniform vec2 uSh;uniform float uOpen;varying vec3 vN;varying vec2 vUV;
+vec3 petal(float u,float v,float k,float A0,float dA,float L){
+  float phi=uPA.y+6.2831853*k/uPA.x;
+  float al=A0+dA*u;
+  float rho=uPB.w+L*(sin(al)-sin(A0))/dA;
+  float z=-L*(cos(al)-cos(A0))/dA;
+  float w=uPA.w*L*pow(max(sin(3.14159*pow(clamp(u,0.,.999),uSh.x)),0.),uSh.y);
+  float lift=uPB.z*w*v*v;
+  rho-=sin(al)*lift;z+=cos(al)*lift;
+  float cs=cos(phi),sn=sin(phi);
+  return vec3(cs*rho-sn*v*w,sn*rho+cs*v*w,z);
+}
+void main(){
+  float lo=smoothstep(0.,1.,uOpen);
+  float A0=mix(1.42,uPB.x,lo),A1=mix(1.52,uPB.y,lo),L=uPA.z*mix(.5,1.,lo);
+  float dA=A1-A0;if(abs(dA)<.002)dA=.002;
+  float u=clamp(a.x,.02,.98);
+  vec3 p=petal(a.x,a.y,a.z,A0,dA,L);
+  vec3 p0=petal(u,a.y,a.z,A0,dA,L),pu=petal(u+.02,a.y,a.z,A0,dA,L),pv=petal(u,a.y+.05,a.z,A0,dA,L);
+  vN=nrm(normalize(cross(pu-p0,pv-p0)));vUV=a.xy;gl_Position=place(p);
+}`,FC+`varying vec3 vN;varying vec2 vUV;uniform vec3 uC0,uC1;
+void main(){float u=vUV.x,v=abs(vUV.y);
+  vec3 base=mix(uC0,uC1,smoothstep(0.,.8,u));
+  base*=1.-.2*(1.-smoothstep(0.,.14,v))*(1.-u*.6);
+  base*=.95+.05*sin(vUV.y*24.);
+  gl_FragColor=vec4(shade(base,vN,.32,.1),1.);
+}`,['a']],
+    tube:[VC+`attribute vec2 a;uniform vec3 uP0,uP1,uP2;uniform vec2 uTR;varying vec3 vN;varying float vT;
+void main(){
+  float t=a.x*uTR.x,u=1.-t;
+  vec3 c=u*u*uP0+2.*u*t*uP1+t*t*uP2;
+  vec3 tg=normalize(2.*u*(uP1-uP0)+2.*t*(uP2-uP1));
+  vec3 e1=normalize(cross(tg,vec3(.13,1.,.07))),e2=cross(tg,e1);
+  vec3 n=cos(a.y)*e1+sin(a.y)*e2;
+  float rad=uTR.y*(1.-.3*a.x)*(a.x>.99?.15:1.);
+  vN=spinz(n);vT=a.x;gl_Position=proj(spinz(c+n*rad));
+}`,FC+`varying vec3 vN;varying float vT;
+void main(){gl_FragColor=vec4(shade(mix(vec3(.06,.22,.1),vec3(.22,.52,.27),vT),vN,.25,.1),1.);}`,['a']],
+    mesh:[VC+`attribute vec3 aP,aN;attribute vec2 aUV;varying vec3 vN;varying vec2 vUV;
+void main(){vN=nrm(aN);vUV=aUV;gl_Position=place(aP);}`,FC+`varying vec3 vN;varying vec2 vUV;uniform float uKind;uniform vec3 uC0,uC1;
+void main(){
+  vec3 base;float rim=.25,sp=.12;
+  if(uKind<1.5){
+    float v=abs(vUV.y*2.-1.);
+    float rib=1.-smoothstep(0.,.07,v);
+    float ve=(1.-smoothstep(0.,.09,abs(fract(vUV.x*7.-v*1.4)-.5)))*smoothstep(.03,.25,v);
+    base=mix(vec3(.11,.4,.2),vec3(.3,.68,.36),v*.55+.15);
+    base=mix(base,vec3(.06,.25,.12),max(rib*.9,ve*.45));
+  }else if(uKind<2.5){
+    float dots=sin(vUV.x*88.)*sin(vUV.y*30.);
+    base=mix(uC0,uC1,smoothstep(-.3,.6,dots)*.55+(1.-vUV.y)*.3);sp=.2;
+  }else if(uKind<3.5){
+    float pl=.5+.5*sin(vUV.x*6.2831853*22.);
+    base=mix(uC0,uC1,vUV.y)*(.88+.12*pl);
+    sp=.05;rim=.08;
+  }else{base=uC0*(.8+.2*sin(vUV.y*3.14159));sp=.55;rim=.5;}
+  gl_FragColor=vec4(shade(base,vN,rim,sp),1.);
+}`,['aP','aN','aUV']]
+  };
+  function mk(vs,fs,attrs){
+    const sh=(t,s)=>{const o=gl.createShader(t);gl.shaderSource(o,s);gl.compileShader(o);
+      if(!gl.getShaderParameter(o,gl.COMPILE_STATUS))throw new Error(gl.getShaderInfoLog(o));return o;};
+    const p=gl.createProgram();gl.attachShader(p,sh(gl.VERTEX_SHADER,vs));gl.attachShader(p,sh(gl.FRAGMENT_SHADER,fs));
+    attrs.forEach((n,i)=>gl.bindAttribLocation(p,i,n));
+    gl.linkProgram(p);if(!gl.getProgramParameter(p,gl.LINK_STATUS))throw new Error(gl.getProgramInfoLog(p));
+    const cache={};p.U=n=>(n in cache)?cache[n]:(cache[n]=gl.getUniformLocation(p,n));p.na=attrs.length;return p;
+  }
+  const P={};for(const k in SRC)P[k]=mk(SRC[k][0],SRC[k][1],SRC[k][2]);
+  function buf(data,idx){
+    const v=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,v);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(data),gl.STATIC_DRAW);
+    const i=gl.createBuffer();gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,i);gl.bufferData(gl.ELEMENT_ARRAY_BUFFER,new Uint16Array(idx),gl.STATIC_DRAW);
+    return {v,i,n:idx.length};
+  }
+  function gridBuf(nu,nv,fn,layers){
+    const d=[],ix=[];let off=0;
+    for(let k=0;k<(layers||1);k++){
+      for(let i=0;i<=nu;i++)for(let j=0;j<=nv;j++)fn(d,i/nu,j/nv,k);
+      for(let i=0;i<nu;i++)for(let j=0;j<nv;j++){const q=off+i*(nv+1)+j;ix.push(q,q+nv+1,q+1,q+1,q+nv+1,q+nv+2);}
+      off+=(nu+1)*(nv+1);
+    }
+    return buf(d,ix);
+  }
+  const NT=opt.roseT||420,NR=opt.roseR||13,PU=10,PV=6,MAXP=20;
+  const B={
+    rose:gridBuf(NT,NR,(d,u,v)=>d.push(v,u)),
+    pet:gridBuf(PU,PV,(d,u,v,k)=>d.push(u,v*2-1,k),MAXP),
+    tube:gridBuf(26,8,(d,u,v)=>d.push(u,v*TAU))
+  };
+  const PETN=PU*PV*6,M={};
+  gl.enable(gl.DEPTH_TEST);gl.clearColor(0,0,0,0);gl.enableVertexAttribArray(0);
+  let curP=null,curB=null;
+  function bind(p,b,size){
+    if(curP!==p){gl.useProgram(p);curP=p;curB=null;
+      for(let i=1;i<3;i++)i<p.na?gl.enableVertexAttribArray(i):gl.disableVertexAttribArray(i);}
+    if(curB!==b){gl.bindBuffer(gl.ARRAY_BUFFER,b.v);gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,b.i);
+      if(p===P.mesh){gl.vertexAttribPointer(0,3,gl.FLOAT,false,32,0);gl.vertexAttribPointer(1,3,gl.FLOAT,false,32,12);gl.vertexAttribPointer(2,2,gl.FLOAT,false,32,24);}
+      else gl.vertexAttribPointer(0,size,gl.FLOAT,false,0,0);
+      curB=b;}
+  }
+  const pm=(p,o)=>{gl.uniform3fv(p.U('uPos'),o.pos||[0,0,0]);gl.uniformMatrix3fv(p.U('uM'),false,o.M||I3);gl.uniform1f(p.U('uS'),o.s==null?1:o.s);};
+  const E={
+    gl,cam,ok:true,
+    addMesh(name,g){M[name]=buf(g.p,g.i);},
+    begin(){
+      gl.viewport(0,0,canvas.width,canvas.height);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);
+      for(const k in P){const p=P[k];gl.useProgram(p);
+        gl.uniform1f(p.U('uSpin'),cam.spin);gl.uniform2f(p.U('uEl'),cam.SE,cam.CE);
+        gl.uniform4f(p.U('uProj'),cam.F*cam.H/cam.W,cam.F,cam.D,cam.YOFF);gl.uniform1f(p.U('uTz'),cam.TZ);}
+      curP=null;curB=null;
+    },
+    rose(o){const p=P.rose;bind(p,B.rose,2);pm(p,o);gl.uniform1f(p.U('uOpen'),o.open);
+      gl.uniform3fv(p.U('uC0'),o.pal.d);gl.uniform3fv(p.U('uC1'),o.pal.m);gl.uniform3fv(p.U('uC2'),o.pal.l);
+      gl.drawElements(gl.TRIANGLES,B.rose.n,gl.UNSIGNED_SHORT,0);},
+    petals(o,ly){const p=P.pet;bind(p,B.pet,3);pm(p,o);gl.uniform1f(p.U('uOpen'),o.open);
+      gl.uniform4f(p.U('uPA'),ly.n,(ly.off||0),ly.len,ly.wid);gl.uniform4f(p.U('uPB'),ly.A0,ly.A1,ly.cup,ly.r0);
+      gl.uniform2f(p.U('uSh'),ly.sh[0],ly.sh[1]);
+      gl.uniform3fv(p.U('uC0'),o.c0);gl.uniform3fv(p.U('uC1'),o.c1);
+      gl.drawElements(gl.TRIANGLES,PETN*ly.n,gl.UNSIGNED_SHORT,0);},
+    tube(o){const p=P.tube;bind(p,B.tube,2);
+      gl.uniform3fv(p.U('uP0'),o.p0);gl.uniform3fv(p.U('uP1'),o.p1);gl.uniform3fv(p.U('uP2'),o.p2);
+      gl.uniform2f(p.U('uTR'),o.grow,o.rad);gl.drawElements(gl.TRIANGLES,B.tube.n,gl.UNSIGNED_SHORT,0);},
+    mesh(name,o){const p=P.mesh,b=M[name];bind(p,b,3);pm(p,o);gl.uniform1f(p.U('uKind'),o.kind||1);
+      gl.uniform3fv(p.U('uC0'),o.c0||[1,1,1]);gl.uniform3fv(p.U('uC1'),o.c1||[1,1,1]);
+      gl.drawElements(gl.TRIANGLES,b.n,gl.UNSIGNED_SHORT,0);},
+    /* poora phool: f={type,pal,s,roll}, open 0..1, k = size multiplier */
+    head(f,pos,M,k,open){
+      if(k<=0)return;
+      if(f.type==='rose'){E.rose({pos,M,s:f.s*k,open,pal:f.pal});return;}
+      const sp=SPEC3[f.type],o={pos,M,s:f.s*k,open,c0:f.c0,c1:f.c1};
+      for(const ly of sp.L)E.petals(o,f.n&&sp.L.length===1?Object.assign({},ly,{n:f.n}):ly);
+      if(sp.c)E.mesh('dome',{pos,M,s:f.s*k*sp.c*(.6+.4*open),kind:2,c0:f.cc0,c1:f.cc1});
+    },
+    project(p){
+      const c=Math.cos(cam.spin),s=Math.sin(cam.spin);
+      const x=c*p[0]-s*p[1],y=s*p[0]+c*p[1],z=p[2]-cam.TZ;
+      const d=cam.D+y*cam.CE-z*cam.SE,yv=y*cam.SE+z*cam.CE;
+      return {x:cam.W/2+(x*cam.F/d)*cam.H/2,y:cam.H/2-(yv*cam.F/d+cam.YOFF)*cam.H/2};
+    },
+    /* screen point -> world point on plane y=y0 (spin=0) */
+    unproject(px,py,y0){
+      const nx=(px-cam.W/2)/(cam.H/2),ny=(cam.H/2-py)/(cam.H/2)-cam.YOFF;
+      const zz=(ny*(cam.D+y0*cam.CE)-y0*cam.SE*cam.F)/(cam.CE*cam.F+ny*cam.SE);
+      const d=cam.D+y0*cam.CE-zz*cam.SE;
+      return [nx*d/cam.F,y0,zz+cam.TZ];
+    }
+  };
+  E.addMesh('leaf',leafGeo());E.addMesh('dome',domeGeo());
+  return E;
+}
+function newFlower3(type,palName,s){
+  const pal=PAL3[palName];
+  const f={type,pal,palName,s,roll:rnd(0,TAU),c0:mix3(pal.d,pal.m,.72),c1:mix3(pal.m,pal.l,.78),
+    cc0:[.5,.26,.02],cc1:[1,.8,.2]};
+  if(type==='daisy')f.n=15+((Math.random()*6)|0);
+  if(type==='lily'){f.cc0=[.3,.14,.02];f.cc1=[.85,.55,.1];}
+  if(type==='dahlia'){f.cc0=mix3(pal.d,[.3,.1,0],.5);f.cc1=[1,.78,.3];}
+  return f;
+}
+
+const PAGES={gulab:"<!DOCTYPE html>\n<html lang=\"ur-Latn\">\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no\">\n<title>Tumhare liye 🌹<\/title>\n<style>\n*{box-sizing:border-box}\nhtml,body{margin:0;height:100%;overflow:hidden;background:#07030a;touch-action:none;\n  -webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none}\nbody{background:radial-gradient(ellipse at 50% 44%,#4a1230 0%,#230a1b 42%,#07030a 100%)}\ncanvas{position:fixed;inset:0;width:100%;height:100%;display:block}\n#back,#gl{pointer-events:none}\n.veil{position:fixed;inset:0;pointer-events:none;\n  background:linear-gradient(to top,rgba(7,3,10,.97) 0%,rgba(7,3,10,.6) 13%,transparent 32%)}\n.txt{position:fixed;left:0;right:0;text-align:center;pointer-events:none;padding:0 22px;color:#ffe6ec}\n.top{top:max(6vh,env(safe-area-inset-top))}\n.bottom{bottom:max(6vh,env(safe-area-inset-bottom))}\n.fade{opacity:0;transform:translateY(16px);filter:blur(8px);\n  transition:opacity 1.6s ease,transform 1.6s ease,filter 1.6s ease}\n.fade.show{opacity:1;transform:none;filter:none}\n.small{font:500 clamp(11px,3vw,14px)/1.4 \"Segoe UI\",Roboto,Helvetica,Arial,sans-serif;\n  letter-spacing:.42em;text-transform:uppercase;color:#f3a9bb;margin:0 0 10px}\n.title{font-family:\"Snell Roundhand\",\"Segoe Script\",\"Brush Script MT\",\"Dancing Script\",cursive;\n  font-weight:600;font-size:clamp(32px,9.2vw,60px);line-height:1.15;margin:0;\n  text-shadow:0 0 22px rgba(255,90,130,.55),0 2px 4px rgba(0,0,0,.5)}\n.line{font:italic 400 clamp(15px,4.3vw,21px)/1.5 Georgia,\"Times New Roman\",serif;margin:0;color:#ffd3dd;\n  text-shadow:0 2px 10px rgba(0,0,0,.8);transition-delay:.9s}\n#again{position:fixed;right:14px;top:max(14px,env(safe-area-inset-top));width:40px;height:40px;border-radius:50%;\n  border:1px solid rgba(255,190,205,.35);background:rgba(255,255,255,.06);color:#ffd3dd;font-size:20px;line-height:1;\n  opacity:0;pointer-events:none;transition:opacity 1s;cursor:pointer}\n#again.show{opacity:.8;pointer-events:auto}\n<\/style>\n<\/head>\n<body>\n<canvas id=\"back\"><\/canvas>\n<canvas id=\"gl\"><\/canvas>\n<canvas id=\"fx\"><\/canvas>\n<div class=\"veil\"><\/div>\n<div class=\"txt top\">\n  <p class=\"small fade\" id=\"small\"><\/p>\n  <h1 class=\"title fade\" id=\"title\"><\/h1>\n<\/div>\n<div class=\"txt bottom\"><p class=\"line fade\" id=\"line\"><\/p><\/div>\n<button id=\"again\" aria-label=\"Dobara chalao\">↻<\/button>\n<script>\nconst CONFIG=__CFG__;\nconst TAU=Math.PI*2;\nconst clamp=(v,a,b)=>Math.max(a,Math.min(b,v));\nconst clamp01=v=>clamp(v,0,1);\nconst lerp=(a,b,t)=>a+(b-a)*t;\nconst easeOut=t=>1-Math.pow(1-t,3);\nconst easeInOut=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;\nconst easeBack=t=>{const c1=1.70158,c3=c1+1;return 1+c3*Math.pow(t-1,3)+c1*Math.pow(t-1,2);};\nconst rnd=(a,b)=>a+Math.random()*(b-a);\nconst mix=(p,q,t)=>[lerp(p[0],q[0],t),lerp(p[1],q[1],t),lerp(p[2],q[2],t)];\nconst rgb=(p,a=1)=>`rgba(${p[0]|0},${p[1]|0},${p[2]|0},${a})`;\n\n/* rang: a = halka (pankhri ka kinara), b = gehra (pankhri ki jar), c = beech */\nconst PALS={\n  pink:{a:[255,158,190],b:[214,51,108],c:[255,214,102]},\n  red:{a:[255,104,120],b:[176,18,50],c:[255,200,87]},\n  white:{a:[255,255,255],b:[224,218,244],c:[255,196,61]},\n  purple:{a:[210,172,255],b:[124,77,214],c:[255,225,130]},\n  gold:{a:[255,217,112],b:[244,140,40],c:[150,78,24]},\n  peach:{a:[255,196,176],b:[238,112,100],c:[255,230,150]},\n  blue:{a:[160,212,255],b:[72,122,226],c:[255,240,170]}\n};\n\nfunction petalPath(c,len,wd,notch){\n  c.beginPath();\n  c.moveTo(0,0);\n  if(notch){\n    c.bezierCurveTo(-wd,-len*.3,-wd*.85,-len*1.02,-wd*.2,-len*.98);\n    c.quadraticCurveTo(-wd*.05,-len*.93,0,-len*.84);\n    c.quadraticCurveTo(wd*.05,-len*.93,wd*.2,-len*.98);\n  }else{\n    c.bezierCurveTo(-wd,-len*.3,-wd*.85,-len*1.02,0,-len);\n  }\n  c.bezierCurveTo(wd*.85,-len*1.02,wd,-len*.3,0,0);\n  c.closePath();\n}\n\nfunction newLook(type,pal,s){\n  return {type,pal,s,rot:rnd(0,TAU),n:12+((Math.random()*5)|0),\n    jit:Array.from({length:40},()=>rnd(-1,1)),sprite:null,half:0};\n}\n\nconst ROSE_L=[[5,1,.64],[5,.8,.62],[4,.6,.63],[3,.42,.67],[3,.25,.76]];\nconst DAHLIA_L=[[13,1,.19],[11,.76,.21],[9,.54,.24],[6,.32,.28]];\n\nfunction drawHead(c,f,b){\n  const s=f.s,A=f.pal.a,B=f.pal.b,C=f.pal.c;\n  b=clamp01(b);\n  const e=easeBack(b),sc=.12+.88*e;\n  c.save();\n  if(f.type==='tulip'){\n    c.scale(sc,sc);\n    const a=.08+.2*easeOut(b),L=s*1.45;\n    const g=c.createLinearGradient(0,0,0,-L);\n    g.addColorStop(0,rgb(mix(B,[40,0,30],.3)));g.addColorStop(1,rgb(mix(A,B,.35)));\n    const g2=c.createLinearGradient(0,0,0,-L);\n    g2.addColorStop(0,rgb(B));g2.addColorStop(1,rgb(A));\n    for(const r of [-a*2.1,a*2.1]){c.save();c.rotate(r);petalPath(c,L*.96,s*.4);c.fillStyle=g;c.fill();c.restore();}\n    for(const r of [-a,a]){c.save();c.rotate(r);petalPath(c,L,s*.42);c.fillStyle=g;c.fill();\n      c.strokeStyle=rgb(mix(B,[0,0,0],.4),.3);c.lineWidth=Math.max(.6,s*.03);c.stroke();c.restore();}\n    petalPath(c,L*1.02,s*.44);c.fillStyle=g2;c.fill();\n    c.strokeStyle=rgb(mix(B,[0,0,0],.4),.25);c.lineWidth=Math.max(.6,s*.03);c.stroke();\n    c.restore();return;\n  }\n  c.rotate((1-e)*-.8);\n  c.scale(sc,sc);\n  if(f.type==='daisy'){\n    const n=f.n,g=c.createLinearGradient(0,-s*.2,0,-s);\n    g.addColorStop(0,rgb(B));g.addColorStop(1,rgb(A));\n    for(let i=0;i<n;i++){\n      c.save();c.rotate(i/n*TAU+f.jit[i]*.05);\n      petalPath(c,s*(1+f.jit[i+1]*.06),s*.2);\n      c.fillStyle=g;c.fill();\n      c.strokeStyle=rgb(mix(B,[0,0,0],.35),.28);c.lineWidth=Math.max(.5,s*.02);c.stroke();\n      c.restore();\n    }\n    const cg=c.createRadialGradient(-s*.07,-s*.07,0,0,0,s*.3);\n    cg.addColorStop(0,rgb(mix(C,[255,255,255],.4)));cg.addColorStop(1,rgb(mix(C,[120,60,0],.4)));\n    c.beginPath();c.arc(0,0,s*.28,0,TAU);c.fillStyle=cg;c.fill();\n    c.fillStyle='rgba(110,55,0,.35)';\n    for(let k=1;k<12;k++){const an=k*2.4,rr=s*.21*Math.sqrt(k/12);\n      c.beginPath();c.arc(Math.cos(an)*rr,Math.sin(an)*rr,s*.022,0,TAU);c.fill();}\n  }else if(f.type==='round5'){\n    const g=c.createLinearGradient(0,0,0,-s);\n    g.addColorStop(0,rgb(B));g.addColorStop(.45,rgb(mix(B,A,.6)));g.addColorStop(1,rgb(A));\n    for(let i=0;i<5;i++){\n      c.save();c.rotate(i/5*TAU);\n      petalPath(c,s,s*.6,true);c.fillStyle=g;c.fill();\n      c.strokeStyle=rgb(mix(B,[0,0,0],.3),.22);c.lineWidth=Math.max(.5,s*.02);c.stroke();\n      c.restore();\n    }\n    c.strokeStyle=rgb(mix(C,[255,255,255],.3),.9);c.fillStyle=rgb(C);c.lineWidth=Math.max(.5,s*.022);\n    for(let k=0;k<10;k++){const an=k/10*TAU+.3,rr=s*(.3+.07*f.jit[k]);\n      c.beginPath();c.moveTo(0,0);c.lineTo(Math.cos(an)*rr,Math.sin(an)*rr);c.stroke();\n      c.beginPath();c.arc(Math.cos(an)*rr,Math.sin(an)*rr,s*.035,0,TAU);c.fill();}\n    c.beginPath();c.arc(0,0,s*.09,0,TAU);c.fillStyle=rgb(mix(B,[60,0,20],.4));c.fill();\n  }else if(f.type==='dahlia'){\n    for(let L=0;L<DAHLIA_L.length;L++){\n      const [n,r,wk]=DAHLIA_L[L],len=s*r;\n      const g=c.createLinearGradient(0,0,0,-len);\n      g.addColorStop(0,rgb(mix(B,[40,0,30],.35)));g.addColorStop(.5,rgb(mix(B,A,L*.1)));g.addColorStop(1,rgb(mix(A,B,L*.2)));\n      for(let i=0;i<n;i++){\n        c.save();c.rotate(i/n*TAU+L*.4);\n        petalPath(c,len,len*wk);c.fillStyle=g;c.fill();\n        c.strokeStyle=rgb(mix(B,[0,0,0],.4),.3);c.lineWidth=Math.max(.5,s*.018);c.stroke();\n        c.restore();\n      }\n    }\n    c.beginPath();c.arc(0,0,s*.1,0,TAU);c.fillStyle=rgb(mix(C,B,.3));c.fill();\n  }else{ /* rose */\n    const deep=mix(B,[24,0,12],.6);\n    for(let L=0;L<ROSE_L.length;L++){\n      const [n,r,wk]=ROSE_L[L];\n      const nr=L+1<ROSE_L.length?ROSE_L[L+1][1]:.1;\n      const lp=easeOut(clamp01((b-L*.1)/.6));\n      const len=s*r*(.5+.5*lp),wd=len*wk;\n      const st=clamp(nr/r-.12,0,.8);\n      const g=c.createLinearGradient(0,0,0,-len);\n      g.addColorStop(0,rgb(deep));g.addColorStop(st,rgb(deep));\n      g.addColorStop(Math.min(.97,st+.3),rgb(B));g.addColorStop(1,rgb(mix(B,A,.85)));\n      for(let i=0;i<n;i++){\n        c.save();c.rotate(i/n*TAU+L*.9+(1-lp)*.9+f.jit[L*6+i]*.1);\n        petalPath(c,len*(1+f.jit[L*6+i+1]*.04),wd);c.fillStyle=g;c.fill();\n        c.strokeStyle=rgb(deep,.4);c.lineWidth=Math.max(.5,s*.022);c.stroke();\n        c.restore();\n      }\n    }\n    c.beginPath();\n    for(let t=0;t<TAU*1.5;t+=.25){const rr=s*.015+s*.085*t/(TAU*1.5);\n      const x=Math.cos(t)*rr,y=Math.sin(t)*rr;t===0?c.moveTo(x,y):c.lineTo(x,y);}\n    c.strokeStyle=rgb(deep,.75);c.lineWidth=Math.max(.6,s*.03);c.lineCap='round';c.stroke();\n  }\n  c.restore();\n}\n\nfunction paintHead(c,f,b,dpr){\n  if(b>=1){\n    if(!f.sprite){\n      const half=Math.ceil(f.s*1.85),cv=document.createElement('canvas');\n      cv.width=cv.height=Math.ceil(half*2*dpr);\n      const k=cv.getContext('2d');k.scale(dpr,dpr);k.translate(half,half);\n      drawHead(k,f,1);f.sprite=cv;f.half=half;\n    }\n    c.drawImage(f.sprite,-f.half,-f.half,f.half*2,f.half*2);\n  }else if(b>0)drawHead(c,f,b);\n}\n\nfunction drawLeaf(c,len,light){\n  const w=len*.3;\n  c.beginPath();c.moveTo(0,0);c.quadraticCurveTo(len*.45,-w,len,0);c.quadraticCurveTo(len*.45,w,0,0);\n  c.fillStyle=light?'#43a35f':'#2f7f49';c.fill();\n  c.beginPath();c.moveTo(0,0);c.quadraticCurveTo(len*.5,-w*.12,len*.92,0);\n  c.strokeStyle='rgba(12,58,30,.55)';c.lineWidth=Math.max(.7,len*.03);c.stroke();\n}\n\nconst qPoint=(p0,p1,p2,t)=>{const u=1-t;return{x:u*u*p0.x+2*u*t*p1.x+t*t*p2.x,y:u*u*p0.y+2*u*t*p1.y+t*t*p2.y};};\nconst qAngle=(p0,p1,p2,t)=>Math.atan2(2*(1-t)*(p1.y-p0.y)+2*t*(p2.y-p1.y),2*(1-t)*(p1.x-p0.x)+2*t*(p2.x-p1.x));\nfunction qPartial(c,p0,p1,p2,g){\n  const e=qPoint(p0,p1,p2,g);\n  c.beginPath();c.moveTo(p0.x,p0.y);c.quadraticCurveTo(lerp(p0.x,p1.x,g),lerp(p0.y,p1.y,g),e.x,e.y);\n  return e;\n}\n\nfunction heartPath(c,s){\n  c.beginPath();c.moveTo(0,s*.35);\n  c.bezierCurveTo(-s*1.1,-s*.35,-s*.45,-s*1.05,0,-s*.42);\n  c.bezierCurveTo(s*.45,-s*1.05,s*1.1,-s*.35,0,s*.35);\n  c.closePath();\n}\n\n\ndocument.getElementById('small').textContent=CONFIG.small;\ndocument.getElementById('title').textContent=CONFIG.title;\ndocument.getElementById('line').textContent=CONFIG.line;\n\nconst back=document.getElementById('back'),bx=back.getContext('2d');\nconst fx=document.getElementById('fx'),ctx=fx.getContext('2d');\nconst glc=document.getElementById('gl');\nconst gl=glc.getContext('webgl',{antialias:true,alpha:true,premultipliedAlpha:true})||glc.getContext('experimental-webgl');\n\nlet W,H,DPR,R,cx,cy,T0=performance.now()/1000,last=0;\nlet petals=[],sparks=[],bokeh=[],textShown=false,petalClock=0,sparkClock=0;\nconst LIGHT=[255,118,146],MID=[216,30,74],DEEP=[66,4,22];\n\n/* ---------- 3D camera ---------- */\nconst ELEV=36*Math.PI/180,SE=Math.sin(ELEV),CE=Math.cos(ELEV),DIST=10,TZ=.22,LS=6.6;\nlet F=1,YOFF=.06;\nconst stemC=t=>{const k=1-t;return [.22*Math.sin(k*4.2),.12*Math.sin(k*3.1),-LS*k];};\nfunction project(p,spin){\n  const c=Math.cos(spin),s=Math.sin(spin);\n  const x=c*p[0]-s*p[1],y=s*p[0]+c*p[1],z=p[2]-TZ;\n  const d=DIST+y*CE-z*SE,yv=y*SE+z*CE;\n  return {x:W/2+(x*F/d)*H/2,y:H/2-(yv*F/d+YOFF)*H/2};\n}\n\n/* ---------- shaders ---------- */\nconst COMMON=`\nuniform float uSpin;uniform mediump vec2 uEl;uniform vec4 uProj;uniform float uTz;\nvec3 spin(vec3 p){float c=cos(uSpin),s=sin(uSpin);return vec3(c*p.x-s*p.y,s*p.x+c*p.y,p.z);}\nvec4 proj(vec3 q){q.z-=uTz;float yv=q.y*uEl.x+q.z*uEl.y;float d=uProj.z+q.y*uEl.y-q.z*uEl.x;\n  return vec4(q.x*uProj.x,yv*uProj.y+uProj.w*d,((d-1.)/29.*2.-1.)*d,d);}\n`;\nconst ROSE_VS=`precision highp float;\nattribute vec2 a;uniform float uOpen,uScale;varying vec3 vN;varying vec2 vA;varying float vZ;\n${COMMON}\nvec3 rose(float r,float ay,float lo){\n  float th=mix(-6.2831853,47.1238898,ay);\n  float phi=1.5707963*exp(-th/25.132741);\n  phi=mix(mix(.34,.1,ay),phi,lo);\n  r*=mix(.62,1.,lo);\n  float q=1.-mod(3.6*th,6.2831853)/3.14159265;\n  float t=1.25*q*q-.25;\n  float X=1.-.5*t*t;\n  float k=1.27689*r-1.;\n  float y=1.95653*r*r*k*k*sin(phi);\n  float Rr=X*(r*sin(phi)+y*cos(phi));\n  return vec3(Rr*sin(th),Rr*cos(th),X*(r*cos(phi)-y*sin(phi)));\n}\nvoid main(){\n  float lo=smoothstep(0.,1.,clamp(uOpen*1.7-a.y*.7,0.,1.));\n  vec3 p=rose(a.x,a.y,lo);\n  float rn=max(a.x,.04);\n  vec3 p0=rose(rn,a.y,lo),pr=rose(rn+.012,a.y,lo),pt=rose(rn,a.y+.0005,lo);\n  vN=spin(normalize(cross(pr-p0,pt-p0)));\n  vA=a;vZ=p.z;\n  gl_Position=proj(spin(p*uScale));\n}`;\nconst ROSE_FS=`precision mediump float;\nvarying vec3 vN;varying vec2 vA;varying float vZ;uniform vec2 uEl;\nvoid main(){\n  vec3 n=normalize(vN),V=vec3(0.,-uEl.y,uEl.x);\n  if(dot(n,V)<0.)n=-n;\n  vec3 L=normalize(vec3(-.5,-.5,.72));\n  float d=dot(n,L)*.5+.5;d*=d;\n  float r=vA.x;\n  vec3 deep=vec3(.11,.0,.025),mid=vec3(.64,.02,.11),light=vec3(.96,.22,.34);\n  vec3 base=mix(deep,mid,smoothstep(.04,.72,r));\n  base=mix(base,light,smoothstep(.74,1.,r)*.42);\n  base*=mix(1.,.7,vA.y);\n  float fr=pow(1.-abs(dot(n,V)),3.);\n  vec3 H=normalize(L+V);\n  float sp=pow(max(dot(n,H),0.),24.)*.16*smoothstep(.35,1.,r);\n  vec3 col=base*(.2+1.08*d)+vec3(1.,.42,.55)*fr*.2*smoothstep(.3,1.,r)+vec3(1.,.8,.85)*sp;\n  col+=vec3(1.,.7,.76)*smoothstep(.97,1.,r)*.1;\n  gl_FragColor=vec4(col,1.);\n}`;\nconst GEN_VS=`precision highp float;\nattribute vec3 aP,aN;attribute vec2 aUV;uniform vec3 uBase;uniform float uS;varying vec3 vN;varying vec2 vUV;\n${COMMON}\nvoid main(){vN=spin(aN);vUV=aUV;gl_Position=proj(spin(uBase+(aP-uBase)*uS));}`;\nconst GEN_FS=`precision mediump float;\nvarying vec3 vN;varying vec2 vUV;uniform vec2 uEl;uniform float uKind,uGrow;\nvoid main(){\n  if(uKind<.5&&vUV.x>uGrow)discard;\n  vec3 n=normalize(vN),V=vec3(0.,-uEl.y,uEl.x);\n  if(dot(n,V)<0.)n=-n;\n  vec3 L=normalize(vec3(-.5,-.5,.72));\n  float d=dot(n,L)*.5+.5;d*=d;\n  vec3 col;\n  if(uKind<.5){col=mix(vec3(.06,.2,.1),vec3(.2,.5,.26),smoothstep(.2,1.,vUV.x));}\n  else{\n    float v=abs(vUV.y);\n    float rib=1.-smoothstep(0.,.07,v);\n    float ve=(1.-smoothstep(0.,.09,abs(fract(vUV.x*7.-v*1.4)-.5)))*smoothstep(.03,.25,v);\n    col=mix(vec3(.11,.4,.2),vec3(.3,.68,.36),v*.55+.15);\n    col=mix(col,vec3(.06,.25,.12),max(rib*.9,ve*.45));\n  }\n  vec3 H=normalize(L+V);\n  col=col*(.32+.95*d)+vec3(.7,1.,.75)*pow(max(dot(n,H),0.),18.)*.14;\n  gl_FragColor=vec4(col,1.);\n}`;\n\nlet roseProg,genProg,roseBuf,roseIdx,roseCount,genBuf,genIdx,ranges={},glOK=false;\nconst LEAFDEF=[{t:.6,az:.7,L:1.4,W:.46},{t:.71,az:3.6,L:1.22,W:.4},{t:.82,az:5.4,L:.95,W:.33}];\nconst THORNS=[{t:.36,az:2.2},{t:.48,az:4.6},{t:.56,az:.2},{t:.66,az:1.9},{t:.77,az:3.0},{t:.88,az:.9}];\n\nfunction compile(vs,fs){\n  const mk=(type,src)=>{const s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);\n    if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw new Error(gl.getShaderInfoLog(s));return s;};\n  const p=gl.createProgram();gl.attachShader(p,mk(gl.VERTEX_SHADER,vs));gl.attachShader(p,mk(gl.FRAGMENT_SHADER,fs));\n  gl.linkProgram(p);if(!gl.getProgramParameter(p,gl.LINK_STATUS))throw new Error(gl.getProgramInfoLog(p));\n  p.u=n=>gl.getUniformLocation(p,n);return p;\n}\nfunction leafMesh(o,base,az,L,Wd,rise,droop,fold){\n  const NU=18,NV=8,ca=Math.cos(az),sa=Math.sin(az),start=o.p.length/8,g=[];\n  for(let i=0;i<=NU;i++){const u=i/NU,hw=Wd*Math.pow(Math.sin(Math.PI*Math.pow(u,.8)),.85);\n    for(let j=0;j<=NV;j++){const v=j/NV*2-1,al=u*L,ac=v*hw,h=L*(rise*u-droop*u*u)+fold*Math.abs(v)*hw;\n      g.push([base[0]+al*ca-ac*sa,base[1]+al*sa+ac*ca,base[2]+h,u,v]);}}\n  const at=(i,j)=>g[clamp(i,0,NU)*(NV+1)+clamp(j,0,NV)];\n  for(let i=0;i<=NU;i++)for(let j=0;j<=NV;j++){\n    const a=at(i+1,j),b=at(i-1,j),c=at(i,j+1),d=at(i,j-1);\n    const ux=a[0]-b[0],uy=a[1]-b[1],uz=a[2]-b[2],vx=c[0]-d[0],vy=c[1]-d[1],vz=c[2]-d[2];\n    let nx=uy*vz-uz*vy,ny=uz*vx-ux*vz,nz=ux*vy-uy*vx;const l=Math.hypot(nx,ny,nz);\n    if(l<1e-7){nx=0;ny=0;nz=1;}else{nx/=l;ny/=l;nz/=l;}\n    const p=at(i,j);o.p.push(p[0],p[1],p[2],nx,ny,nz,p[3],p[4]);\n  }\n  for(let i=0;i<NU;i++)for(let j=0;j<NV;j++){const q=start+i*(NV+1)+j;o.i.push(q,q+NV+1,q+1,q+1,q+NV+1,q+NV+2);}\n}\nfunction initGL(){\n  roseProg=compile(ROSE_VS,ROSE_FS);genProg=compile(GEN_VS,GEN_FS);\n  /* gulab */\n  const NT=760,NR=22,v=new Float32Array((NT+1)*(NR+1)*2),ix=new Uint16Array(NT*NR*6);let k=0;\n  for(let i=0;i<=NT;i++)for(let j=0;j<=NR;j++){v[k++]=j/NR;v[k++]=i/NT;}\n  k=0;for(let i=0;i<NT;i++)for(let j=0;j<NR;j++){const q=i*(NR+1)+j;ix[k++]=q;ix[k++]=q+NR+1;ix[k++]=q+1;ix[k++]=q+1;ix[k++]=q+NR+1;ix[k++]=q+NR+2;}\n  roseBuf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,roseBuf);gl.bufferData(gl.ARRAY_BUFFER,v,gl.STATIC_DRAW);\n  roseIdx=gl.createBuffer();gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,roseIdx);gl.bufferData(gl.ELEMENT_ARRAY_BUFFER,ix,gl.STATIC_DRAW);\n  roseCount=ix.length;\n  /* tehni, kaante, patte, sepals */\n  const o={p:[],i:[]};\n  const NS=150,SD=10;\n  for(let i=0;i<=NS;i++){const t=i/NS,c=stemC(t);\n    let rad=lerp(.07,.046,t)+.075*Math.pow(clamp01((t-.972)/.028),1.5);\n    if(t>.996)rad*=.7;\n    for(let s=0;s<=SD;s++){const an=s/SD*TAU,nx=Math.cos(an),ny=Math.sin(an);\n      o.p.push(c[0]+nx*rad,c[1]+ny*rad,c[2],nx,ny,0,t,0);}}\n  for(let i=0;i<NS;i++)for(let s=0;s<SD;s++){const q=i*(SD+1)+s;o.i.push(q,q+SD+1,q+1,q+1,q+SD+1,q+SD+2);}\n  for(const th of THORNS){\n    const c=stemC(th.t),dx=Math.cos(th.az),dy=Math.sin(th.az),st=o.p.length/8,rr=.055;\n    o.p.push(c[0]+dx*.2,c[1]+dy*.2,c[2]+.1,dx,dy,.3,th.t,0);\n    for(let s=0;s<6;s++){const an=s/6*TAU,e1=Math.cos(an)*rr,e2=Math.sin(an)*rr;\n      o.p.push(c[0]+dx*.04-dy*e1,c[1]+dy*.04+dx*e1,c[2]+e2,dx*.4-dy*Math.cos(an),dy*.4+dx*Math.cos(an),Math.sin(an),th.t,0);}\n    for(let s=0;s<6;s++)o.i.push(st,st+1+s,st+1+(s+1)%6);\n  }\n  ranges.stem=[0,o.i.length];\n  ranges.leaves=LEAFDEF.map(lf=>{\n    const c=stemC(lf.t),s=o.i.length;lf.base=[c[0]+Math.cos(lf.az)*.04,c[1]+Math.sin(lf.az)*.04,c[2]];\n    leafMesh(o,lf.base,lf.az,lf.L,lf.W,.55,.5,.38);return [s,o.i.length-s];});\n  const ss=o.i.length;\n  for(let i=0;i<5;i++)leafMesh(o,[0,0,-.03],i/5*TAU+.3,.92,.15,-.05,.5,.25);\n  ranges.sepals=[ss,o.i.length-ss];\n  genBuf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,genBuf);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(o.p),gl.STATIC_DRAW);\n  genIdx=gl.createBuffer();gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,genIdx);gl.bufferData(gl.ELEMENT_ARRAY_BUFFER,new Uint16Array(o.i),gl.STATIC_DRAW);\n  gl.enable(gl.DEPTH_TEST);gl.clearColor(0,0,0,0);\n  glOK=true;\n}\nfunction camUniforms(p,spin){\n  gl.uniform1f(p.u('uSpin'),spin);gl.uniform2f(p.u('uEl'),SE,CE);\n  gl.uniform4f(p.u('uProj'),F*H/W,F,DIST,YOFF);gl.uniform1f(p.u('uTz'),TZ);\n}\nfunction draw3D(spin,g,open,headScale,now){\n  gl.viewport(0,0,glc.width,glc.height);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);\n  gl.useProgram(genProg);camUniforms(genProg,spin);\n  gl.bindBuffer(gl.ARRAY_BUFFER,genBuf);gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,genIdx);\n  const aP=gl.getAttribLocation(genProg,'aP'),aN=gl.getAttribLocation(genProg,'aN'),aUV=gl.getAttribLocation(genProg,'aUV');\n  gl.enableVertexAttribArray(aP);gl.enableVertexAttribArray(aN);gl.enableVertexAttribArray(aUV);\n  gl.vertexAttribPointer(aP,3,gl.FLOAT,false,32,0);gl.vertexAttribPointer(aN,3,gl.FLOAT,false,32,12);gl.vertexAttribPointer(aUV,2,gl.FLOAT,false,32,24);\n  gl.uniform1f(genProg.u('uKind'),0);gl.uniform1f(genProg.u('uGrow'),g);gl.uniform3f(genProg.u('uBase'),0,0,0);gl.uniform1f(genProg.u('uS'),1);\n  gl.drawElements(gl.TRIANGLES,ranges.stem[1],gl.UNSIGNED_SHORT,ranges.stem[0]*2);\n  gl.uniform1f(genProg.u('uKind'),1);\n  LEAFDEF.forEach((lf,i)=>{\n    const s=easeBack(clamp01((g-lf.t)/.16));if(s<=0)return;\n    gl.uniform3f(genProg.u('uBase'),lf.base[0],lf.base[1],lf.base[2]);gl.uniform1f(genProg.u('uS'),s);\n    gl.drawElements(gl.TRIANGLES,ranges.leaves[i][1],gl.UNSIGNED_SHORT,ranges.leaves[i][0]*2);\n  });\n  if(headScale>0){\n    gl.uniform3f(genProg.u('uBase'),0,0,-.03);gl.uniform1f(genProg.u('uS'),headScale*(.55+.45*easeOut(open)));\n    gl.drawElements(gl.TRIANGLES,ranges.sepals[1],gl.UNSIGNED_SHORT,ranges.sepals[0]*2);\n    gl.disableVertexAttribArray(aP);gl.disableVertexAttribArray(aN);gl.disableVertexAttribArray(aUV);\n    gl.useProgram(roseProg);camUniforms(roseProg,spin);\n    gl.bindBuffer(gl.ARRAY_BUFFER,roseBuf);gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,roseIdx);\n    const a=gl.getAttribLocation(roseProg,'a');gl.enableVertexAttribArray(a);gl.vertexAttribPointer(a,2,gl.FLOAT,false,0,0);\n    gl.uniform1f(roseProg.u('uOpen'),open);\n    gl.uniform1f(roseProg.u('uScale'),headScale*(1+Math.sin(now*1.3)*.008));\n    gl.drawElements(gl.TRIANGLES,roseCount,gl.UNSIGNED_SHORT,0);\n    gl.disableVertexAttribArray(a);\n  }\n}\n\nfunction layout(){\n  DPR=Math.min(window.devicePixelRatio||1,2);\n  W=innerWidth;H=innerHeight;\n  for(const c of [back,fx,glc]){c.width=Math.round(W*DPR);c.height=Math.round(H*DPR);}\n  R=Math.min(W*.33,H*.2,210);cx=W/2;cy=H*.47;\n  F=2*R*DIST/H;YOFF=1-2*cy/H;\n  bokeh=Array.from({length:18},()=>({x:rnd(0,W),y:rnd(0,H),r:rnd(18,70),a:rnd(.04,.13),\n    vx:rnd(-6,6),vy:rnd(-9,-2),gold:Math.random()<.35,ph:rnd(0,TAU)}));\n}\nfunction fallPetal(x,y,burst){\n  const sz=R*rnd(.1,.18);\n  petals.push({x,y,vx:burst?rnd(-160,160):rnd(-14,14),vy:burst?rnd(-230,-40):rnd(26,58),\n    rot:rnd(0,TAU),vr:rnd(-1.4,1.4),spin:rnd(0,TAU),vs:rnd(1.2,3),sz,k:Math.random(),ph:rnd(0,TAU),burst});\n}\nfunction spark(x,y,vx,vy,life,r,gold){sparks.push({x,y,vx,vy,life,max:life,r,gold});}\n\nfunction frame(ts){\n  const now=ts/1000,dt=Math.min(.05,now-last||0);last=now;\n  const T=now-T0;\n  const g=easeInOut(clamp01((T-.5)/3));\n  const headScale=easeBack(clamp01((T-3.2)/.9));\n  const open=easeInOut(clamp01((T-3.9)/5.4));\n  const spin=.6+T*.24;\n\n  /* peeche: bokeh + roshni */\n  bx.setTransform(DPR,0,0,DPR,0,0);bx.clearRect(0,0,W,H);\n  for(const o of bokeh){\n    o.x+=o.vx*dt;o.y+=o.vy*dt;\n    if(o.y<-o.r)o.y=H+o.r;if(o.x<-o.r)o.x=W+o.r;if(o.x>W+o.r)o.x=-o.r;\n    const a=o.a*(.7+.3*Math.sin(now*.7+o.ph))*clamp01(T/1.5);\n    const gr=bx.createRadialGradient(o.x,o.y,0,o.x,o.y,o.r),col=o.gold?[255,214,150]:[255,120,160];\n    gr.addColorStop(0,rgb(col,a));gr.addColorStop(.6,rgb(col,a*.55));gr.addColorStop(1,rgb(col,0));\n    bx.fillStyle=gr;bx.beginPath();bx.arc(o.x,o.y,o.r,0,TAU);bx.fill();\n  }\n  if(headScale>0){\n    const gr=R*3.2,a=(.34+.05*Math.sin(now*1.3))*(.35+.65*open)*clamp01(headScale);\n    const gl2=bx.createRadialGradient(cx,cy,0,cx,cy,gr);\n    gl2.addColorStop(0,`rgba(255,70,120,${a})`);gl2.addColorStop(.4,`rgba(255,60,110,${a*.4})`);gl2.addColorStop(1,'rgba(255,60,110,0)');\n    bx.globalCompositeOperation='lighter';bx.fillStyle=gl2;bx.beginPath();bx.arc(cx,cy,gr,0,TAU);bx.fill();\n    bx.globalCompositeOperation='source-over';\n  }\n\n  if(glOK)draw3D(spin,g,open,headScale,now);\n\n  /* aage: chamak + pankhriyan */\n  ctx.setTransform(DPR,0,0,DPR,0,0);ctx.clearRect(0,0,W,H);\n  if(g>0&&g<1&&Math.random()<.6){const tp=project(stemC(g),spin);\n    spark(tp.x,tp.y,rnd(-20,20),rnd(-30,5),rnd(.4,.9),rnd(.8,1.8),true);}\n  if(T>8.6&&!textShown){textShown=true;\n    for(const id of ['small','title','line'])document.getElementById(id).classList.add('show');\n    setTimeout(()=>document.getElementById('again').classList.add('show'),2600);}\n  if(T>9){petalClock-=dt;if(petalClock<=0&&petals.length<46){petalClock=rnd(.22,.5);fallPetal(rnd(-20,W+20),-24,false);}}\n  if(open>.35){\n    sparkClock-=dt;if(sparkClock<=0){sparkClock=rnd(.05,.16);\n      const an=rnd(0,TAU),rr=R*rnd(.3,1.9);\n      spark(cx+Math.cos(an)*rr,cy+Math.sin(an)*rr*.8,rnd(-8,8),rnd(-26,-8),rnd(1,2.2),rnd(.8,2.2),Math.random()<.5);}\n  }\n  for(let i=petals.length-1;i>=0;i--){\n    const p=petals[i];\n    if(p.burst){p.vy+=260*dt;p.vx*=.985;}\n    p.x+=(p.vx+Math.sin(now*1.1+p.ph)*22)*dt;p.y+=p.vy*dt;p.rot+=p.vr*dt;p.spin+=p.vs*dt;\n    if(p.y>H+40){petals.splice(i,1);continue;}\n    const cs=Math.cos(p.spin);\n    ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rot);ctx.scale(cs*.85+.15*(cs<0?-1:1),1);\n    petalPath(ctx,p.sz,p.sz*.56);\n    const pg=ctx.createLinearGradient(0,0,0,-p.sz);pg.addColorStop(0,rgb(mix(DEEP,MID,.5),.92));pg.addColorStop(1,rgb(mix(MID,LIGHT,p.k),.92));\n    ctx.fillStyle=pg;ctx.fill();ctx.restore();\n  }\n  ctx.globalCompositeOperation='lighter';\n  for(let i=sparks.length-1;i>=0;i--){\n    const s=sparks[i];s.life-=dt;if(s.life<=0){sparks.splice(i,1);continue;}\n    s.x+=s.vx*dt;s.y+=s.vy*dt;\n    const k=s.life/s.max,a=Math.sin(k*Math.PI)*(.6+.4*Math.sin(now*14+i));\n    ctx.fillStyle=s.gold?`rgba(255,226,170,${a})`:`rgba(255,170,195,${a})`;\n    ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,TAU);ctx.fill();\n    ctx.fillStyle=s.gold?`rgba(255,226,170,${a*.18})`:`rgba(255,170,195,${a*.18})`;\n    ctx.beginPath();ctx.arc(s.x,s.y,s.r*4,0,TAU);ctx.fill();\n  }\n  ctx.globalCompositeOperation='source-over';\n  requestAnimationFrame(frame);\n}\n\nfx.addEventListener('pointerdown',e=>{\n  for(let i=0;i<9;i++)fallPetal(e.clientX,e.clientY,true);\n  for(let i=0;i<14;i++){const an=rnd(0,TAU),v=rnd(30,150);\n    spark(e.clientX,e.clientY,Math.cos(an)*v,Math.sin(an)*v,rnd(.5,1.1),rnd(1,2.4),Math.random()<.5);}\n});\ndocument.getElementById('again').addEventListener('click',()=>{\n  T0=performance.now()/1000;petals=[];textShown=false;\n  for(const id of ['small','title','line','again'])document.getElementById(id).classList.remove('show');\n});\naddEventListener('resize',layout);\nlayout();\ntry{if(gl)initGL();}catch(err){console.error(err);}\nwindow.__gl=gl;\nrequestAnimationFrame(frame);\n<\/script>\n<\/body>\n<\/html>\n",bagh:"<!DOCTYPE html>\n<html lang=\"ur-Latn\">\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no\">\n<title>Tumhara Bagh 🌸<\/title>\n<style>\n*{box-sizing:border-box}\nhtml,body{margin:0;height:100%;overflow:hidden;background:#050818;touch-action:none;\n  -webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none}\ncanvas{position:fixed;inset:0;width:100%;height:100%;display:block}\n#back,#gl{pointer-events:none}\n#fx{cursor:pointer}\n.txt{position:fixed;left:0;right:0;text-align:center;pointer-events:none;padding:0 24px;color:#fff}\n#hint{top:36vh;font:500 clamp(15px,4.4vw,20px)/1.5 \"Segoe UI\",Roboto,Helvetica,Arial,sans-serif;letter-spacing:.04em;\n  color:#e9defa;text-shadow:0 2px 14px rgba(0,0,0,.7);opacity:0;transition:opacity 1.2s;animation:pulse 2.4s ease-in-out infinite}\n#hint.show{opacity:1}\n@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}\n#msg{top:max(14vh,env(safe-area-inset-top))}\n.fade{opacity:0;transform:translateY(16px);filter:blur(8px);transition:opacity 1.8s ease,transform 1.8s ease,filter 1.8s ease}\n.show .fade{opacity:1;transform:none;filter:none}\n.title{font-family:\"Snell Roundhand\",\"Segoe Script\",\"Brush Script MT\",\"Dancing Script\",cursive;font-weight:600;\n  font-size:clamp(30px,8.6vw,56px);line-height:1.15;margin:0 0 12px;color:#fff1f6;\n  text-shadow:0 0 24px rgba(255,140,190,.6),0 2px 6px rgba(0,0,0,.7)}\n.line{font:italic 400 clamp(15px,4.2vw,20px)/1.5 Georgia,\"Times New Roman\",serif;margin:0;color:#f3dcff;\n  text-shadow:0 2px 10px rgba(0,0,0,.9);transition-delay:1s}\n<\/style>\n<\/head>\n<body>\n<canvas id=\"back\"><\/canvas>\n<canvas id=\"gl\"><\/canvas>\n<canvas id=\"fx\"><\/canvas>\n<div class=\"txt\" id=\"hint\"><\/div>\n<div class=\"txt\" id=\"msg\"><h1 class=\"title fade\" id=\"title\"><\/h1><p class=\"line fade\" id=\"line\"><\/p><\/div>\n<script>\nconst CONFIG=__CFG__;\nconst TAU=Math.PI*2;\nconst clamp=(v,a,b)=>Math.max(a,Math.min(b,v));\nconst clamp01=v=>clamp(v,0,1);\nconst lerp=(a,b,t)=>a+(b-a)*t;\nconst easeOut=t=>1-Math.pow(1-t,3);\nconst easeInOut=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;\nconst easeBack=t=>{const c1=1.70158,c3=c1+1;return 1+c3*Math.pow(t-1,3)+c1*Math.pow(t-1,2);};\nconst rnd=(a,b)=>a+Math.random()*(b-a);\nconst mix=(p,q,t)=>[lerp(p[0],q[0],t),lerp(p[1],q[1],t),lerp(p[2],q[2],t)];\nconst rgb=(p,a=1)=>`rgba(${p[0]|0},${p[1]|0},${p[2]|0},${a})`;\n\n/* rang: a = halka (pankhri ka kinara), b = gehra (pankhri ki jar), c = beech */\nconst PALS={\n  pink:{a:[255,158,190],b:[214,51,108],c:[255,214,102]},\n  red:{a:[255,104,120],b:[176,18,50],c:[255,200,87]},\n  white:{a:[255,255,255],b:[224,218,244],c:[255,196,61]},\n  purple:{a:[210,172,255],b:[124,77,214],c:[255,225,130]},\n  gold:{a:[255,217,112],b:[244,140,40],c:[150,78,24]},\n  peach:{a:[255,196,176],b:[238,112,100],c:[255,230,150]},\n  blue:{a:[160,212,255],b:[72,122,226],c:[255,240,170]}\n};\n\nfunction petalPath(c,len,wd,notch){\n  c.beginPath();\n  c.moveTo(0,0);\n  if(notch){\n    c.bezierCurveTo(-wd,-len*.3,-wd*.85,-len*1.02,-wd*.2,-len*.98);\n    c.quadraticCurveTo(-wd*.05,-len*.93,0,-len*.84);\n    c.quadraticCurveTo(wd*.05,-len*.93,wd*.2,-len*.98);\n  }else{\n    c.bezierCurveTo(-wd,-len*.3,-wd*.85,-len*1.02,0,-len);\n  }\n  c.bezierCurveTo(wd*.85,-len*1.02,wd,-len*.3,0,0);\n  c.closePath();\n}\n\nfunction newLook(type,pal,s){\n  return {type,pal,s,rot:rnd(0,TAU),n:12+((Math.random()*5)|0),\n    jit:Array.from({length:40},()=>rnd(-1,1)),sprite:null,half:0};\n}\n\nconst ROSE_L=[[5,1,.64],[5,.8,.62],[4,.6,.63],[3,.42,.67],[3,.25,.76]];\nconst DAHLIA_L=[[13,1,.19],[11,.76,.21],[9,.54,.24],[6,.32,.28]];\n\nfunction drawHead(c,f,b){\n  const s=f.s,A=f.pal.a,B=f.pal.b,C=f.pal.c;\n  b=clamp01(b);\n  const e=easeBack(b),sc=.12+.88*e;\n  c.save();\n  if(f.type==='tulip'){\n    c.scale(sc,sc);\n    const a=.08+.2*easeOut(b),L=s*1.45;\n    const g=c.createLinearGradient(0,0,0,-L);\n    g.addColorStop(0,rgb(mix(B,[40,0,30],.3)));g.addColorStop(1,rgb(mix(A,B,.35)));\n    const g2=c.createLinearGradient(0,0,0,-L);\n    g2.addColorStop(0,rgb(B));g2.addColorStop(1,rgb(A));\n    for(const r of [-a*2.1,a*2.1]){c.save();c.rotate(r);petalPath(c,L*.96,s*.4);c.fillStyle=g;c.fill();c.restore();}\n    for(const r of [-a,a]){c.save();c.rotate(r);petalPath(c,L,s*.42);c.fillStyle=g;c.fill();\n      c.strokeStyle=rgb(mix(B,[0,0,0],.4),.3);c.lineWidth=Math.max(.6,s*.03);c.stroke();c.restore();}\n    petalPath(c,L*1.02,s*.44);c.fillStyle=g2;c.fill();\n    c.strokeStyle=rgb(mix(B,[0,0,0],.4),.25);c.lineWidth=Math.max(.6,s*.03);c.stroke();\n    c.restore();return;\n  }\n  c.rotate((1-e)*-.8);\n  c.scale(sc,sc);\n  if(f.type==='daisy'){\n    const n=f.n,g=c.createLinearGradient(0,-s*.2,0,-s);\n    g.addColorStop(0,rgb(B));g.addColorStop(1,rgb(A));\n    for(let i=0;i<n;i++){\n      c.save();c.rotate(i/n*TAU+f.jit[i]*.05);\n      petalPath(c,s*(1+f.jit[i+1]*.06),s*.2);\n      c.fillStyle=g;c.fill();\n      c.strokeStyle=rgb(mix(B,[0,0,0],.35),.28);c.lineWidth=Math.max(.5,s*.02);c.stroke();\n      c.restore();\n    }\n    const cg=c.createRadialGradient(-s*.07,-s*.07,0,0,0,s*.3);\n    cg.addColorStop(0,rgb(mix(C,[255,255,255],.4)));cg.addColorStop(1,rgb(mix(C,[120,60,0],.4)));\n    c.beginPath();c.arc(0,0,s*.28,0,TAU);c.fillStyle=cg;c.fill();\n    c.fillStyle='rgba(110,55,0,.35)';\n    for(let k=1;k<12;k++){const an=k*2.4,rr=s*.21*Math.sqrt(k/12);\n      c.beginPath();c.arc(Math.cos(an)*rr,Math.sin(an)*rr,s*.022,0,TAU);c.fill();}\n  }else if(f.type==='round5'){\n    const g=c.createLinearGradient(0,0,0,-s);\n    g.addColorStop(0,rgb(B));g.addColorStop(.45,rgb(mix(B,A,.6)));g.addColorStop(1,rgb(A));\n    for(let i=0;i<5;i++){\n      c.save();c.rotate(i/5*TAU);\n      petalPath(c,s,s*.6,true);c.fillStyle=g;c.fill();\n      c.strokeStyle=rgb(mix(B,[0,0,0],.3),.22);c.lineWidth=Math.max(.5,s*.02);c.stroke();\n      c.restore();\n    }\n    c.strokeStyle=rgb(mix(C,[255,255,255],.3),.9);c.fillStyle=rgb(C);c.lineWidth=Math.max(.5,s*.022);\n    for(let k=0;k<10;k++){const an=k/10*TAU+.3,rr=s*(.3+.07*f.jit[k]);\n      c.beginPath();c.moveTo(0,0);c.lineTo(Math.cos(an)*rr,Math.sin(an)*rr);c.stroke();\n      c.beginPath();c.arc(Math.cos(an)*rr,Math.sin(an)*rr,s*.035,0,TAU);c.fill();}\n    c.beginPath();c.arc(0,0,s*.09,0,TAU);c.fillStyle=rgb(mix(B,[60,0,20],.4));c.fill();\n  }else if(f.type==='dahlia'){\n    for(let L=0;L<DAHLIA_L.length;L++){\n      const [n,r,wk]=DAHLIA_L[L],len=s*r;\n      const g=c.createLinearGradient(0,0,0,-len);\n      g.addColorStop(0,rgb(mix(B,[40,0,30],.35)));g.addColorStop(.5,rgb(mix(B,A,L*.1)));g.addColorStop(1,rgb(mix(A,B,L*.2)));\n      for(let i=0;i<n;i++){\n        c.save();c.rotate(i/n*TAU+L*.4);\n        petalPath(c,len,len*wk);c.fillStyle=g;c.fill();\n        c.strokeStyle=rgb(mix(B,[0,0,0],.4),.3);c.lineWidth=Math.max(.5,s*.018);c.stroke();\n        c.restore();\n      }\n    }\n    c.beginPath();c.arc(0,0,s*.1,0,TAU);c.fillStyle=rgb(mix(C,B,.3));c.fill();\n  }else{ /* rose */\n    const deep=mix(B,[24,0,12],.6);\n    for(let L=0;L<ROSE_L.length;L++){\n      const [n,r,wk]=ROSE_L[L];\n      const nr=L+1<ROSE_L.length?ROSE_L[L+1][1]:.1;\n      const lp=easeOut(clamp01((b-L*.1)/.6));\n      const len=s*r*(.5+.5*lp),wd=len*wk;\n      const st=clamp(nr/r-.12,0,.8);\n      const g=c.createLinearGradient(0,0,0,-len);\n      g.addColorStop(0,rgb(deep));g.addColorStop(st,rgb(deep));\n      g.addColorStop(Math.min(.97,st+.3),rgb(B));g.addColorStop(1,rgb(mix(B,A,.85)));\n      for(let i=0;i<n;i++){\n        c.save();c.rotate(i/n*TAU+L*.9+(1-lp)*.9+f.jit[L*6+i]*.1);\n        petalPath(c,len*(1+f.jit[L*6+i+1]*.04),wd);c.fillStyle=g;c.fill();\n        c.strokeStyle=rgb(deep,.4);c.lineWidth=Math.max(.5,s*.022);c.stroke();\n        c.restore();\n      }\n    }\n    c.beginPath();\n    for(let t=0;t<TAU*1.5;t+=.25){const rr=s*.015+s*.085*t/(TAU*1.5);\n      const x=Math.cos(t)*rr,y=Math.sin(t)*rr;t===0?c.moveTo(x,y):c.lineTo(x,y);}\n    c.strokeStyle=rgb(deep,.75);c.lineWidth=Math.max(.6,s*.03);c.lineCap='round';c.stroke();\n  }\n  c.restore();\n}\n\nfunction paintHead(c,f,b,dpr){\n  if(b>=1){\n    if(!f.sprite){\n      const half=Math.ceil(f.s*1.85),cv=document.createElement('canvas');\n      cv.width=cv.height=Math.ceil(half*2*dpr);\n      const k=cv.getContext('2d');k.scale(dpr,dpr);k.translate(half,half);\n      drawHead(k,f,1);f.sprite=cv;f.half=half;\n    }\n    c.drawImage(f.sprite,-f.half,-f.half,f.half*2,f.half*2);\n  }else if(b>0)drawHead(c,f,b);\n}\n\nfunction drawLeaf(c,len,light){\n  const w=len*.3;\n  c.beginPath();c.moveTo(0,0);c.quadraticCurveTo(len*.45,-w,len,0);c.quadraticCurveTo(len*.45,w,0,0);\n  c.fillStyle=light?'#43a35f':'#2f7f49';c.fill();\n  c.beginPath();c.moveTo(0,0);c.quadraticCurveTo(len*.5,-w*.12,len*.92,0);\n  c.strokeStyle='rgba(12,58,30,.55)';c.lineWidth=Math.max(.7,len*.03);c.stroke();\n}\n\nconst qPoint=(p0,p1,p2,t)=>{const u=1-t;return{x:u*u*p0.x+2*u*t*p1.x+t*t*p2.x,y:u*u*p0.y+2*u*t*p1.y+t*t*p2.y};};\nconst qAngle=(p0,p1,p2,t)=>Math.atan2(2*(1-t)*(p1.y-p0.y)+2*t*(p2.y-p1.y),2*(1-t)*(p1.x-p0.x)+2*t*(p2.x-p1.x));\nfunction qPartial(c,p0,p1,p2,g){\n  const e=qPoint(p0,p1,p2,g);\n  c.beginPath();c.moveTo(p0.x,p0.y);c.quadraticCurveTo(lerp(p0.x,p1.x,g),lerp(p0.y,p1.y,g),e.x,e.y);\n  return e;\n}\n\nfunction heartPath(c,s){\n  c.beginPath();c.moveTo(0,s*.35);\n  c.bezierCurveTo(-s*1.1,-s*.35,-s*.45,-s*1.05,0,-s*.42);\n  c.bezierCurveTo(s*.45,-s*1.05,s*1.1,-s*.35,0,s*.35);\n  c.closePath();\n}\n\n/* ================= 3D phool engine ================= */\nconst I3=new Float32Array([1,0,0,0,1,0,0,0,1]);\nfunction basis(ax,roll){\n  const l=Math.hypot(ax[0],ax[1],ax[2])||1,z=[ax[0]/l,ax[1]/l,ax[2]/l];\n  let x=[-z[1],z[0],0],xl=Math.hypot(x[0],x[1]);\n  if(xl<1e-4){x=[1,0,0];xl=1;}\n  x=[x[0]/xl,x[1]/xl,0];\n  const y=[z[1]*x[2]-z[2]*x[1],z[2]*x[0]-z[0]*x[2],z[0]*x[1]-z[1]*x[0]];\n  const c=Math.cos(roll||0),s=Math.sin(roll||0);\n  return new Float32Array([x[0]*c+y[0]*s,x[1]*c+y[1]*s,x[2]*c+y[2]*s,-x[0]*s+y[0]*c,-x[1]*s+y[1]*c,-x[2]*s+y[2]*c,z[0],z[1],z[2]]);\n}\nconst rotZ=a=>new Float32Array([Math.cos(a),Math.sin(a),0,-Math.sin(a),Math.cos(a),0,0,0,1]);\nconst mix3=(p,q,t)=>[lerp(p[0],q[0],t),lerp(p[1],q[1],t),lerp(p[2],q[2],t)];\n\nfunction surfGeo(nu,nv,fn,wrapU){\n  const g=[],p=[],ix=[];\n  for(let i=0;i<=nu;i++)for(let j=0;j<=nv;j++)g.push(fn(i/nu,j/nv));\n  const at=(i,j)=>g[(wrapU?((i%nu)+nu)%nu:clamp(i,0,nu))*(nv+1)+clamp(j,0,nv)];\n  for(let i=0;i<=nu;i++)for(let j=0;j<=nv;j++){\n    const a=at(i+1,j),b=at(i-1,j),c=at(i,j+1),d=at(i,j-1);\n    const ux=a[0]-b[0],uy=a[1]-b[1],uz=a[2]-b[2],vx=c[0]-d[0],vy=c[1]-d[1],vz=c[2]-d[2];\n    let nx=uy*vz-uz*vy,ny=uz*vx-ux*vz,nz=ux*vy-uy*vx;const l=Math.hypot(nx,ny,nz);\n    if(l<1e-9){nx=0;ny=0;nz=1;}else{nx/=l;ny/=l;nz/=l;}\n    const q=g[i*(nv+1)+j];p.push(q[0],q[1],q[2],nx,ny,nz,i/nu,j/nv);\n  }\n  for(let i=0;i<nu;i++)for(let j=0;j<nv;j++){const q=i*(nv+1)+j;ix.push(q,q+nv+1,q+1,q+1,q+nv+1,q+nv+2);}\n  return {p,i:ix};\n}\nfunction mergeGeo(list){\n  const p=[],ix=[];\n  for(const g of list){const off=p.length/8;for(const v of g.p)p.push(v);for(const k of g.i)ix.push(k+off);}\n  return {p,i:ix};\n}\nconst leafGeo=()=>surfGeo(18,8,(u,vv)=>{\n  const v=vv*2-1,hw=.32*Math.pow(Math.sin(Math.PI*Math.pow(u,.8)),.85);\n  return [u,v*hw,(.5*u-.5*u*u)+.38*Math.abs(v)*hw];});\nconst domeGeo=()=>surfGeo(20,7,(u,v)=>{const th=v*Math.PI/2,a=u*TAU;\n  return [Math.cos(a)*Math.sin(th),Math.sin(a)*Math.sin(th),Math.cos(th)*.6];},true);\n\nconst PAL3={\n  red:{d:[.11,0,.025],m:[.64,.02,.11],l:[.96,.22,.34]},\n  pink:{d:[.3,.03,.14],m:[.92,.33,.55],l:[1,.72,.82]},\n  peach:{d:[.52,.17,.11],m:[.96,.52,.4],l:[1,.82,.72]},\n  white:{d:[.52,.46,.46],m:[.95,.92,.92],l:[1,1,1]},\n  gold:{d:[.42,.2,0],m:[.97,.68,.12],l:[1,.9,.5]},\n  purple:{d:[.16,.04,.32],m:[.56,.32,.88],l:[.84,.7,1]},\n  blue:{d:[.04,.1,.36],m:[.3,.5,.95],l:[.7,.84,1]}\n};\nconst SPEC3={\n  daisy:{L:[{n:18,len:1,wid:.15,A0:.14,A1:-.1,cup:.5,r0:.2,sh:[.75,.8]}],c:.27},\n  cosmos:{L:[{n:8,len:1,wid:.36,A0:.32,A1:.04,cup:.3,r0:.1,sh:[.6,.6]}],c:.17},\n  lily:{L:[{n:6,len:1.2,wid:.22,A0:1.05,A1:-.4,cup:.6,r0:.05,sh:[.9,1.1]}],c:.1},\n  tulip:{L:[{n:3,len:1.4,wid:.4,A0:1.02,A1:1.5,cup:.5,r0:.12,sh:[.7,.75]},\n            {n:3,off:1.047,len:1.34,wid:.4,A0:.95,A1:1.42,cup:.5,r0:.17,sh:[.7,.75]}],c:0},\n  dahlia:{L:[{n:13,len:1,wid:.17,A0:.14,A1:0,cup:.9,r0:.1,sh:[.8,.9]},\n             {n:11,off:.24,len:.8,wid:.18,A0:.5,A1:.3,cup:.9,r0:.08,sh:[.8,.9]},\n             {n:9,off:.1,len:.6,wid:.2,A0:.85,A1:.7,cup:.9,r0:.06,sh:[.8,.9]},\n             {n:7,off:.3,len:.4,wid:.24,A0:1.15,A1:1.1,cup:.9,r0:.04,sh:[.8,.9]}],c:.08}\n};\n\nfunction Flora(canvas,opt){\n  opt=opt||{};\n  const gl=canvas.getContext('webgl',{antialias:true,alpha:true,premultipliedAlpha:true})||canvas.getContext('experimental-webgl');\n  if(!gl)return null;\n  const cam={SE:0,CE:1,D:10,TZ:0,F:1,YOFF:0,spin:0,W:1,H:1};\n  const VC=`precision highp float;\nuniform float uSpin;uniform mediump vec2 uEl;uniform vec4 uProj;uniform float uTz;\nuniform vec3 uPos;uniform mat3 uM;uniform float uS;\nvec3 spinz(vec3 p){float c=cos(uSpin),s=sin(uSpin);return vec3(c*p.x-s*p.y,s*p.x+c*p.y,p.z);}\nvec4 proj(vec3 q){q.z-=uTz;float yv=q.y*uEl.x+q.z*uEl.y;float d=uProj.z+q.y*uEl.y-q.z*uEl.x;\n  return vec4(q.x*uProj.x,yv*uProj.y+uProj.w*d,((d-1.)/99.*2.-1.)*d,d);}\nvec4 place(vec3 p){return proj(spinz(uPos+uM*(p*uS)));}\nvec3 nrm(vec3 n){return spinz(uM*n);}\n`;\n  const FC=`precision mediump float;\nuniform mediump vec2 uEl;\nvec3 shade(vec3 base,vec3 n,float rim,float sp){\n  vec3 V=vec3(0.,-uEl.y,uEl.x);n=normalize(n);if(dot(n,V)<0.)n=-n;\n  vec3 L=normalize(vec3(-.5,-.5,.72));\n  float d=dot(n,L)*.5+.5;d*=d;\n  float fr=pow(1.-abs(dot(n,V)),3.);\n  vec3 Hh=normalize(L+V);\n  return base*(.22+1.05*d)+(base*.5+.5)*fr*rim+vec3(1.,.92,.92)*pow(max(dot(n,Hh),0.),24.)*sp;\n}\n`;\n  const SRC={\n    rose:[VC+`attribute vec2 a;uniform float uOpen;varying vec3 vN;varying vec2 vA;\nvec3 rose(float r,float ay,float lo){\n  float th=mix(-6.2831853,47.1238898,ay);\n  float phi=1.5707963*exp(-th/25.132741);\n  phi=mix(mix(.34,.1,ay),phi,lo);\n  r*=mix(.62,1.,lo);\n  float q=1.-mod(3.6*th,6.2831853)/3.14159265;\n  float t=1.25*q*q-.25;float X=1.-.5*t*t;float k=1.27689*r-1.;\n  float y=1.95653*r*r*k*k*sin(phi);\n  float Rr=X*(r*sin(phi)+y*cos(phi));\n  return vec3(Rr*sin(th),Rr*cos(th),X*(r*cos(phi)-y*sin(phi)));\n}\nvoid main(){\n  float lo=smoothstep(0.,1.,clamp(uOpen*1.7-a.y*.7,0.,1.));\n  vec3 p=rose(a.x,a.y,lo);float rn=max(a.x,.05);\n  vec3 p0=rose(rn,a.y,lo),pr=rose(rn+.02,a.y,lo),pt=rose(rn,a.y+.0008,lo);\n  vN=nrm(normalize(cross(pr-p0,pt-p0)));vA=a;gl_Position=place(p);\n}`,FC+`varying vec3 vN;varying vec2 vA;uniform vec3 uC0,uC1,uC2;\nvoid main(){float r=vA.x;\n  vec3 base=mix(uC0,uC1,smoothstep(.04,.72,r));base=mix(base,uC2,smoothstep(.74,1.,r)*.42);base*=mix(1.,.7,vA.y);\n  gl_FragColor=vec4(shade(base,vN,.4*smoothstep(.3,1.,r),.16*smoothstep(.35,1.,r)),1.);\n}`,['a']],\n    pet:[VC+`attribute vec3 a;uniform vec4 uPA,uPB;uniform vec2 uSh;uniform float uOpen;varying vec3 vN;varying vec2 vUV;\nvec3 petal(float u,float v,float k,float A0,float dA,float L){\n  float phi=uPA.y+6.2831853*k/uPA.x;\n  float al=A0+dA*u;\n  float rho=uPB.w+L*(sin(al)-sin(A0))/dA;\n  float z=-L*(cos(al)-cos(A0))/dA;\n  float w=uPA.w*L*pow(max(sin(3.14159*pow(clamp(u,0.,.999),uSh.x)),0.),uSh.y);\n  float lift=uPB.z*w*v*v;\n  rho-=sin(al)*lift;z+=cos(al)*lift;\n  float cs=cos(phi),sn=sin(phi);\n  return vec3(cs*rho-sn*v*w,sn*rho+cs*v*w,z);\n}\nvoid main(){\n  float lo=smoothstep(0.,1.,uOpen);\n  float A0=mix(1.42,uPB.x,lo),A1=mix(1.52,uPB.y,lo),L=uPA.z*mix(.5,1.,lo);\n  float dA=A1-A0;if(abs(dA)<.002)dA=.002;\n  float u=clamp(a.x,.02,.98);\n  vec3 p=petal(a.x,a.y,a.z,A0,dA,L);\n  vec3 p0=petal(u,a.y,a.z,A0,dA,L),pu=petal(u+.02,a.y,a.z,A0,dA,L),pv=petal(u,a.y+.05,a.z,A0,dA,L);\n  vN=nrm(normalize(cross(pu-p0,pv-p0)));vUV=a.xy;gl_Position=place(p);\n}`,FC+`varying vec3 vN;varying vec2 vUV;uniform vec3 uC0,uC1;\nvoid main(){float u=vUV.x,v=abs(vUV.y);\n  vec3 base=mix(uC0,uC1,smoothstep(0.,.8,u));\n  base*=1.-.2*(1.-smoothstep(0.,.14,v))*(1.-u*.6);\n  base*=.95+.05*sin(vUV.y*24.);\n  gl_FragColor=vec4(shade(base,vN,.32,.1),1.);\n}`,['a']],\n    tube:[VC+`attribute vec2 a;uniform vec3 uP0,uP1,uP2;uniform vec2 uTR;varying vec3 vN;varying float vT;\nvoid main(){\n  float t=a.x*uTR.x,u=1.-t;\n  vec3 c=u*u*uP0+2.*u*t*uP1+t*t*uP2;\n  vec3 tg=normalize(2.*u*(uP1-uP0)+2.*t*(uP2-uP1));\n  vec3 e1=normalize(cross(tg,vec3(.13,1.,.07))),e2=cross(tg,e1);\n  vec3 n=cos(a.y)*e1+sin(a.y)*e2;\n  float rad=uTR.y*(1.-.3*a.x)*(a.x>.99?.15:1.);\n  vN=spinz(n);vT=a.x;gl_Position=proj(spinz(c+n*rad));\n}`,FC+`varying vec3 vN;varying float vT;\nvoid main(){gl_FragColor=vec4(shade(mix(vec3(.06,.22,.1),vec3(.22,.52,.27),vT),vN,.25,.1),1.);}`,['a']],\n    mesh:[VC+`attribute vec3 aP,aN;attribute vec2 aUV;varying vec3 vN;varying vec2 vUV;\nvoid main(){vN=nrm(aN);vUV=aUV;gl_Position=place(aP);}`,FC+`varying vec3 vN;varying vec2 vUV;uniform float uKind;uniform vec3 uC0,uC1;\nvoid main(){\n  vec3 base;float rim=.25,sp=.12;\n  if(uKind<1.5){\n    float v=abs(vUV.y*2.-1.);\n    float rib=1.-smoothstep(0.,.07,v);\n    float ve=(1.-smoothstep(0.,.09,abs(fract(vUV.x*7.-v*1.4)-.5)))*smoothstep(.03,.25,v);\n    base=mix(vec3(.11,.4,.2),vec3(.3,.68,.36),v*.55+.15);\n    base=mix(base,vec3(.06,.25,.12),max(rib*.9,ve*.45));\n  }else if(uKind<2.5){\n    float dots=sin(vUV.x*88.)*sin(vUV.y*30.);\n    base=mix(uC0,uC1,smoothstep(-.3,.6,dots)*.55+(1.-vUV.y)*.3);sp=.2;\n  }else if(uKind<3.5){\n    float pl=.5+.5*sin(vUV.x*6.2831853*22.);\n    base=mix(uC0,uC1,vUV.y)*(.88+.12*pl);\n    sp=.05;rim=.08;\n  }else{base=uC0*(.8+.2*sin(vUV.y*3.14159));sp=.55;rim=.5;}\n  gl_FragColor=vec4(shade(base,vN,rim,sp),1.);\n}`,['aP','aN','aUV']]\n  };\n  function mk(vs,fs,attrs){\n    const sh=(t,s)=>{const o=gl.createShader(t);gl.shaderSource(o,s);gl.compileShader(o);\n      if(!gl.getShaderParameter(o,gl.COMPILE_STATUS))throw new Error(gl.getShaderInfoLog(o));return o;};\n    const p=gl.createProgram();gl.attachShader(p,sh(gl.VERTEX_SHADER,vs));gl.attachShader(p,sh(gl.FRAGMENT_SHADER,fs));\n    attrs.forEach((n,i)=>gl.bindAttribLocation(p,i,n));\n    gl.linkProgram(p);if(!gl.getProgramParameter(p,gl.LINK_STATUS))throw new Error(gl.getProgramInfoLog(p));\n    const cache={};p.U=n=>(n in cache)?cache[n]:(cache[n]=gl.getUniformLocation(p,n));p.na=attrs.length;return p;\n  }\n  const P={};for(const k in SRC)P[k]=mk(SRC[k][0],SRC[k][1],SRC[k][2]);\n  function buf(data,idx){\n    const v=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,v);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(data),gl.STATIC_DRAW);\n    const i=gl.createBuffer();gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,i);gl.bufferData(gl.ELEMENT_ARRAY_BUFFER,new Uint16Array(idx),gl.STATIC_DRAW);\n    return {v,i,n:idx.length};\n  }\n  function gridBuf(nu,nv,fn,layers){\n    const d=[],ix=[];let off=0;\n    for(let k=0;k<(layers||1);k++){\n      for(let i=0;i<=nu;i++)for(let j=0;j<=nv;j++)fn(d,i/nu,j/nv,k);\n      for(let i=0;i<nu;i++)for(let j=0;j<nv;j++){const q=off+i*(nv+1)+j;ix.push(q,q+nv+1,q+1,q+1,q+nv+1,q+nv+2);}\n      off+=(nu+1)*(nv+1);\n    }\n    return buf(d,ix);\n  }\n  const NT=opt.roseT||420,NR=opt.roseR||13,PU=10,PV=6,MAXP=20;\n  const B={\n    rose:gridBuf(NT,NR,(d,u,v)=>d.push(v,u)),\n    pet:gridBuf(PU,PV,(d,u,v,k)=>d.push(u,v*2-1,k),MAXP),\n    tube:gridBuf(26,8,(d,u,v)=>d.push(u,v*TAU))\n  };\n  const PETN=PU*PV*6,M={};\n  gl.enable(gl.DEPTH_TEST);gl.clearColor(0,0,0,0);gl.enableVertexAttribArray(0);\n  let curP=null,curB=null;\n  function bind(p,b,size){\n    if(curP!==p){gl.useProgram(p);curP=p;curB=null;\n      for(let i=1;i<3;i++)i<p.na?gl.enableVertexAttribArray(i):gl.disableVertexAttribArray(i);}\n    if(curB!==b){gl.bindBuffer(gl.ARRAY_BUFFER,b.v);gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,b.i);\n      if(p===P.mesh){gl.vertexAttribPointer(0,3,gl.FLOAT,false,32,0);gl.vertexAttribPointer(1,3,gl.FLOAT,false,32,12);gl.vertexAttribPointer(2,2,gl.FLOAT,false,32,24);}\n      else gl.vertexAttribPointer(0,size,gl.FLOAT,false,0,0);\n      curB=b;}\n  }\n  const pm=(p,o)=>{gl.uniform3fv(p.U('uPos'),o.pos||[0,0,0]);gl.uniformMatrix3fv(p.U('uM'),false,o.M||I3);gl.uniform1f(p.U('uS'),o.s==null?1:o.s);};\n  const E={\n    gl,cam,ok:true,\n    addMesh(name,g){M[name]=buf(g.p,g.i);},\n    begin(){\n      gl.viewport(0,0,canvas.width,canvas.height);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);\n      for(const k in P){const p=P[k];gl.useProgram(p);\n        gl.uniform1f(p.U('uSpin'),cam.spin);gl.uniform2f(p.U('uEl'),cam.SE,cam.CE);\n        gl.uniform4f(p.U('uProj'),cam.F*cam.H/cam.W,cam.F,cam.D,cam.YOFF);gl.uniform1f(p.U('uTz'),cam.TZ);}\n      curP=null;curB=null;\n    },\n    rose(o){const p=P.rose;bind(p,B.rose,2);pm(p,o);gl.uniform1f(p.U('uOpen'),o.open);\n      gl.uniform3fv(p.U('uC0'),o.pal.d);gl.uniform3fv(p.U('uC1'),o.pal.m);gl.uniform3fv(p.U('uC2'),o.pal.l);\n      gl.drawElements(gl.TRIANGLES,B.rose.n,gl.UNSIGNED_SHORT,0);},\n    petals(o,ly){const p=P.pet;bind(p,B.pet,3);pm(p,o);gl.uniform1f(p.U('uOpen'),o.open);\n      gl.uniform4f(p.U('uPA'),ly.n,(ly.off||0),ly.len,ly.wid);gl.uniform4f(p.U('uPB'),ly.A0,ly.A1,ly.cup,ly.r0);\n      gl.uniform2f(p.U('uSh'),ly.sh[0],ly.sh[1]);\n      gl.uniform3fv(p.U('uC0'),o.c0);gl.uniform3fv(p.U('uC1'),o.c1);\n      gl.drawElements(gl.TRIANGLES,PETN*ly.n,gl.UNSIGNED_SHORT,0);},\n    tube(o){const p=P.tube;bind(p,B.tube,2);\n      gl.uniform3fv(p.U('uP0'),o.p0);gl.uniform3fv(p.U('uP1'),o.p1);gl.uniform3fv(p.U('uP2'),o.p2);\n      gl.uniform2f(p.U('uTR'),o.grow,o.rad);gl.drawElements(gl.TRIANGLES,B.tube.n,gl.UNSIGNED_SHORT,0);},\n    mesh(name,o){const p=P.mesh,b=M[name];bind(p,b,3);pm(p,o);gl.uniform1f(p.U('uKind'),o.kind||1);\n      gl.uniform3fv(p.U('uC0'),o.c0||[1,1,1]);gl.uniform3fv(p.U('uC1'),o.c1||[1,1,1]);\n      gl.drawElements(gl.TRIANGLES,b.n,gl.UNSIGNED_SHORT,0);},\n    /* poora phool: f={type,pal,s,roll}, open 0..1, k = size multiplier */\n    head(f,pos,M,k,open){\n      if(k<=0)return;\n      if(f.type==='rose'){E.rose({pos,M,s:f.s*k,open,pal:f.pal});return;}\n      const sp=SPEC3[f.type],o={pos,M,s:f.s*k,open,c0:f.c0,c1:f.c1};\n      for(const ly of sp.L)E.petals(o,f.n&&sp.L.length===1?Object.assign({},ly,{n:f.n}):ly);\n      if(sp.c)E.mesh('dome',{pos,M,s:f.s*k*sp.c*(.6+.4*open),kind:2,c0:f.cc0,c1:f.cc1});\n    },\n    project(p){\n      const c=Math.cos(cam.spin),s=Math.sin(cam.spin);\n      const x=c*p[0]-s*p[1],y=s*p[0]+c*p[1],z=p[2]-cam.TZ;\n      const d=cam.D+y*cam.CE-z*cam.SE,yv=y*cam.SE+z*cam.CE;\n      return {x:cam.W/2+(x*cam.F/d)*cam.H/2,y:cam.H/2-(yv*cam.F/d+cam.YOFF)*cam.H/2};\n    },\n    /* screen point -> world point on plane y=y0 (spin=0) */\n    unproject(px,py,y0){\n      const nx=(px-cam.W/2)/(cam.H/2),ny=(cam.H/2-py)/(cam.H/2)-cam.YOFF;\n      const zz=(ny*(cam.D+y0*cam.CE)-y0*cam.SE*cam.F)/(cam.CE*cam.F+ny*cam.SE);\n      const d=cam.D+y0*cam.CE-zz*cam.SE;\n      return [nx*d/cam.F,y0,zz+cam.TZ];\n    }\n  };\n  E.addMesh('leaf',leafGeo());E.addMesh('dome',domeGeo());\n  return E;\n}\nfunction newFlower3(type,palName,s){\n  const pal=PAL3[palName];\n  const f={type,pal,palName,s,roll:rnd(0,TAU),c0:mix3(pal.d,pal.m,.72),c1:mix3(pal.m,pal.l,.78),\n    cc0:[.5,.26,.02],cc1:[1,.8,.2]};\n  if(type==='daisy')f.n=15+((Math.random()*6)|0);\n  if(type==='lily'){f.cc0=[.3,.14,.02];f.cc1=[.85,.55,.1];}\n  if(type==='dahlia'){f.cc0=mix3(pal.d,[.3,.1,0],.5);f.cc1=[1,.78,.3];}\n  return f;\n}\n\n\nconst hintEl=document.getElementById('hint'),msgEl=document.getElementById('msg');\nhintEl.textContent=CONFIG.hint;\ndocument.getElementById('title').textContent=CONFIG.title;\ndocument.getElementById('line').textContent=CONFIG.line;\n\nconst back=document.getElementById('back'),bx=back.getContext('2d');\nconst fx=document.getElementById('fx'),ctx=fx.getContext('2d');\nconst glc=document.getElementById('gl');\nlet E=null;try{E=Flora(glc,{roseT:380,roseR:12});}catch(err){console.error(err);}\n\nlet W,H,DPR,bg,grass,stars=[],flies=[],flowers=[],sparks=[],shoot=null,nextShoot=5,userCount=0,last=0;\nconst MAXF=34;\nconst TYPES=['rose','rose','daisy','cosmos','tulip','lily','dahlia','rose','daisy','tulip'];\nconst PALS_FOR={rose:['red','pink','peach','white','gold','red'],daisy:['white','white','pink','purple','gold'],\n  cosmos:['pink','purple','white','peach'],tulip:['red','gold','pink','purple','peach'],\n  lily:['white','pink','gold','peach'],dahlia:['purple','pink','red','gold','blue']};\nconst groundY=x=>H*.87+Math.sin(x*.006+1)*H*.016+Math.sin(x*.0137+3)*H*.008;\nconst hillY=x=>H*.8+Math.sin(x*.004+2)*H*.03+Math.sin(x*.011)*H*.008;\nconst pick=a=>a[(Math.random()*a.length)|0];\n\nfunction build(){\n  DPR=Math.min(window.devicePixelRatio||1,2);\n  W=innerWidth;H=innerHeight;\n  for(const c of [back,fx,glc]){c.width=Math.round(W*DPR);c.height=Math.round(H*DPR);}\n  if(E){const e=9*Math.PI/180,c=E.cam;c.SE=Math.sin(e);c.CE=Math.cos(e);c.D=40;c.TZ=0;c.W=W;c.H=H;\n    c.F=2*(Math.max(H,W*.9)/15)*c.D/H;c.YOFF=-.74;c.spin=0;}\n  bg=document.createElement('canvas');bg.width=back.width;bg.height=back.height;\n  const b=bg.getContext('2d');b.scale(DPR,DPR);\n  const sky=b.createLinearGradient(0,0,0,H);\n  sky.addColorStop(0,'#040616');sky.addColorStop(.45,'#141038');sky.addColorStop(.74,'#3a1f5e');sky.addColorStop(.88,'#6b2f6a');\n  b.fillStyle=sky;b.fillRect(0,0,W,H);\n  /* kehkashan */\n  for(let i=0;i<34;i++){\n    const t=i/33,x=W*(-.1+1.2*t),y=H*(.5-.42*t)+rnd(-H*.04,H*.04),r=Math.min(W,H)*rnd(.12,.26);\n    const g=b.createRadialGradient(x,y,0,x,y,r),col=i%3?[150,130,255]:[255,150,220];\n    g.addColorStop(0,rgb(col,.05));g.addColorStop(1,rgb(col,0));b.fillStyle=g;b.beginPath();b.arc(x,y,r,0,TAU);b.fill();\n  }\n  /* chaand */\n  const mx=W*.8,my=H*.085,mr=Math.min(W,H)*.065;\n  const mg=b.createRadialGradient(mx,my,mr*.6,mx,my,mr*5);\n  mg.addColorStop(0,'rgba(255,240,205,.32)');mg.addColorStop(.3,'rgba(255,225,200,.1)');mg.addColorStop(1,'rgba(255,225,200,0)');\n  b.fillStyle=mg;b.beginPath();b.arc(mx,my,mr*5,0,TAU);b.fill();\n  const mb=b.createRadialGradient(mx-mr*.3,my-mr*.3,mr*.1,mx,my,mr);\n  mb.addColorStop(0,'#fffaf0');mb.addColorStop(1,'#f0dcae');\n  b.fillStyle=mb;b.beginPath();b.arc(mx,my,mr,0,TAU);b.fill();\n  b.fillStyle='rgba(190,165,120,.22)';\n  for(const [ox,oy,rr] of [[.3,-.2,.2],[-.35,.25,.15],[.1,.45,.1],[-.2,-.45,.09]]){b.beginPath();b.arc(mx+ox*mr,my+oy*mr,rr*mr,0,TAU);b.fill();}\n  /* paharian */\n  b.beginPath();b.moveTo(0,H);for(let x=0;x<=W+8;x+=8)b.lineTo(x,hillY(x));b.lineTo(W,H);b.closePath();\n  const hg=b.createLinearGradient(0,H*.76,0,H);hg.addColorStop(0,'#231a45');hg.addColorStop(1,'#0c0d24');b.fillStyle=hg;b.fill();\n  b.beginPath();b.moveTo(0,H);for(let x=0;x<=W+6;x+=6)b.lineTo(x,groundY(x));b.lineTo(W,H);b.closePath();\n  const gg=b.createLinearGradient(0,H*.85,0,H);gg.addColorStop(0,'#0f2b20');gg.addColorStop(1,'#03100b');b.fillStyle=gg;b.fill();\n  /* ghaas */\n  grass=document.createElement('canvas');grass.width=fx.width;grass.height=fx.height;\n  const g=grass.getContext('2d');g.scale(DPR,DPR);g.lineCap='round';\n  for(let x=-4;x<W+4;x+=2.4){\n    const gy=groundY(x)+4,h=rnd(7,20);\n    g.strokeStyle=`rgba(${rnd(22,52)|0},${rnd(92,150)|0},${rnd(58,84)|0},.95)`;g.lineWidth=rnd(1,2);\n    g.beginPath();g.moveTo(x,gy);g.quadraticCurveTo(x+rnd(-2,2),gy-h*.6,x+rnd(-6,6),gy-h);g.stroke();\n  }\n  const n=clamp(Math.round(W*H/5200),70,280);\n  stars=Array.from({length:n},()=>({x:rnd(0,W),y:rnd(0,H*.78),r:rnd(.4,1.5),ph:rnd(0,TAU),sp:rnd(.6,2.4)}));\n  flies=Array.from({length:22},()=>({x:rnd(0,W),y:rnd(H*.35,H*.9),an:rnd(0,TAU),sp:rnd(8,22),ph:rnd(0,TAU)}));\n}\n\nfunction plant(px,py,auto){\n  if(!E)return;\n  const y0=rnd(-1.4,1.6);\n  const base=E.unproject(px,groundY(px)+5,y0),top=E.unproject(px,py,y0);\n  let h=top[2]-base[2];\n  if(h<1.5)h=rnd(1.7,3.6);\n  h=Math.min(h,7.4);\n  const type=pick(TYPES);\n  let s=clamp(h*.17,.45,.8)*rnd(.9,1.12);\n  if(type==='rose')s*=.9;\n  const f=newFlower3(type,pick(PALS_FOR[type]),s);\n  const side=Math.random()<.5?-1:1;\n  Object.assign(f,{base,h,bend:rnd(-.5,.5)*h*.36,born:performance.now()/1000,ph:rnd(0,TAU),lean:rnd(-.35,.35),\n    rad:clamp(s*.075,.045,.075),popped:false,\n    leaves:[{t:rnd(.2,.34),az:side>0?rnd(-.5,.5):Math.PI+rnd(-.5,.5),len:s*rnd(1.3,1.8)},\n            {t:rnd(.44,.6),az:side>0?Math.PI+rnd(-.5,.5):rnd(-.5,.5),len:s*rnd(1,1.4)}]});\n  flowers.push(f);\n  if(flowers.length>MAXF)flowers.shift();\n  if(!auto){\n    userCount++;hintEl.classList.remove('show');\n    if(userCount===CONFIG.flowersForMessage)setTimeout(()=>msgEl.classList.add('show'),1200);\n  }\n}\nfunction spark(x,y,vx,vy,life,r,col){sparks.push({x,y,vx,vy,life,max:life,r,col});}\nconst col255=c=>[c[0]*255,c[1]*255,c[2]*255];\n\nfunction frame(ts){\n  const t=ts/1000,dt=Math.min(.05,t-last||0);last=t;\n\n  /* aasman */\n  bx.setTransform(DPR,0,0,DPR,0,0);\n  bx.drawImage(bg,0,0,W,H);\n  for(const s of stars){\n    bx.globalAlpha=.35+.65*(.5+.5*Math.sin(t*s.sp+s.ph));\n    bx.fillStyle='#fff';bx.beginPath();bx.arc(s.x,s.y,s.r,0,TAU);bx.fill();\n  }\n  bx.globalAlpha=1;\n  nextShoot-=dt;\n  if(nextShoot<=0&&!shoot){nextShoot=rnd(6,13);shoot={x:rnd(W*.1,W*.7),y:rnd(H*.04,H*.3),life:0,dir:Math.random()<.5?1:-1};}\n  if(shoot){\n    shoot.life+=dt;const k=shoot.life/.9;\n    if(k>=1)shoot=null;else{\n      const len=Math.min(W,H)*.22,x=shoot.x+shoot.dir*k*len*2.2,y=shoot.y+k*len*.9;\n      const tx=x-shoot.dir*len*Math.sin(k*Math.PI),ty=y-len*.41*Math.sin(k*Math.PI);\n      const sg=bx.createLinearGradient(x,y,tx,ty);sg.addColorStop(0,`rgba(255,255,255,${Math.sin(k*Math.PI)})`);sg.addColorStop(1,'rgba(255,255,255,0)');\n      bx.strokeStyle=sg;bx.lineWidth=1.8;bx.lineCap='round';bx.beginPath();bx.moveTo(x,y);bx.lineTo(tx,ty);bx.stroke();\n    }\n  }\n\n  /* phool: pehle hisaab, phir 3D */\n  if(E){\n    const U=E.cam.F*H/2/E.cam.D;\n    bx.globalCompositeOperation='lighter';\n    for(const f of flowers){\n      const age=t-f.born;\n      f.g=easeOut(clamp01(age/1.3));\n      f.k=easeBack(clamp01((age-1)/.7));\n      f.open=easeInOut(clamp01((age-1.4)/2.4));\n      const sway=(Math.sin(t*1.1+f.ph)*.035+Math.sin(t*.43+f.ph*2.3)*.02)*f.h;\n      const b=f.base;\n      f.p0=[b[0],b[1],b[2]-.1];f.p1=[b[0]+f.bend,b[1],b[2]+f.h*.55];f.p2=[b[0]+f.bend*.4+sway,b[1]+sway*.3,b[2]+f.h];\n      const g=f.g,u=1-g;\n      f.tip=[u*u*f.p0[0]+2*u*g*f.p1[0]+g*g*f.p2[0],u*u*f.p0[1]+2*u*g*f.p1[1]+g*g*f.p2[1],u*u*f.p0[2]+2*u*g*f.p1[2]+g*g*f.p2[2]];\n      const tg=[2*u*(f.p1[0]-f.p0[0])+2*g*(f.p2[0]-f.p1[0]),0,2*u*(f.p1[2]-f.p0[2])+2*g*(f.p2[2]-f.p1[2])];\n      const tl=Math.hypot(tg[0],tg[2])||1;tg[0]/=tl;tg[2]/=tl;\n      const up=(f.type==='rose'||f.type==='tulip');\n      f.M=basis(up?[tg[0]+f.lean*.5,-.42,tg[2]]:[tg[0]*.5+f.lean,-.95,tg[2]*.5+.05],f.roll+Math.sin(t*.5+f.ph)*.08);\n      if(f.k>0){\n        const sp=E.project(f.tip);\n        if(!f.popped){f.popped=true;const c=col255(f.pal.l);\n          for(let i=0;i<12;i++){const an=rnd(0,TAU),v=rnd(20,90);spark(sp.x,sp.y,Math.cos(an)*v,Math.sin(an)*v-20,rnd(.6,1.3),rnd(.8,2),c);}}\n        const gr=f.s*U*2.3,gl2=bx.createRadialGradient(sp.x,sp.y,0,sp.x,sp.y,gr),c=col255(f.pal.m);\n        gl2.addColorStop(0,rgb(c,.17*clamp01(f.k)*(.5+.5*f.open)));gl2.addColorStop(1,rgb(c,0));\n        bx.fillStyle=gl2;bx.beginPath();bx.arc(sp.x,sp.y,gr,0,TAU);bx.fill();\n      }\n    }\n    bx.globalCompositeOperation='source-over';\n    E.begin();\n    for(const f of flowers)E.tube({p0:f.p0,p1:f.p1,p2:f.p2,grow:f.g,rad:f.rad});\n    for(const f of flowers){\n      const age=t-f.born;\n      for(const lf of f.leaves){\n        const lg=easeBack(clamp01((age-1.3*lf.t*.8-.2)/.8));if(lg<=0)continue;\n        const q=lf.t,u=1-q;\n        const pos=[u*u*f.p0[0]+2*u*q*f.p1[0]+q*q*f.p2[0],u*u*f.p0[1]+2*u*q*f.p1[1]+q*q*f.p2[1],u*u*f.p0[2]+2*u*q*f.p1[2]+q*q*f.p2[2]];\n        E.mesh('leaf',{pos,M:rotZ(lf.az+Math.sin(t*1.3+f.ph)*.08),s:lf.len*lg,kind:1});\n      }\n    }\n    for(const f of flowers)E.head(f,f.tip,f.M,f.k,f.open);\n  }\n\n  /* aage: ghaas, jugnu, chamak */\n  ctx.setTransform(DPR,0,0,DPR,0,0);ctx.clearRect(0,0,W,H);\n  ctx.drawImage(grass,0,0,W,H);\n  ctx.globalCompositeOperation='lighter';\n  for(const f of flies){\n    f.an+=rnd(-1.6,1.6)*dt*3;f.x+=Math.cos(f.an)*f.sp*dt;f.y+=Math.sin(f.an)*f.sp*dt*.6;\n    if(f.x<-10)f.x=W+10;if(f.x>W+10)f.x=-10;f.y=clamp(f.y,H*.3,H*.93);\n    const a=.25+.75*Math.pow(.5+.5*Math.sin(t*1.7+f.ph),2);\n    ctx.fillStyle=`rgba(255,236,150,${a*.16})`;ctx.beginPath();ctx.arc(f.x,f.y,7,0,TAU);ctx.fill();\n    ctx.fillStyle=`rgba(255,244,190,${a})`;ctx.beginPath();ctx.arc(f.x,f.y,1.5,0,TAU);ctx.fill();\n  }\n  for(let i=sparks.length-1;i>=0;i--){\n    const s=sparks[i];s.life-=dt;if(s.life<=0){sparks.splice(i,1);continue;}\n    s.vy+=30*dt;s.x+=s.vx*dt;s.y+=s.vy*dt;s.vx*=.97;s.vy*=.97;\n    const a=s.life/s.max;\n    ctx.fillStyle=rgb(mix(s.col,[255,255,255],.4),a);ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,TAU);ctx.fill();\n    ctx.fillStyle=rgb(s.col,a*.2);ctx.beginPath();ctx.arc(s.x,s.y,s.r*4,0,TAU);ctx.fill();\n  }\n  ctx.globalCompositeOperation='source-over';\n  requestAnimationFrame(frame);\n}\n\nlet down=false,lx=0,ly=0;\nfx.addEventListener('pointerdown',e=>{down=true;lx=e.clientX;ly=e.clientY;plant(e.clientX,e.clientY,false);});\nfx.addEventListener('pointermove',e=>{\n  if(!down)return;\n  if(Math.hypot(e.clientX-lx,e.clientY-ly)>70){lx=e.clientX;ly=e.clientY;plant(e.clientX,e.clientY,false);}\n});\naddEventListener('pointerup',()=>down=false);addEventListener('pointercancel',()=>down=false);\naddEventListener('resize',build);\nbuild();\n[[.22,.56,500],[.52,.46,1000],[.8,.6,1500]].forEach(([a,b,ms])=>setTimeout(()=>plant(W*a,H*b,true),ms));\nsetTimeout(()=>{if(!userCount)hintEl.classList.add('show');},3200);\nwindow.__gl=E&&E.gl;\nrequestAnimationFrame(frame);\n<\/script>\n<\/body>\n<\/html>\n",guldasta:"<!DOCTYPE html>\n<html lang=\"ur-Latn\">\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no\">\n<title>Tumhare liye ek khat 💌<\/title>\n<style>\n*{box-sizing:border-box}\nhtml,body{margin:0;height:100%;overflow:hidden;background:#12060f;\n  -webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none}\nbody{background:radial-gradient(ellipse at 50% 35%,#4a1230 0%,#260a1c 45%,#0d040b 100%);\n  font-family:Georgia,\"Times New Roman\",serif}\n#bg{position:fixed;inset:0;width:100%;height:100%;display:block}\n.scene{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;\n  transition:opacity .9s ease,transform .9s ease}\n.scene.gone{opacity:0;transform:scale(.86);pointer-events:none}\n.scene.wait{opacity:0;pointer-events:none}\n\n/* ---------- lifafa ---------- */\n#s1{cursor:pointer}\n.float{animation:bob 3.4s ease-in-out infinite}\n@keyframes bob{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-12px) rotate(1.5deg)}}\n.env{--w:min(80vw,340px);position:relative;width:var(--w);height:calc(var(--w)*.66);\n  filter:drop-shadow(0 22px 28px rgba(0,0,0,.55))}\n.env>div{position:absolute;inset:0}\n.back{background:#7f1836;border-radius:10px;z-index:0}\n.paper{inset:7% 6% 6% 6% !important;background:linear-gradient(#fffaf2,#fbeede);border-radius:6px;z-index:2;\n  display:flex;align-items:flex-start;justify-content:center;padding-top:9%;color:#d6436a;font-size:calc(var(--w)*.11);\n  transition:transform .9s cubic-bezier(.3,1.3,.5,1) .45s}\n.front{z-index:3;border-radius:0 0 10px 10px;\n  background:linear-gradient(160deg,#ee6587 0%,#d43f67 60%,#c33560 100%);\n  clip-path:polygon(0 0,50% 56%,100% 0,100% 100%,0 100%)}\n.front::after{content:\"\";position:absolute;inset:0;\n  background:linear-gradient(to top,rgba(120,10,45,.35),transparent 55%)}\n.flap{z-index:4;transform-origin:50% 0;border-radius:10px 10px 0 0;\n  background:linear-gradient(180deg,#f47a98 0%,#dd4a72 100%);\n  clip-path:polygon(0 0,100% 0,50% 62%);\n  transform:perspective(900px) rotateX(0deg);\n  transition:transform .7s ease,z-index 0s .35s,filter .7s}\n.seal{inset:auto !important;left:50% !important;top:62% !important;width:calc(var(--w)*.17);height:calc(var(--w)*.17);\n  margin:calc(var(--w)*-.085) 0 0 calc(var(--w)*-.085);border-radius:50%;z-index:5;\n  background:radial-gradient(circle at 35% 30%,#c22a55,#7d1030);box-shadow:0 3px 8px rgba(0,0,0,.45),inset 0 0 0 3px rgba(255,255,255,.08);\n  display:flex;align-items:center;justify-content:center;color:#ffd5df;font-size:calc(var(--w)*.085);\n  transition:opacity .35s,transform .35s}\n.env.open .flap{transform:perspective(900px) rotateX(180deg);z-index:1;filter:brightness(.82)}\n.env.open .seal{opacity:0;transform:scale(1.6)}\n.env.open .paper{transform:translateY(-58%)}\n.tap{margin:34px 0 0;text-align:center;color:#ffd9e2;font-style:italic;font-size:clamp(16px,4.6vw,21px);line-height:1.6;\n  text-shadow:0 2px 12px rgba(0,0,0,.6);animation:pulse 2.2s ease-in-out infinite;transition:opacity .4s}\n.tap b{font-style:normal;letter-spacing:.14em;text-transform:uppercase;font-size:.78em;color:#ff9db6}\n@keyframes pulse{0%,100%{opacity:.75}50%{opacity:1}}\n.tap.hide{animation:none;opacity:0}\n\n/* ---------- guldasta + khat ---------- */\n#s2{justify-content:flex-start;padding:max(1vh,env(safe-area-inset-top)) 0 max(3vh,env(safe-area-inset-bottom))}\n.bqw{position:relative;width:100%;height:54vh;flex:0 0 auto}\n.bqw canvas{position:absolute;inset:0;width:100%;height:100%;display:block}\n.letter{position:relative;width:min(88vw,440px);flex:0 1 auto;max-height:42vh;overflow:hidden auto;margin-top:-2vh;\n  background:#fffaf1;border-radius:6px;padding:20px 22px 22px;color:#5a2032;\n  background-image:repeating-linear-gradient(transparent 0 1.74em,rgba(214,67,106,.13) 1.74em calc(1.74em + 1px));\n  background-position:0 calc(20px - .42em);background-attachment:local;\n  box-shadow:0 18px 40px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.4) inset;\n  font-size:clamp(15px,4.25vw,19px);line-height:1.75em;font-style:italic;white-space:pre-wrap;\n  opacity:0;transform:translateY(46px) rotate(-1.2deg);transition:opacity 1s ease 2.2s,transform 1.1s cubic-bezier(.2,1.2,.4,1) 2.2s}\n#s2.live .letter{opacity:1;transform:rotate(-1.2deg)}\n.letter span{opacity:0}\n.letter span.on{opacity:1}\n.letter span.cur{box-shadow:2px 0 0 #d6436a}\n.letter .hd{font-family:\"Snell Roundhand\",\"Segoe Script\",\"Brush Script MT\",\"Dancing Script\",cursive;font-style:normal;\n  font-weight:600;font-size:1.5em;line-height:1.1666em;color:#c22a55}\n<\/style>\n<\/head>\n<body>\n<canvas id=\"bg\"><\/canvas>\n\n<section class=\"scene\" id=\"s1\">\n  <div class=\"float\"><div class=\"env\" id=\"env\">\n    <div class=\"back\"><\/div><div class=\"paper\">♥<\/div><div class=\"front\"><\/div><div class=\"flap\"><\/div><div class=\"seal\">♥<\/div>\n  <\/div><\/div>\n  <p class=\"tap\" id=\"tap\"><\/p>\n<\/section>\n\n<section class=\"scene wait\" id=\"s2\">\n  <div class=\"bqw\"><canvas id=\"bq\"><\/canvas><canvas id=\"sp\"><\/canvas><\/div>\n  <div class=\"letter\" id=\"letter\"><\/div>\n<\/section>\n\n<script>\nconst CONFIG=__CFG__;\nconst TAU=Math.PI*2;\nconst clamp=(v,a,b)=>Math.max(a,Math.min(b,v));\nconst clamp01=v=>clamp(v,0,1);\nconst lerp=(a,b,t)=>a+(b-a)*t;\nconst easeOut=t=>1-Math.pow(1-t,3);\nconst easeInOut=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;\nconst easeBack=t=>{const c1=1.70158,c3=c1+1;return 1+c3*Math.pow(t-1,3)+c1*Math.pow(t-1,2);};\nconst rnd=(a,b)=>a+Math.random()*(b-a);\nconst mix=(p,q,t)=>[lerp(p[0],q[0],t),lerp(p[1],q[1],t),lerp(p[2],q[2],t)];\nconst rgb=(p,a=1)=>`rgba(${p[0]|0},${p[1]|0},${p[2]|0},${a})`;\n\n/* rang: a = halka (pankhri ka kinara), b = gehra (pankhri ki jar), c = beech */\nconst PALS={\n  pink:{a:[255,158,190],b:[214,51,108],c:[255,214,102]},\n  red:{a:[255,104,120],b:[176,18,50],c:[255,200,87]},\n  white:{a:[255,255,255],b:[224,218,244],c:[255,196,61]},\n  purple:{a:[210,172,255],b:[124,77,214],c:[255,225,130]},\n  gold:{a:[255,217,112],b:[244,140,40],c:[150,78,24]},\n  peach:{a:[255,196,176],b:[238,112,100],c:[255,230,150]},\n  blue:{a:[160,212,255],b:[72,122,226],c:[255,240,170]}\n};\n\nfunction petalPath(c,len,wd,notch){\n  c.beginPath();\n  c.moveTo(0,0);\n  if(notch){\n    c.bezierCurveTo(-wd,-len*.3,-wd*.85,-len*1.02,-wd*.2,-len*.98);\n    c.quadraticCurveTo(-wd*.05,-len*.93,0,-len*.84);\n    c.quadraticCurveTo(wd*.05,-len*.93,wd*.2,-len*.98);\n  }else{\n    c.bezierCurveTo(-wd,-len*.3,-wd*.85,-len*1.02,0,-len);\n  }\n  c.bezierCurveTo(wd*.85,-len*1.02,wd,-len*.3,0,0);\n  c.closePath();\n}\n\nfunction newLook(type,pal,s){\n  return {type,pal,s,rot:rnd(0,TAU),n:12+((Math.random()*5)|0),\n    jit:Array.from({length:40},()=>rnd(-1,1)),sprite:null,half:0};\n}\n\nconst ROSE_L=[[5,1,.64],[5,.8,.62],[4,.6,.63],[3,.42,.67],[3,.25,.76]];\nconst DAHLIA_L=[[13,1,.19],[11,.76,.21],[9,.54,.24],[6,.32,.28]];\n\nfunction drawHead(c,f,b){\n  const s=f.s,A=f.pal.a,B=f.pal.b,C=f.pal.c;\n  b=clamp01(b);\n  const e=easeBack(b),sc=.12+.88*e;\n  c.save();\n  if(f.type==='tulip'){\n    c.scale(sc,sc);\n    const a=.08+.2*easeOut(b),L=s*1.45;\n    const g=c.createLinearGradient(0,0,0,-L);\n    g.addColorStop(0,rgb(mix(B,[40,0,30],.3)));g.addColorStop(1,rgb(mix(A,B,.35)));\n    const g2=c.createLinearGradient(0,0,0,-L);\n    g2.addColorStop(0,rgb(B));g2.addColorStop(1,rgb(A));\n    for(const r of [-a*2.1,a*2.1]){c.save();c.rotate(r);petalPath(c,L*.96,s*.4);c.fillStyle=g;c.fill();c.restore();}\n    for(const r of [-a,a]){c.save();c.rotate(r);petalPath(c,L,s*.42);c.fillStyle=g;c.fill();\n      c.strokeStyle=rgb(mix(B,[0,0,0],.4),.3);c.lineWidth=Math.max(.6,s*.03);c.stroke();c.restore();}\n    petalPath(c,L*1.02,s*.44);c.fillStyle=g2;c.fill();\n    c.strokeStyle=rgb(mix(B,[0,0,0],.4),.25);c.lineWidth=Math.max(.6,s*.03);c.stroke();\n    c.restore();return;\n  }\n  c.rotate((1-e)*-.8);\n  c.scale(sc,sc);\n  if(f.type==='daisy'){\n    const n=f.n,g=c.createLinearGradient(0,-s*.2,0,-s);\n    g.addColorStop(0,rgb(B));g.addColorStop(1,rgb(A));\n    for(let i=0;i<n;i++){\n      c.save();c.rotate(i/n*TAU+f.jit[i]*.05);\n      petalPath(c,s*(1+f.jit[i+1]*.06),s*.2);\n      c.fillStyle=g;c.fill();\n      c.strokeStyle=rgb(mix(B,[0,0,0],.35),.28);c.lineWidth=Math.max(.5,s*.02);c.stroke();\n      c.restore();\n    }\n    const cg=c.createRadialGradient(-s*.07,-s*.07,0,0,0,s*.3);\n    cg.addColorStop(0,rgb(mix(C,[255,255,255],.4)));cg.addColorStop(1,rgb(mix(C,[120,60,0],.4)));\n    c.beginPath();c.arc(0,0,s*.28,0,TAU);c.fillStyle=cg;c.fill();\n    c.fillStyle='rgba(110,55,0,.35)';\n    for(let k=1;k<12;k++){const an=k*2.4,rr=s*.21*Math.sqrt(k/12);\n      c.beginPath();c.arc(Math.cos(an)*rr,Math.sin(an)*rr,s*.022,0,TAU);c.fill();}\n  }else if(f.type==='round5'){\n    const g=c.createLinearGradient(0,0,0,-s);\n    g.addColorStop(0,rgb(B));g.addColorStop(.45,rgb(mix(B,A,.6)));g.addColorStop(1,rgb(A));\n    for(let i=0;i<5;i++){\n      c.save();c.rotate(i/5*TAU);\n      petalPath(c,s,s*.6,true);c.fillStyle=g;c.fill();\n      c.strokeStyle=rgb(mix(B,[0,0,0],.3),.22);c.lineWidth=Math.max(.5,s*.02);c.stroke();\n      c.restore();\n    }\n    c.strokeStyle=rgb(mix(C,[255,255,255],.3),.9);c.fillStyle=rgb(C);c.lineWidth=Math.max(.5,s*.022);\n    for(let k=0;k<10;k++){const an=k/10*TAU+.3,rr=s*(.3+.07*f.jit[k]);\n      c.beginPath();c.moveTo(0,0);c.lineTo(Math.cos(an)*rr,Math.sin(an)*rr);c.stroke();\n      c.beginPath();c.arc(Math.cos(an)*rr,Math.sin(an)*rr,s*.035,0,TAU);c.fill();}\n    c.beginPath();c.arc(0,0,s*.09,0,TAU);c.fillStyle=rgb(mix(B,[60,0,20],.4));c.fill();\n  }else if(f.type==='dahlia'){\n    for(let L=0;L<DAHLIA_L.length;L++){\n      const [n,r,wk]=DAHLIA_L[L],len=s*r;\n      const g=c.createLinearGradient(0,0,0,-len);\n      g.addColorStop(0,rgb(mix(B,[40,0,30],.35)));g.addColorStop(.5,rgb(mix(B,A,L*.1)));g.addColorStop(1,rgb(mix(A,B,L*.2)));\n      for(let i=0;i<n;i++){\n        c.save();c.rotate(i/n*TAU+L*.4);\n        petalPath(c,len,len*wk);c.fillStyle=g;c.fill();\n        c.strokeStyle=rgb(mix(B,[0,0,0],.4),.3);c.lineWidth=Math.max(.5,s*.018);c.stroke();\n        c.restore();\n      }\n    }\n    c.beginPath();c.arc(0,0,s*.1,0,TAU);c.fillStyle=rgb(mix(C,B,.3));c.fill();\n  }else{ /* rose */\n    const deep=mix(B,[24,0,12],.6);\n    for(let L=0;L<ROSE_L.length;L++){\n      const [n,r,wk]=ROSE_L[L];\n      const nr=L+1<ROSE_L.length?ROSE_L[L+1][1]:.1;\n      const lp=easeOut(clamp01((b-L*.1)/.6));\n      const len=s*r*(.5+.5*lp),wd=len*wk;\n      const st=clamp(nr/r-.12,0,.8);\n      const g=c.createLinearGradient(0,0,0,-len);\n      g.addColorStop(0,rgb(deep));g.addColorStop(st,rgb(deep));\n      g.addColorStop(Math.min(.97,st+.3),rgb(B));g.addColorStop(1,rgb(mix(B,A,.85)));\n      for(let i=0;i<n;i++){\n        c.save();c.rotate(i/n*TAU+L*.9+(1-lp)*.9+f.jit[L*6+i]*.1);\n        petalPath(c,len*(1+f.jit[L*6+i+1]*.04),wd);c.fillStyle=g;c.fill();\n        c.strokeStyle=rgb(deep,.4);c.lineWidth=Math.max(.5,s*.022);c.stroke();\n        c.restore();\n      }\n    }\n    c.beginPath();\n    for(let t=0;t<TAU*1.5;t+=.25){const rr=s*.015+s*.085*t/(TAU*1.5);\n      const x=Math.cos(t)*rr,y=Math.sin(t)*rr;t===0?c.moveTo(x,y):c.lineTo(x,y);}\n    c.strokeStyle=rgb(deep,.75);c.lineWidth=Math.max(.6,s*.03);c.lineCap='round';c.stroke();\n  }\n  c.restore();\n}\n\nfunction paintHead(c,f,b,dpr){\n  if(b>=1){\n    if(!f.sprite){\n      const half=Math.ceil(f.s*1.85),cv=document.createElement('canvas');\n      cv.width=cv.height=Math.ceil(half*2*dpr);\n      const k=cv.getContext('2d');k.scale(dpr,dpr);k.translate(half,half);\n      drawHead(k,f,1);f.sprite=cv;f.half=half;\n    }\n    c.drawImage(f.sprite,-f.half,-f.half,f.half*2,f.half*2);\n  }else if(b>0)drawHead(c,f,b);\n}\n\nfunction drawLeaf(c,len,light){\n  const w=len*.3;\n  c.beginPath();c.moveTo(0,0);c.quadraticCurveTo(len*.45,-w,len,0);c.quadraticCurveTo(len*.45,w,0,0);\n  c.fillStyle=light?'#43a35f':'#2f7f49';c.fill();\n  c.beginPath();c.moveTo(0,0);c.quadraticCurveTo(len*.5,-w*.12,len*.92,0);\n  c.strokeStyle='rgba(12,58,30,.55)';c.lineWidth=Math.max(.7,len*.03);c.stroke();\n}\n\nconst qPoint=(p0,p1,p2,t)=>{const u=1-t;return{x:u*u*p0.x+2*u*t*p1.x+t*t*p2.x,y:u*u*p0.y+2*u*t*p1.y+t*t*p2.y};};\nconst qAngle=(p0,p1,p2,t)=>Math.atan2(2*(1-t)*(p1.y-p0.y)+2*t*(p2.y-p1.y),2*(1-t)*(p1.x-p0.x)+2*t*(p2.x-p1.x));\nfunction qPartial(c,p0,p1,p2,g){\n  const e=qPoint(p0,p1,p2,g);\n  c.beginPath();c.moveTo(p0.x,p0.y);c.quadraticCurveTo(lerp(p0.x,p1.x,g),lerp(p0.y,p1.y,g),e.x,e.y);\n  return e;\n}\n\nfunction heartPath(c,s){\n  c.beginPath();c.moveTo(0,s*.35);\n  c.bezierCurveTo(-s*1.1,-s*.35,-s*.45,-s*1.05,0,-s*.42);\n  c.bezierCurveTo(s*.45,-s*1.05,s*1.1,-s*.35,0,s*.35);\n  c.closePath();\n}\n\n/* ================= 3D phool engine ================= */\nconst I3=new Float32Array([1,0,0,0,1,0,0,0,1]);\nfunction basis(ax,roll){\n  const l=Math.hypot(ax[0],ax[1],ax[2])||1,z=[ax[0]/l,ax[1]/l,ax[2]/l];\n  let x=[-z[1],z[0],0],xl=Math.hypot(x[0],x[1]);\n  if(xl<1e-4){x=[1,0,0];xl=1;}\n  x=[x[0]/xl,x[1]/xl,0];\n  const y=[z[1]*x[2]-z[2]*x[1],z[2]*x[0]-z[0]*x[2],z[0]*x[1]-z[1]*x[0]];\n  const c=Math.cos(roll||0),s=Math.sin(roll||0);\n  return new Float32Array([x[0]*c+y[0]*s,x[1]*c+y[1]*s,x[2]*c+y[2]*s,-x[0]*s+y[0]*c,-x[1]*s+y[1]*c,-x[2]*s+y[2]*c,z[0],z[1],z[2]]);\n}\nconst rotZ=a=>new Float32Array([Math.cos(a),Math.sin(a),0,-Math.sin(a),Math.cos(a),0,0,0,1]);\nconst mix3=(p,q,t)=>[lerp(p[0],q[0],t),lerp(p[1],q[1],t),lerp(p[2],q[2],t)];\n\nfunction surfGeo(nu,nv,fn,wrapU){\n  const g=[],p=[],ix=[];\n  for(let i=0;i<=nu;i++)for(let j=0;j<=nv;j++)g.push(fn(i/nu,j/nv));\n  const at=(i,j)=>g[(wrapU?((i%nu)+nu)%nu:clamp(i,0,nu))*(nv+1)+clamp(j,0,nv)];\n  for(let i=0;i<=nu;i++)for(let j=0;j<=nv;j++){\n    const a=at(i+1,j),b=at(i-1,j),c=at(i,j+1),d=at(i,j-1);\n    const ux=a[0]-b[0],uy=a[1]-b[1],uz=a[2]-b[2],vx=c[0]-d[0],vy=c[1]-d[1],vz=c[2]-d[2];\n    let nx=uy*vz-uz*vy,ny=uz*vx-ux*vz,nz=ux*vy-uy*vx;const l=Math.hypot(nx,ny,nz);\n    if(l<1e-9){nx=0;ny=0;nz=1;}else{nx/=l;ny/=l;nz/=l;}\n    const q=g[i*(nv+1)+j];p.push(q[0],q[1],q[2],nx,ny,nz,i/nu,j/nv);\n  }\n  for(let i=0;i<nu;i++)for(let j=0;j<nv;j++){const q=i*(nv+1)+j;ix.push(q,q+nv+1,q+1,q+1,q+nv+1,q+nv+2);}\n  return {p,i:ix};\n}\nfunction mergeGeo(list){\n  const p=[],ix=[];\n  for(const g of list){const off=p.length/8;for(const v of g.p)p.push(v);for(const k of g.i)ix.push(k+off);}\n  return {p,i:ix};\n}\nconst leafGeo=()=>surfGeo(18,8,(u,vv)=>{\n  const v=vv*2-1,hw=.32*Math.pow(Math.sin(Math.PI*Math.pow(u,.8)),.85);\n  return [u,v*hw,(.5*u-.5*u*u)+.38*Math.abs(v)*hw];});\nconst domeGeo=()=>surfGeo(20,7,(u,v)=>{const th=v*Math.PI/2,a=u*TAU;\n  return [Math.cos(a)*Math.sin(th),Math.sin(a)*Math.sin(th),Math.cos(th)*.6];},true);\n\nconst PAL3={\n  red:{d:[.11,0,.025],m:[.64,.02,.11],l:[.96,.22,.34]},\n  pink:{d:[.3,.03,.14],m:[.92,.33,.55],l:[1,.72,.82]},\n  peach:{d:[.52,.17,.11],m:[.96,.52,.4],l:[1,.82,.72]},\n  white:{d:[.52,.46,.46],m:[.95,.92,.92],l:[1,1,1]},\n  gold:{d:[.42,.2,0],m:[.97,.68,.12],l:[1,.9,.5]},\n  purple:{d:[.16,.04,.32],m:[.56,.32,.88],l:[.84,.7,1]},\n  blue:{d:[.04,.1,.36],m:[.3,.5,.95],l:[.7,.84,1]}\n};\nconst SPEC3={\n  daisy:{L:[{n:18,len:1,wid:.15,A0:.14,A1:-.1,cup:.5,r0:.2,sh:[.75,.8]}],c:.27},\n  cosmos:{L:[{n:8,len:1,wid:.36,A0:.32,A1:.04,cup:.3,r0:.1,sh:[.6,.6]}],c:.17},\n  lily:{L:[{n:6,len:1.2,wid:.22,A0:1.05,A1:-.4,cup:.6,r0:.05,sh:[.9,1.1]}],c:.1},\n  tulip:{L:[{n:3,len:1.4,wid:.4,A0:1.02,A1:1.5,cup:.5,r0:.12,sh:[.7,.75]},\n            {n:3,off:1.047,len:1.34,wid:.4,A0:.95,A1:1.42,cup:.5,r0:.17,sh:[.7,.75]}],c:0},\n  dahlia:{L:[{n:13,len:1,wid:.17,A0:.14,A1:0,cup:.9,r0:.1,sh:[.8,.9]},\n             {n:11,off:.24,len:.8,wid:.18,A0:.5,A1:.3,cup:.9,r0:.08,sh:[.8,.9]},\n             {n:9,off:.1,len:.6,wid:.2,A0:.85,A1:.7,cup:.9,r0:.06,sh:[.8,.9]},\n             {n:7,off:.3,len:.4,wid:.24,A0:1.15,A1:1.1,cup:.9,r0:.04,sh:[.8,.9]}],c:.08}\n};\n\nfunction Flora(canvas,opt){\n  opt=opt||{};\n  const gl=canvas.getContext('webgl',{antialias:true,alpha:true,premultipliedAlpha:true})||canvas.getContext('experimental-webgl');\n  if(!gl)return null;\n  const cam={SE:0,CE:1,D:10,TZ:0,F:1,YOFF:0,spin:0,W:1,H:1};\n  const VC=`precision highp float;\nuniform float uSpin;uniform mediump vec2 uEl;uniform vec4 uProj;uniform float uTz;\nuniform vec3 uPos;uniform mat3 uM;uniform float uS;\nvec3 spinz(vec3 p){float c=cos(uSpin),s=sin(uSpin);return vec3(c*p.x-s*p.y,s*p.x+c*p.y,p.z);}\nvec4 proj(vec3 q){q.z-=uTz;float yv=q.y*uEl.x+q.z*uEl.y;float d=uProj.z+q.y*uEl.y-q.z*uEl.x;\n  return vec4(q.x*uProj.x,yv*uProj.y+uProj.w*d,((d-1.)/99.*2.-1.)*d,d);}\nvec4 place(vec3 p){return proj(spinz(uPos+uM*(p*uS)));}\nvec3 nrm(vec3 n){return spinz(uM*n);}\n`;\n  const FC=`precision mediump float;\nuniform mediump vec2 uEl;\nvec3 shade(vec3 base,vec3 n,float rim,float sp){\n  vec3 V=vec3(0.,-uEl.y,uEl.x);n=normalize(n);if(dot(n,V)<0.)n=-n;\n  vec3 L=normalize(vec3(-.5,-.5,.72));\n  float d=dot(n,L)*.5+.5;d*=d;\n  float fr=pow(1.-abs(dot(n,V)),3.);\n  vec3 Hh=normalize(L+V);\n  return base*(.22+1.05*d)+(base*.5+.5)*fr*rim+vec3(1.,.92,.92)*pow(max(dot(n,Hh),0.),24.)*sp;\n}\n`;\n  const SRC={\n    rose:[VC+`attribute vec2 a;uniform float uOpen;varying vec3 vN;varying vec2 vA;\nvec3 rose(float r,float ay,float lo){\n  float th=mix(-6.2831853,47.1238898,ay);\n  float phi=1.5707963*exp(-th/25.132741);\n  phi=mix(mix(.34,.1,ay),phi,lo);\n  r*=mix(.62,1.,lo);\n  float q=1.-mod(3.6*th,6.2831853)/3.14159265;\n  float t=1.25*q*q-.25;float X=1.-.5*t*t;float k=1.27689*r-1.;\n  float y=1.95653*r*r*k*k*sin(phi);\n  float Rr=X*(r*sin(phi)+y*cos(phi));\n  return vec3(Rr*sin(th),Rr*cos(th),X*(r*cos(phi)-y*sin(phi)));\n}\nvoid main(){\n  float lo=smoothstep(0.,1.,clamp(uOpen*1.7-a.y*.7,0.,1.));\n  vec3 p=rose(a.x,a.y,lo);float rn=max(a.x,.05);\n  vec3 p0=rose(rn,a.y,lo),pr=rose(rn+.02,a.y,lo),pt=rose(rn,a.y+.0008,lo);\n  vN=nrm(normalize(cross(pr-p0,pt-p0)));vA=a;gl_Position=place(p);\n}`,FC+`varying vec3 vN;varying vec2 vA;uniform vec3 uC0,uC1,uC2;\nvoid main(){float r=vA.x;\n  vec3 base=mix(uC0,uC1,smoothstep(.04,.72,r));base=mix(base,uC2,smoothstep(.74,1.,r)*.42);base*=mix(1.,.7,vA.y);\n  gl_FragColor=vec4(shade(base,vN,.4*smoothstep(.3,1.,r),.16*smoothstep(.35,1.,r)),1.);\n}`,['a']],\n    pet:[VC+`attribute vec3 a;uniform vec4 uPA,uPB;uniform vec2 uSh;uniform float uOpen;varying vec3 vN;varying vec2 vUV;\nvec3 petal(float u,float v,float k,float A0,float dA,float L){\n  float phi=uPA.y+6.2831853*k/uPA.x;\n  float al=A0+dA*u;\n  float rho=uPB.w+L*(sin(al)-sin(A0))/dA;\n  float z=-L*(cos(al)-cos(A0))/dA;\n  float w=uPA.w*L*pow(max(sin(3.14159*pow(clamp(u,0.,.999),uSh.x)),0.),uSh.y);\n  float lift=uPB.z*w*v*v;\n  rho-=sin(al)*lift;z+=cos(al)*lift;\n  float cs=cos(phi),sn=sin(phi);\n  return vec3(cs*rho-sn*v*w,sn*rho+cs*v*w,z);\n}\nvoid main(){\n  float lo=smoothstep(0.,1.,uOpen);\n  float A0=mix(1.42,uPB.x,lo),A1=mix(1.52,uPB.y,lo),L=uPA.z*mix(.5,1.,lo);\n  float dA=A1-A0;if(abs(dA)<.002)dA=.002;\n  float u=clamp(a.x,.02,.98);\n  vec3 p=petal(a.x,a.y,a.z,A0,dA,L);\n  vec3 p0=petal(u,a.y,a.z,A0,dA,L),pu=petal(u+.02,a.y,a.z,A0,dA,L),pv=petal(u,a.y+.05,a.z,A0,dA,L);\n  vN=nrm(normalize(cross(pu-p0,pv-p0)));vUV=a.xy;gl_Position=place(p);\n}`,FC+`varying vec3 vN;varying vec2 vUV;uniform vec3 uC0,uC1;\nvoid main(){float u=vUV.x,v=abs(vUV.y);\n  vec3 base=mix(uC0,uC1,smoothstep(0.,.8,u));\n  base*=1.-.2*(1.-smoothstep(0.,.14,v))*(1.-u*.6);\n  base*=.95+.05*sin(vUV.y*24.);\n  gl_FragColor=vec4(shade(base,vN,.32,.1),1.);\n}`,['a']],\n    tube:[VC+`attribute vec2 a;uniform vec3 uP0,uP1,uP2;uniform vec2 uTR;varying vec3 vN;varying float vT;\nvoid main(){\n  float t=a.x*uTR.x,u=1.-t;\n  vec3 c=u*u*uP0+2.*u*t*uP1+t*t*uP2;\n  vec3 tg=normalize(2.*u*(uP1-uP0)+2.*t*(uP2-uP1));\n  vec3 e1=normalize(cross(tg,vec3(.13,1.,.07))),e2=cross(tg,e1);\n  vec3 n=cos(a.y)*e1+sin(a.y)*e2;\n  float rad=uTR.y*(1.-.3*a.x)*(a.x>.99?.15:1.);\n  vN=spinz(n);vT=a.x;gl_Position=proj(spinz(c+n*rad));\n}`,FC+`varying vec3 vN;varying float vT;\nvoid main(){gl_FragColor=vec4(shade(mix(vec3(.06,.22,.1),vec3(.22,.52,.27),vT),vN,.25,.1),1.);}`,['a']],\n    mesh:[VC+`attribute vec3 aP,aN;attribute vec2 aUV;varying vec3 vN;varying vec2 vUV;\nvoid main(){vN=nrm(aN);vUV=aUV;gl_Position=place(aP);}`,FC+`varying vec3 vN;varying vec2 vUV;uniform float uKind;uniform vec3 uC0,uC1;\nvoid main(){\n  vec3 base;float rim=.25,sp=.12;\n  if(uKind<1.5){\n    float v=abs(vUV.y*2.-1.);\n    float rib=1.-smoothstep(0.,.07,v);\n    float ve=(1.-smoothstep(0.,.09,abs(fract(vUV.x*7.-v*1.4)-.5)))*smoothstep(.03,.25,v);\n    base=mix(vec3(.11,.4,.2),vec3(.3,.68,.36),v*.55+.15);\n    base=mix(base,vec3(.06,.25,.12),max(rib*.9,ve*.45));\n  }else if(uKind<2.5){\n    float dots=sin(vUV.x*88.)*sin(vUV.y*30.);\n    base=mix(uC0,uC1,smoothstep(-.3,.6,dots)*.55+(1.-vUV.y)*.3);sp=.2;\n  }else if(uKind<3.5){\n    float pl=.5+.5*sin(vUV.x*6.2831853*22.);\n    base=mix(uC0,uC1,vUV.y)*(.88+.12*pl);\n    sp=.05;rim=.08;\n  }else{base=uC0*(.8+.2*sin(vUV.y*3.14159));sp=.55;rim=.5;}\n  gl_FragColor=vec4(shade(base,vN,rim,sp),1.);\n}`,['aP','aN','aUV']]\n  };\n  function mk(vs,fs,attrs){\n    const sh=(t,s)=>{const o=gl.createShader(t);gl.shaderSource(o,s);gl.compileShader(o);\n      if(!gl.getShaderParameter(o,gl.COMPILE_STATUS))throw new Error(gl.getShaderInfoLog(o));return o;};\n    const p=gl.createProgram();gl.attachShader(p,sh(gl.VERTEX_SHADER,vs));gl.attachShader(p,sh(gl.FRAGMENT_SHADER,fs));\n    attrs.forEach((n,i)=>gl.bindAttribLocation(p,i,n));\n    gl.linkProgram(p);if(!gl.getProgramParameter(p,gl.LINK_STATUS))throw new Error(gl.getProgramInfoLog(p));\n    const cache={};p.U=n=>(n in cache)?cache[n]:(cache[n]=gl.getUniformLocation(p,n));p.na=attrs.length;return p;\n  }\n  const P={};for(const k in SRC)P[k]=mk(SRC[k][0],SRC[k][1],SRC[k][2]);\n  function buf(data,idx){\n    const v=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,v);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(data),gl.STATIC_DRAW);\n    const i=gl.createBuffer();gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,i);gl.bufferData(gl.ELEMENT_ARRAY_BUFFER,new Uint16Array(idx),gl.STATIC_DRAW);\n    return {v,i,n:idx.length};\n  }\n  function gridBuf(nu,nv,fn,layers){\n    const d=[],ix=[];let off=0;\n    for(let k=0;k<(layers||1);k++){\n      for(let i=0;i<=nu;i++)for(let j=0;j<=nv;j++)fn(d,i/nu,j/nv,k);\n      for(let i=0;i<nu;i++)for(let j=0;j<nv;j++){const q=off+i*(nv+1)+j;ix.push(q,q+nv+1,q+1,q+1,q+nv+1,q+nv+2);}\n      off+=(nu+1)*(nv+1);\n    }\n    return buf(d,ix);\n  }\n  const NT=opt.roseT||420,NR=opt.roseR||13,PU=10,PV=6,MAXP=20;\n  const B={\n    rose:gridBuf(NT,NR,(d,u,v)=>d.push(v,u)),\n    pet:gridBuf(PU,PV,(d,u,v,k)=>d.push(u,v*2-1,k),MAXP),\n    tube:gridBuf(26,8,(d,u,v)=>d.push(u,v*TAU))\n  };\n  const PETN=PU*PV*6,M={};\n  gl.enable(gl.DEPTH_TEST);gl.clearColor(0,0,0,0);gl.enableVertexAttribArray(0);\n  let curP=null,curB=null;\n  function bind(p,b,size){\n    if(curP!==p){gl.useProgram(p);curP=p;curB=null;\n      for(let i=1;i<3;i++)i<p.na?gl.enableVertexAttribArray(i):gl.disableVertexAttribArray(i);}\n    if(curB!==b){gl.bindBuffer(gl.ARRAY_BUFFER,b.v);gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,b.i);\n      if(p===P.mesh){gl.vertexAttribPointer(0,3,gl.FLOAT,false,32,0);gl.vertexAttribPointer(1,3,gl.FLOAT,false,32,12);gl.vertexAttribPointer(2,2,gl.FLOAT,false,32,24);}\n      else gl.vertexAttribPointer(0,size,gl.FLOAT,false,0,0);\n      curB=b;}\n  }\n  const pm=(p,o)=>{gl.uniform3fv(p.U('uPos'),o.pos||[0,0,0]);gl.uniformMatrix3fv(p.U('uM'),false,o.M||I3);gl.uniform1f(p.U('uS'),o.s==null?1:o.s);};\n  const E={\n    gl,cam,ok:true,\n    addMesh(name,g){M[name]=buf(g.p,g.i);},\n    begin(){\n      gl.viewport(0,0,canvas.width,canvas.height);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);\n      for(const k in P){const p=P[k];gl.useProgram(p);\n        gl.uniform1f(p.U('uSpin'),cam.spin);gl.uniform2f(p.U('uEl'),cam.SE,cam.CE);\n        gl.uniform4f(p.U('uProj'),cam.F*cam.H/cam.W,cam.F,cam.D,cam.YOFF);gl.uniform1f(p.U('uTz'),cam.TZ);}\n      curP=null;curB=null;\n    },\n    rose(o){const p=P.rose;bind(p,B.rose,2);pm(p,o);gl.uniform1f(p.U('uOpen'),o.open);\n      gl.uniform3fv(p.U('uC0'),o.pal.d);gl.uniform3fv(p.U('uC1'),o.pal.m);gl.uniform3fv(p.U('uC2'),o.pal.l);\n      gl.drawElements(gl.TRIANGLES,B.rose.n,gl.UNSIGNED_SHORT,0);},\n    petals(o,ly){const p=P.pet;bind(p,B.pet,3);pm(p,o);gl.uniform1f(p.U('uOpen'),o.open);\n      gl.uniform4f(p.U('uPA'),ly.n,(ly.off||0),ly.len,ly.wid);gl.uniform4f(p.U('uPB'),ly.A0,ly.A1,ly.cup,ly.r0);\n      gl.uniform2f(p.U('uSh'),ly.sh[0],ly.sh[1]);\n      gl.uniform3fv(p.U('uC0'),o.c0);gl.uniform3fv(p.U('uC1'),o.c1);\n      gl.drawElements(gl.TRIANGLES,PETN*ly.n,gl.UNSIGNED_SHORT,0);},\n    tube(o){const p=P.tube;bind(p,B.tube,2);\n      gl.uniform3fv(p.U('uP0'),o.p0);gl.uniform3fv(p.U('uP1'),o.p1);gl.uniform3fv(p.U('uP2'),o.p2);\n      gl.uniform2f(p.U('uTR'),o.grow,o.rad);gl.drawElements(gl.TRIANGLES,B.tube.n,gl.UNSIGNED_SHORT,0);},\n    mesh(name,o){const p=P.mesh,b=M[name];bind(p,b,3);pm(p,o);gl.uniform1f(p.U('uKind'),o.kind||1);\n      gl.uniform3fv(p.U('uC0'),o.c0||[1,1,1]);gl.uniform3fv(p.U('uC1'),o.c1||[1,1,1]);\n      gl.drawElements(gl.TRIANGLES,b.n,gl.UNSIGNED_SHORT,0);},\n    /* poora phool: f={type,pal,s,roll}, open 0..1, k = size multiplier */\n    head(f,pos,M,k,open){\n      if(k<=0)return;\n      if(f.type==='rose'){E.rose({pos,M,s:f.s*k,open,pal:f.pal});return;}\n      const sp=SPEC3[f.type],o={pos,M,s:f.s*k,open,c0:f.c0,c1:f.c1};\n      for(const ly of sp.L)E.petals(o,f.n&&sp.L.length===1?Object.assign({},ly,{n:f.n}):ly);\n      if(sp.c)E.mesh('dome',{pos,M,s:f.s*k*sp.c*(.6+.4*open),kind:2,c0:f.cc0,c1:f.cc1});\n    },\n    project(p){\n      const c=Math.cos(cam.spin),s=Math.sin(cam.spin);\n      const x=c*p[0]-s*p[1],y=s*p[0]+c*p[1],z=p[2]-cam.TZ;\n      const d=cam.D+y*cam.CE-z*cam.SE,yv=y*cam.SE+z*cam.CE;\n      return {x:cam.W/2+(x*cam.F/d)*cam.H/2,y:cam.H/2-(yv*cam.F/d+cam.YOFF)*cam.H/2};\n    },\n    /* screen point -> world point on plane y=y0 (spin=0) */\n    unproject(px,py,y0){\n      const nx=(px-cam.W/2)/(cam.H/2),ny=(cam.H/2-py)/(cam.H/2)-cam.YOFF;\n      const zz=(ny*(cam.D+y0*cam.CE)-y0*cam.SE*cam.F)/(cam.CE*cam.F+ny*cam.SE);\n      const d=cam.D+y0*cam.CE-zz*cam.SE;\n      return [nx*d/cam.F,y0,zz+cam.TZ];\n    }\n  };\n  E.addMesh('leaf',leafGeo());E.addMesh('dome',domeGeo());\n  return E;\n}\nfunction newFlower3(type,palName,s){\n  const pal=PAL3[palName];\n  const f={type,pal,palName,s,roll:rnd(0,TAU),c0:mix3(pal.d,pal.m,.72),c1:mix3(pal.m,pal.l,.78),\n    cc0:[.5,.26,.02],cc1:[1,.8,.2]};\n  if(type==='daisy')f.n=15+((Math.random()*6)|0);\n  if(type==='lily'){f.cc0=[.3,.14,.02];f.cc1=[.85,.55,.1];}\n  if(type==='dahlia'){f.cc0=mix3(pal.d,[.3,.1,0],.5);f.cc1=[1,.78,.3];}\n  return f;\n}\n\n\n{const t=document.getElementById('tap');t.append(CONFIG.tapLine,document.createElement('br'));\n const b=document.createElement('b');b.textContent=CONFIG.tapWord;t.append(b,' 💌');}\n\n/* ---------- peeche: dil aur roshni ---------- */\nconst bgc=document.getElementById('bg'),bx=bgc.getContext('2d');\nlet W,H,DPR,hearts=[],last=0;\nfunction sizeBg(){\n  DPR=Math.min(window.devicePixelRatio||1,2);W=innerWidth;H=innerHeight;\n  bgc.width=Math.round(W*DPR);bgc.height=Math.round(H*DPR);\n  hearts=Array.from({length:26},()=>newHeart(true));\n}\nfunction newHeart(any){return{x:rnd(0,W),y:any?rnd(0,H):H+30,s:rnd(5,15),vy:rnd(10,30),ph:rnd(0,TAU),a:rnd(.06,.22),rot:rnd(-.4,.4),round:Math.random()<.4};}\n\n/* ---------- 3D guldasta ---------- */\nconst bq=document.getElementById('bq'),spc=document.getElementById('sp'),sx=spc.getContext('2d');\nlet E=null;try{E=Flora(bq,{roseT:400,roseR:12});}catch(err){console.error(err);}\nlet bw=1,bh=1,T1=null,sparks=[];\nconst CZ=-.9,RD=2.2,TIE=[0,0,-3.35];\nconst leafM=(az,b)=>{const c=Math.cos(az),s=Math.sin(az),cb=Math.cos(b),sb=Math.sin(b);\n  return new Float32Array([c*cb,s*cb,sb,-s,c,0,-c*sb,-s*sb,cb]);};\nconst HEADS=[],GREENS=[],MINIS=[];\nfunction addHead(tilt,az,type,pal,s,delay){\n  const dir=[Math.sin(tilt)*Math.cos(az),Math.sin(tilt)*Math.sin(az),Math.cos(tilt)];\n  const f=newFlower3(type,pal,s);\n  f.pos=[dir[0]*RD,dir[1]*RD,CZ+dir[2]*RD];\n  f.M=basis([dir[0],dir[1],dir[2]+.22],f.roll);\n  f.p1=[f.pos[0]*.42,f.pos[1]*.42,-1.7];f.delay=delay;f.popped=false;\n  HEADS.push(f);\n}\nfunction buildBouquet(){\n  addHead(0,0,'rose','red',.74,.5);\n  const r1=[['rose','pink'],['dahlia','purple'],['rose','peach'],['daisy','white'],['rose','red'],['lily','white']];\n  r1.forEach(([t,p],i)=>addHead(.58,i/6*TAU+.35,t,p,t==='rose'?.67:.68,.9+i*.16+Math.random()*.1));\n  const r2=[['rose','red'],['daisy','white'],['rose','pink'],['tulip','gold'],['rose','peach'],['cosmos','pink'],\n            ['rose','red'],['dahlia','purple'],['rose','pink'],['dahlia','pink']];\n  r2.forEach(([t,p],i)=>addHead(1.12,i/10*TAU-1.45,t,p,t==='rose'?.62:t==='tulip'?.5:.63,1.7+i*.13+Math.random()*.1));\n  for(let i=0;i<10;i++){const az=(i+.5)/10*TAU-1.45;\n    GREENS.push({pos:[Math.cos(az)*1.25,Math.sin(az)*1.25,CZ+.2],M:leafM(az,.62),s:rnd(1.45,1.7),d:.5+i*.08});}\n  for(let i=0;i<7;i++){const az=i/7*TAU+.2;\n    GREENS.push({pos:[Math.cos(az)*.55,Math.sin(az)*.55,CZ+.75],M:leafM(az,.8),s:rnd(1.35,1.6),d:.8+i*.08});}\n  for(let i=0;i<14;i++){\n    const tilt=i<6?.3:.86,az=i<6?i/6*TAU+.9:(i-6)/8*TAU+.2,r=RD+.28;\n    const dir=[Math.sin(tilt)*Math.cos(az),Math.sin(tilt)*Math.sin(az),Math.cos(tilt)];\n    const f=newFlower3('cosmos','white',.22);f.n=5;\n    f.pos=[dir[0]*r,dir[1]*r,CZ+dir[2]*r];f.M=basis(dir,f.roll);f.p1=[f.pos[0]*.5,f.pos[1]*.5,-1.2];f.delay=1.2+Math.random()*2.2;\n    MINIS.push(f);\n  }\n  /* kaghaz */\n  const wrap=(dr,dz,ph)=>surfGeo(72,14,(u,v)=>{\n    const az=u*TAU,front=Math.pow(Math.max(0,-Math.sin(az)),2);\n    const zr=.5-.6*front+.05*Math.sin(az*5+ph)-dz;\n    const t=clamp01((v-.3)/.6),sm=Math.pow(t*t*(3-2*t),.9);\n    const r=(.24+.45*v+2.2*sm+dr)*(1+.02*Math.sin(az*11+ph)*v);\n    return [Math.cos(az)*r,Math.sin(az)*r,lerp(TIE[2]-.25-dz*.3,zr,v)];},true);\n  E.addMesh('paper',wrap(0,0,1));E.addMesh('paper2',wrap(.14,.32,2.6));\n  /* ribbon */\n  const zb=-2.5,rb=.66,parts=[];\n  parts.push(surfGeo(40,8,(u,v)=>{const az=u*TAU,b=v*TAU;return [Math.cos(az)*(rb+.035*Math.cos(b)),Math.sin(az)*(rb+.035*Math.cos(b)),zb+.15*Math.sin(b)];},true));\n  for(const sgn of [-1,1]){\n    parts.push(surfGeo(16,12,(u,v)=>{const b=v*TAU,r=.3*Math.pow(Math.sin(Math.PI*Math.pow(u,.62)),.8),x=u*.95;\n      return [sgn*(.06+x),-rb-.1+r*.42*Math.cos(b)-x*.08,zb+x*.22+r*Math.sin(b)];},false));\n    parts.push(surfGeo(14,4,(u,v)=>{const w=(v-.5)*.3*(1+u*.25);\n      return [sgn*(.1+u*.52)+w,-rb-.08+.06*Math.sin(u*6),zb-.1-u*1.25+Math.abs(v-.5)*u*u*.5+w*sgn*.3];},false));\n  }\n  parts.push(surfGeo(12,8,(u,v)=>{const a=u*TAU,th=v*Math.PI;return [.14*Math.cos(a)*Math.sin(th),-rb-.14+.1*Math.sin(a)*Math.sin(th),zb+.02+.15*Math.cos(th)];},true));\n  E.addMesh('bow',mergeGeo(parts));\n}\nfunction sizeBq(){\n  const r=bq.getBoundingClientRect();bw=r.width;bh=r.height;\n  for(const c of [bq,spc]){c.width=Math.round(bw*DPR);c.height=Math.round(bh*DPR);}\n  if(!E)return;\n  const e=23*Math.PI/180,c=E.cam;c.SE=Math.sin(e);c.CE=Math.cos(e);c.D=16;c.TZ=-.95;c.W=bw;c.H=bh;\n  const U=Math.min(bw*.96/6.5,bh*.98/6.9);c.F=2*U*c.D/bh;c.YOFF=.02;\n}\nconst PAPER_M=rotZ(.5);\nfunction drawBouquet(T,now,dt){\n  if(E){\n    E.cam.spin=Math.sin(now*.45)*.38;\n    E.begin();\n    const pk=easeBack(clamp01(T/.9));\n    if(pk>0){\n      E.mesh('paper',{pos:[0,0,TIE[2]*(1-pk)],s:pk,kind:3,c0:[.9,.42,.58],c1:[1,.8,.86]});\n      E.mesh('paper2',{pos:[0,0,TIE[2]*(1-pk)],s:pk,kind:3,c0:[.62,.1,.28],c1:[.86,.36,.54]});\n      E.mesh('bow',{pos:[0,0,-2.5*(1-pk)],s:pk,kind:4,c0:[.72,.05,.2]});\n    }\n    for(const f of HEADS){const g=easeOut(clamp01((T-f.delay)/.8));if(g>0)E.tube({p0:TIE,p1:f.p1,p2:f.pos,grow:g,rad:.05});}\n    for(const f of MINIS){const g=easeOut(clamp01((T-f.delay)/.8));if(g>0)E.tube({p0:TIE,p1:f.p1,p2:f.pos,grow:g,rad:.018});}\n    for(const lf of GREENS){const g=easeBack(clamp01((T-lf.d)/.9));if(g>0)E.mesh('leaf',{pos:lf.pos,M:lf.M,s:lf.s*g,kind:1});}\n    for(const f of HEADS){\n      const k=easeBack(clamp01((T-f.delay-.55)/.7)),open=easeInOut(clamp01((T-f.delay-.9)/2.3));\n      if(k>0&&!f.popped){f.popped=true;const p=E.project(f.pos),c=[f.pal.l[0]*255,f.pal.l[1]*255,f.pal.l[2]*255];\n        for(let i=0;i<9;i++){const an=rnd(0,TAU),v=rnd(15,70);sparks.push({x:p.x,y:p.y,vx:Math.cos(an)*v,vy:Math.sin(an)*v,life:rnd(.6,1.2),max:1.2,r:rnd(.8,1.8),col:c});}}\n      E.head(f,f.pos,f.M,k,open);\n    }\n    for(const f of MINIS){const k=easeBack(clamp01((T-f.delay-.6)/.6));E.head(f,f.pos,f.M,k,easeOut(clamp01((T-f.delay-.7)/1.2)));}\n  }\n  /* chamak */\n  const c=sx;c.setTransform(DPR,0,0,DPR,0,0);c.clearRect(0,0,bw,bh);\n  if(T>4&&Math.random()<.3)sparks.push({x:bw/2+rnd(-.34,.34)*Math.min(bw,bh),y:bh*rnd(.1,.6),vx:rnd(-6,6),vy:rnd(-22,-6),life:1.6,max:1.6,r:rnd(.8,1.9),col:[255,225,190]});\n  c.globalCompositeOperation='lighter';\n  for(let i=sparks.length-1;i>=0;i--){\n    const s=sparks[i];s.life-=dt;if(s.life<=0){sparks.splice(i,1);continue;}\n    s.x+=s.vx*dt;s.y+=s.vy*dt;s.vx*=.97;s.vy*=.97;\n    const a=Math.sin(clamp01(s.life/s.max)*Math.PI);\n    c.fillStyle=rgb(mix(s.col,[255,255,255],.4),a);c.beginPath();c.arc(s.x,s.y,s.r,0,TAU);c.fill();\n    c.fillStyle=rgb(s.col,a*.2);c.beginPath();c.arc(s.x,s.y,s.r*4,0,TAU);c.fill();\n  }\n  c.globalCompositeOperation='source-over';\n}\n\nfunction frame(ts){\n  const now=ts/1000,dt=Math.min(.05,now-last||0);last=now;\n  bx.setTransform(DPR,0,0,DPR,0,0);bx.clearRect(0,0,W,H);\n  if(T1!==null){\n    const a=.3*clamp01((now-T1)/3),gx=W/2,gy=H*.27,gr=Math.min(W,H)*.62;\n    const g=bx.createRadialGradient(gx,gy,0,gx,gy,gr);\n    g.addColorStop(0,`rgba(255,110,150,${a})`);g.addColorStop(1,'rgba(255,110,150,0)');\n    bx.fillStyle=g;bx.beginPath();bx.arc(gx,gy,gr,0,TAU);bx.fill();\n  }\n  for(let i=0;i<hearts.length;i++){\n    const h=hearts[i];h.y-=h.vy*dt;h.x+=Math.sin(now*.8+h.ph)*10*dt;\n    if(h.y<-30)hearts[i]=newHeart(false);\n    const a=h.a*(.7+.3*Math.sin(now+h.ph));\n    if(h.round){const g=bx.createRadialGradient(h.x,h.y,0,h.x,h.y,h.s*3);\n      g.addColorStop(0,`rgba(255,170,195,${a*.7})`);g.addColorStop(1,'rgba(255,170,195,0)');\n      bx.fillStyle=g;bx.beginPath();bx.arc(h.x,h.y,h.s*3,0,TAU);bx.fill();}\n    else{bx.save();bx.translate(h.x,h.y);bx.rotate(h.rot+Math.sin(now+h.ph)*.2);heartPath(bx,h.s);\n      bx.fillStyle=`rgba(255,120,160,${a})`;bx.fill();bx.restore();}\n  }\n  if(T1!==null)drawBouquet(now-T1,now,dt);\n  typeTick(now);\n  requestAnimationFrame(frame);\n}\n\n/* ---------- khat ---------- */\nconst letter=document.getElementById('letter');\nfunction buildLetter(){\n  letter.textContent='';\n  const add=(text,cls)=>{for(const ch of Array.from(text)){const s=document.createElement('span');s.textContent=ch;if(cls)s.className=cls;letter.appendChild(s);}};\n  add(CONFIG.greeting,'hd');add('\\n');add(CONFIG.body);add('\\n\\n');add(CONFIG.sign);\n}\nlet typeSpans=[],typeAt=[],typeI=0,typeT0=null;\nfunction typeLetter(){\n  typeSpans=[...letter.querySelectorAll('span')];let t=0;\n  typeAt=typeSpans.map(s=>{const ch=s.textContent,at=t;t+=(ch==='\\n'?.26:/[.,…]/.test(ch)?.24:ch===' '?.045:rnd(.026,.052));return at;});\n  typeI=0;typeT0=performance.now()/1000;\n}\nfunction typeTick(now){\n  if(typeT0===null||typeI>=typeSpans.length)return;\n  const el=now-typeT0;let s=null;\n  while(typeI<typeSpans.length&&typeAt[typeI]<=el){\n    if(typeI>0)typeSpans[typeI-1].classList.remove('cur');\n    s=typeSpans[typeI++];s.classList.add('on','cur');\n  }\n  if(s){const bottom=s.offsetTop+s.offsetHeight+24;\n    if(bottom>letter.scrollTop+letter.clientHeight)letter.scrollTop=bottom-letter.clientHeight;\n    if(typeI>=typeSpans.length)setTimeout(()=>s.classList.remove('cur'),900);}\n}\n\n/* ---------- kholna ---------- */\nconst s1=document.getElementById('s1'),s2=document.getElementById('s2'),env=document.getElementById('env');\nlet opened=false;\ns1.addEventListener('click',()=>{\n  if(opened)return;opened=true;\n  env.classList.add('open');document.getElementById('tap').classList.add('hide');\n  setTimeout(()=>{\n    s1.classList.add('gone');s2.classList.remove('wait');\n    sizeBq();T1=performance.now()/1000;\n    requestAnimationFrame(()=>s2.classList.add('live'));\n    setTimeout(typeLetter,3600);\n  },1700);\n});\naddEventListener('resize',()=>{sizeBg();if(T1!==null)sizeBq();});\nbuildLetter();sizeBg();\nif(E){try{buildBouquet();}catch(err){console.error(err);E=null;}}\nwindow.__gl=E&&E.gl;\nrequestAnimationFrame(frame);\n<\/script>\n<\/body>\n<\/html>\n"};
+
+const SONG_FILE='alvida.aac',SONG_TYPE=''||'audio/aac';
+const MM=MESSAGES.menu,$=id=>document.getElementById(id);
+$('mSmall').textContent=MM.small;$('mTitle').textContent=MM.title;$('mSub').textContent=MM.sub;
+$('mFoot').textContent=MM.foot;$('backTxt').textContent=MM.back;
+const menu=$('menu'),stage=$('stage'),backBtn=$('back'),curtain=$('curtain');
+const thumbs=[];
+for(const c of MM.cards){
+  const b=document.createElement('button');b.className='card c-'+c.key;b.type='button';
+  const th=document.createElement('span');th.className='thumb';
+  const ic=document.createElement('i');ic.textContent=c.icon;const cv=document.createElement('canvas');th.append(ic,cv);
+  const info=document.createElement('span');info.className='info';
+  const t=document.createElement('b');t.textContent=c.title;const d=document.createElement('em');d.textContent=c.text;info.append(t,d);
+  const go=document.createElement('span');go.className='go';go.textContent='›';
+  b.append(th,info,go);b.addEventListener('click',()=>openPage(c.key));
+  $('cards').appendChild(b);thumbs.push({cv,ic,ctx:cv.getContext('2d')});
+}
+
+/* ---------- menu ka peecha: roshni + girti pankhriyan ---------- */
+const mbg=$('mbg'),mx=mbg.getContext('2d');
+let W,H,DPR,bokeh=[],petals=[],last=0,running=true,rafId=0;
+function sizeMenu(){
+  DPR=Math.min(window.devicePixelRatio||1,2);W=innerWidth;H=innerHeight;
+  mbg.width=Math.round(W*DPR);mbg.height=Math.round(H*DPR);
+  bokeh=Array.from({length:20},()=>({x:rnd(0,W),y:rnd(0,H),r:rnd(20,80),a:rnd(.04,.12),vx:rnd(-5,5),vy:rnd(-8,-2),gold:Math.random()<.35,ph:rnd(0,TAU)}));
+  petals=Array.from({length:Math.round(clamp(W*H/42000,10,26))},()=>newPetal(true));
+  sizeThumbs();
+}
+function newPetal(any){return{x:rnd(-20,W+20),y:any?rnd(-20,H):-24,vy:rnd(18,44),vx:rnd(-10,10),rot:rnd(0,TAU),vr:rnd(-1.2,1.2),
+  spin:rnd(0,TAU),vs:rnd(1,2.6),sz:rnd(9,19),k:Math.random(),ph:rnd(0,TAU)};}
+
+/* ---------- 3D thumbnails (ek hi WebGL canvas se) ---------- */
+const tgl=document.createElement('canvas');
+let E=null;try{E=Flora(tgl,{roseT:300,roseR:10});}catch(err){console.error(err);}
+const leafM=(az,b)=>{const c=Math.cos(az),s=Math.sin(az),cb=Math.cos(b),sb=Math.sin(b);
+  return new Float32Array([c*cb,s*cb,sb,-s,c,0,-c*sb,-s*sb,cb]);};
+let F0=null,GARD=[],BQ=[],BQL=[];
+function buildThumbScenes(){
+  F0=newFlower3('rose','red',1);
+  GARD=[['daisy','white',-1.35,2.3,.72],['cosmos','pink',0,3.25,.8],['tulip','gold',1.3,2.5,.52]].map(([t,p,x,h,s],i)=>{
+    const f=newFlower3(t,p,s);f.x=x;f.h=h;f.b=(i-1)*-.35;f.ph=i*2.1;f.la=i%2?Math.PI+.2:-.2;return f;});
+  const add=(tilt,az,pal,s)=>{const dir=[Math.sin(tilt)*Math.cos(az),Math.sin(tilt)*Math.sin(az),Math.cos(tilt)];
+    const f=newFlower3('rose',pal,s);f.pos=[dir[0]*1.25,dir[1]*1.25,-.5+dir[2]*1.25];f.M=basis([dir[0],dir[1],dir[2]+.25],f.roll);BQ.push(f);};
+  add(0,0,'red',.6);
+  ['pink','red','peach','pink','red','white'].forEach((p,i)=>add(.85,i/6*TAU-1.2,p,.5));
+  for(let i=0;i<6;i++){const az=(i+.5)/6*TAU-1.2;BQL.push({pos:[Math.cos(az)*.55,Math.sin(az)*.55,-.35],M:leafM(az,.55),s:1.05});}
+  E.addMesh('wrap',surfGeo(56,12,(u,v)=>{
+    const az=u*TAU,front=Math.pow(Math.max(0,-Math.sin(az)),2);
+    const zr=.5-.6*front+.05*Math.sin(az*5+1);
+    const t=clamp01((v-.3)/.6),sm=Math.pow(t*t*(3-2*t),.9);
+    const r=(.24+.45*v+2.2*sm)*(1+.02*Math.sin(az*11)*v);
+    return [Math.cos(az)*r,Math.sin(az)*r,lerp(-3.6,zr,v)];},true));
+}
+function sizeThumbs(){
+  for(const t of thumbs){const r=t.cv.getBoundingClientRect(),px=Math.max(64,Math.round(r.width*DPR));
+    if(t.cv.width!==px){t.cv.width=px;t.cv.height=px;}}
+  if(E){const px=thumbs[0].cv.width;tgl.width=px;tgl.height=px;E.cam.W=E.cam.H=px;}
+}
+function setCam(deg,D,TZ,F,YOFF,spin){const c=E.cam,e=deg*Math.PI/180;c.SE=Math.sin(e);c.CE=Math.cos(e);c.D=D;c.TZ=TZ;c.F=F;c.YOFF=YOFF;c.spin=spin;}
+function drawThumbs(t){
+  if(!E)return;
+  /* 1: gulab */
+  setCam(38,10,.05,5.4,.06,t*.5);E.begin();
+  E.tube({p0:[.3,0,-3.4],p1:[-.25,0,-1.6],p2:[0,0,0],grow:1,rad:.075});
+  E.mesh('leaf',{pos:[-.08,0,-1.25],M:leafM(.6,.3),s:1.35,kind:1});
+  E.mesh('leaf',{pos:[.02,0,-1.9],M:leafM(3.7,.3),s:1.2,kind:1});
+  E.head(F0,[0,0,0],I3,1,.93+.07*Math.sin(t*.9));
+  copyThumb(0);
+  /* 2: bagh */
+  setCam(10,14,1.75,5.6,0,0);E.begin();
+  for(const f of GARD){
+    const sw=Math.sin(t*1.2+f.ph)*.13;
+    f.p2=[f.x+f.b*.4+sw,0,f.h];
+    E.tube({p0:[f.x,0,-.4],p1:[f.x+f.b,0,f.h*.55],p2:f.p2,grow:1,rad:.06});
+    E.mesh('leaf',{pos:[f.x+f.b*.55,0,f.h*.33],M:rotZ(f.la),s:1,kind:1});
+  }
+  for(const f of GARD)E.head(f,f.p2,basis(f.type==='tulip'?[.1,-.42,1]:[0,-.95,.3],f.roll+Math.sin(t*.6+f.ph)*.1),1,1);
+  copyThumb(1);
+  /* 3: guldasta */
+  setCam(26,14,-.55,6.6,0,Math.sin(t*.5)*.5);E.begin();
+  E.mesh('wrap',{pos:[0,0,-.12],s:.6,kind:3,c0:[.86,.36,.54],c1:[1,.8,.86]});
+  for(const lf of BQL)E.mesh('leaf',{pos:lf.pos,M:lf.M,s:lf.s,kind:1});
+  for(const f of BQ)E.head(f,f.pos,f.M,1,1);
+  copyThumb(2);
+}
+function copyThumb(i){const t=thumbs[i];t.ctx.clearRect(0,0,t.cv.width,t.cv.height);t.ctx.drawImage(tgl,0,0,t.cv.width,t.cv.height);}
+
+function frame(ts){
+  if(!running)return;
+  const now=ts/1000,dt=Math.min(.05,now-last||0);last=now;
+  mx.setTransform(DPR,0,0,DPR,0,0);mx.clearRect(0,0,W,H);
+  for(const o of bokeh){
+    o.x+=o.vx*dt;o.y+=o.vy*dt;
+    if(o.y<-o.r)o.y=H+o.r;if(o.x<-o.r)o.x=W+o.r;if(o.x>W+o.r)o.x=-o.r;
+    const a=o.a*(.7+.3*Math.sin(now*.7+o.ph)),g=mx.createRadialGradient(o.x,o.y,0,o.x,o.y,o.r),col=o.gold?[255,214,150]:[255,120,160];
+    g.addColorStop(0,rgb(col,a));g.addColorStop(.6,rgb(col,a*.55));g.addColorStop(1,rgb(col,0));
+    mx.fillStyle=g;mx.beginPath();mx.arc(o.x,o.y,o.r,0,TAU);mx.fill();
+  }
+  for(let i=0;i<petals.length;i++){
+    const p=petals[i];
+    p.x+=(p.vx+Math.sin(now*1.1+p.ph)*20)*dt;p.y+=p.vy*dt;p.rot+=p.vr*dt;p.spin+=p.vs*dt;
+    if(p.y>H+30){petals[i]=newPetal(false);continue;}
+    const cs=Math.cos(p.spin);
+    mx.save();mx.translate(p.x,p.y);mx.rotate(p.rot);mx.scale(cs*.85+.15*(cs<0?-1:1),1);
+    petalPath(mx,p.sz,p.sz*.56);
+    const pg=mx.createLinearGradient(0,0,0,-p.sz);pg.addColorStop(0,'rgba(140,16,48,.75)');pg.addColorStop(1,rgb(mix([216,30,74],[255,118,146],p.k),.75));
+    mx.fillStyle=pg;mx.fill();mx.restore();
+  }
+  drawThumbs(now);
+  rafId=requestAnimationFrame(frame);
+}
+
+/* ---------- page kholna / wapas aana ---------- */
+let current=null,busy=false;
+const safeJSON=o=>JSON.stringify(o).replace(/</g,'\\u003c');
+function openPage(key){
+  if(busy||!PAGES[key])return;busy=true;
+  curtain.classList.add('on');
+  setTimeout(()=>{
+    running=false;cancelAnimationFrame(rafId);menu.classList.add('off');
+    const f=document.createElement('iframe');f.setAttribute('title',key);
+    let done=false;const show=()=>{if(done)return;done=true;curtain.classList.remove('on');backBtn.classList.add('on');busy=false;};
+    f.addEventListener('load',()=>setTimeout(show,120));setTimeout(show,2500);
+    f.srcdoc=PAGES[key].replace('__CFG__',()=>safeJSON(MESSAGES[key]));
+    stage.appendChild(f);stage.classList.add('on');current=f;
+  },460);
+}
+function goBack(){
+  if(busy||!current)return;busy=true;
+  backBtn.classList.remove('on');curtain.classList.add('on');
+  setTimeout(()=>{
+    try{const g=current.contentWindow&&current.contentWindow.__gl;const x=g&&g.getExtension('WEBGL_lose_context');if(x)x.loseContext();}catch(err){}
+    current.remove();current=null;stage.classList.remove('on');
+    menu.classList.remove('off');menu.scrollTop=0;
+    running=true;last=0;rafId=requestAnimationFrame(frame);
+    curtain.classList.remove('on');busy=false;
+  },460);
+}
+backBtn.addEventListener('click',goBack);
+
+/* ---------- gaana: menu aate hi shuru, kabhi nahi rukta ---------- */
+const song=$('song'),splash=$('splash');
+$('spTitle').textContent=MM.gift;$('spTap').textContent=MM.giftTap;
+let songOn=false;
+function ready(){menu.classList.add('ready');}
+function hideSplash(){if(!splash.classList.contains('on')){ready();return;}splash.classList.add('bye');ready();setTimeout(()=>splash.classList.remove('on'),950);}
+function startSong(){const p=song.play();if(p&&p.then)p.then(()=>{songOn=true;}).catch(()=>{});else songOn=true;}
+(function initSong(){
+  const b64=$('songData').textContent.replace(/<!--.*?-->/g,'').trim();
+  if(b64){
+    try{const bin=atob(b64),u8=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u8[i]=bin.charCodeAt(i);
+      song.src=URL.createObjectURL(new Blob([u8],{type:SONG_TYPE}));}catch(err){console.error(err);}
+  }else song.src=SONG_FILE;
+  song.addEventListener('error',()=>{if(!songOn)hideSplash();});
+  song.addEventListener('ended',()=>{song.currentTime=0;startSong();});
+  splash.classList.add('on');
+  const p=song.play();
+  if(p&&p.then)p.then(()=>{songOn=true;hideSplash();}).catch(()=>{});
+  splash.addEventListener('click',()=>{startSong();hideSplash();});
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden&&songOn&&song.paused)startSong();});
+  addEventListener('pointerdown',()=>{if(songOn&&song.paused)startSong();});
+})();
+addEventListener('resize',sizeMenu);
+if(E){try{buildThumbScenes();for(const t of thumbs)t.ic.style.display='none';}catch(err){console.error(err);E=null;}}
+sizeMenu();
+rafId=requestAnimationFrame(frame);
+</script>
+
+<script>
+/* Gaana — sirf repo ki alvida.aac
+   <audio id="song"> loop par alvida.aac chalata hai. Player main page par hai,
+   option pages ke andar nahi — is liye option choose karne ya Wapas aane par
+   gaana nahi rukta. Neeche right corner wala ♪ button sirf isi file ko
+   chalata / band karta hai. */
+(function(){
+  var audio=document.getElementById('song');
+  var musicBtn=document.getElementById('musicBtn');
+  function playSong(){ if(audio){ try{ var pr=audio.play(); if(pr&&pr.catch) pr.catch(function(){}); }catch(e){} } }
+  function syncBtn(){ if(musicBtn){ musicBtn.textContent = (audio && !audio.paused) ? '\u275A\u275A' : '\u266A'; musicBtn.setAttribute('aria-label', (audio && !audio.paused) ? 'Gaana band karo' : 'Gaana chalao'); } }
+  if(musicBtn){ musicBtn.addEventListener('click',function(e){
+    e.stopPropagation();
+    if(!audio) return;
+    if(audio.paused){ playSong(); }
+    else { try{ audio.pause(); }catch(err){} }
+    syncBtn();
+  }); }
+  if(audio){ audio.addEventListener('playing',syncBtn); audio.addEventListener('pause',syncBtn); }
+  document.addEventListener('pointerdown',function(){
+    if(audio && audio.paused && audio.currentTime>0){ playSong(); }
+  });
+  document.addEventListener('visibilitychange',function(){
+    if(!document.hidden && audio && audio.paused && audio.currentTime>0){ playSong(); }
+  });
+})();
+</script>
+
+</body>
+</html>
